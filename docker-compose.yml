@@ -92,16 +92,17 @@ services:
     image: mailhog/mailhog
     container_name: laravel-mailhog
     ports:
-      - '${MAIL_PORT}-1025:1025'
+      - '${MAIL_PORT:-1025}:1025'
       - '8025:8025'
 
   npm:
-    image: node:19-slim
+    image: node:16.19-slim
     container_name: laravel-npm
-    working_dir: /var/www/html
+    user: node
+    working_dir: /srv
     entrypoint: ["npm"]
     volumes:
-        - .:/var/www/html
+        - .:/srv
 
 volumes:
   mariadb:
