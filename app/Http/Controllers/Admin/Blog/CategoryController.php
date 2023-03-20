@@ -13,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = BlogCategory::paginate(2);
+        $categories = BlogCategory::paginate(20);
+
         return view('admin.blog.categories.index', compact('categories'));
     }
 
@@ -22,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.blog.categories.create');
     }
 
     /**
@@ -30,7 +31,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+        ]);
+
+        BlogCategory::create($request->all());
+        // $request->session()->flash('success', 'Категория добавлена');
+
+        return redirect()->route('admin.blog.categories.index')
+                         ->with('success', "Категория \"{$request->title}\" успешно добавлена");
     }
 
     /**
@@ -38,7 +47,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-       dd(__METHOD__);
+       $category = BlogCategory::find($id);
+
+       return view('admin.blog.categories.edit', compact('category'));
     }
 
     /**
@@ -46,7 +57,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+        ]);
+
+        $category = BlogCategory::find($id);
+        $category->update($request->all());
+
+        return redirect()->route('admin.blog.categories.index')
+                         ->with('success', "Категория \"{$request->title}\" успешно отредактирована");
     }
 
     /**
@@ -54,6 +73,10 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        dd(__METHOD__);
+        $category = BlogCategory::find($id);
+        $category->delete();
+
+        return redirect()->route('admin.blog.categories.index')
+                         ->with('success', "Категория \"{$category->title}\" успешно удалена");
     }
 }

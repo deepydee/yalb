@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="h-100">
 
 <head>
   <meta charset="utf-8">
@@ -21,7 +21,7 @@
   <link href="{{ asset('assets/admin/css/admin.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="d-flex flex-column justify-content-between h-100">
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -279,9 +279,19 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
+    <div class="pagetitle">
+        <h1>@yield('title')</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">Pages</li>
+            <li class="breadcrumb-item active">Blank</li>
+          </ol>
+        </nav>
+      </div><!-- End Page Title -->
 
+  @include('admin.layouts.chunks.alerts')
    @yield('main-content')
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

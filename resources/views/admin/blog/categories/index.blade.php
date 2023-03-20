@@ -3,29 +3,22 @@
 @section('title', 'Категории')
 
 @section('main-content')
-<div class="pagetitle">
-    <h1>Категории</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item">Pages</li>
-        <li class="breadcrumb-item active">Blank</li>
-      </ol>
-    </nav>
-  </div><!-- End Page Title -->
 
-  <section class="section">
+<section class="section">
     <div class="row">
        <div class="col-12 col-xl-6">
         <div class="card-body">
             <h5 class="card-title">Список категорий</h5>
 
-            <button
+            {{-- <button
                 class="btn btn-outline-primary mb-4"
                 data-bs-toggle="modal"
                 data-bs-target="#addBlogCategoryModal">
                 Добавить
-            </button>
+            </button> --}}
+
+            <a href="{{ route('admin.blog.categories.create') }}"
+            class="btn btn-outline-primary mb-4">Добавить</a>
 
             @if (count($categories))
             <table class="table table-hover">
@@ -44,8 +37,8 @@
                         <td>{{ $category->title }}</td>
                         <td>{{ $category->slug }}</td>
                         <td class="d-flex">
-                            <a href="{{ route('admin.blog.categories.edit', ['$category' => $category->id]) }}" class="btn btn-outline-secondary border-0" title="Редактировать"><i class="bi bi-pencil-square"></i></a>
-                            <form action="{{ route('admin.blog.categories.destroy', ['$category' => $category->id]) }}" method="POST">
+                            <a href="{{ route('admin.blog.categories.edit', ['category' => $category->id]) }}" class="btn btn-outline-secondary border-0" title="Редактировать"><i class="bi bi-pencil-square"></i></a>
+                            <form action="{{ route('admin.blog.categories.destroy', ['category' => $category->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-outline-danger border-0" title="Удалить" onclick="return confirm('Вы действительно хотите удалить категорию?')"><i class="bi bi-trash"></i></button>
@@ -56,7 +49,7 @@
                 </tbody>
               </table>
 
-              {{ $categories->links() }}
+              {{ $categories->links('vendor.pagination.bootstrap-5') }}
             @else
                 <p>Нет категорий</p>
             @endif
