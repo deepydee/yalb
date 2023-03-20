@@ -1,5 +1,7 @@
 @extends('admin.layouts.layout')
 
+@section('title', 'Административная панель')
+
 @section('main-content')
 <div class="pagetitle">
     <h1>Административная панель</h1>

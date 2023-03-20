@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>ТОО СИЛМАСТЕР | Административная панель</title>
+  <title>ТОО СИЛМАСТЕР | @yield('title', 'Производство манжет и уплотнений в Караганде')</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
