@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\Blog;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Tag extends Model
+class BlogTag extends Model
 {
     use HasFactory, Sluggable;
 
     public function posts()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(BlogPost::class);
     }
 
     /**

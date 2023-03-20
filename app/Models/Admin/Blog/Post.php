@@ -1,21 +1,26 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin\Blog;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Category extends Model
+class BlogPost extends Model
 {
     use HasFactory, Sluggable;
 
-    public function posts ()
+    public function tags()
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(BlogTag::class);
     }
 
-     /**
+    public function category()
+    {
+        return $this->belongsTo(BlogCategory::class);
+    }
+
+    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array

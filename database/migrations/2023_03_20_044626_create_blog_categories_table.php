@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('blog_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('slug')->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('blog_categories');
     }
 };

@@ -10,8 +10,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/admin/img/favicon.png" rel="icon">
-  <link href="assets/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{ asset('assets/admin/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('assets/admin/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -28,7 +28,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{{ url('/') }}" target="_blank" class="logo d-flex align-items-center">
-        <img src="assets/admin/img/logo.png" alt="">
+        <img src="{{ asset('assets/admin/img/logo.png') }}" alt="Логотип ТОО СИЛМАСТЕР">
         <span class="d-none d-lg-block">СИЛМАСТЕР</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -143,7 +143,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/admin/img/messages-1.jpg" alt="" class="rounded-circle">
+                <img src="{{ asset('assets/admin/img/messages-1.jpg') }}" alt="" class="rounded-circle">
                 <div>
                   <h4>Maria Hudson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -157,7 +157,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/admin/img/messages-2.jpg" alt="" class="rounded-circle">
+                <img src="{{ asset('assets/admin/img/messages-2.jpg') }}" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -171,7 +171,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/admin/img/messages-3.jpg" alt="" class="rounded-circle">
+                <img src="{{ asset('assets/admin/img/messages-3.jpg') }}" alt="" class="rounded-circle">
                 <div>
                   <h4>David Muldon</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -194,7 +194,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/admin/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="{{ asset('assets/admin/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">А. Клонов</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -254,22 +254,22 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Блог</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link {{ (request()->is('admin/blog*')) ? '' : 'collapsed' }}" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journals"></i><span>Блог</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="components-nav" class="nav-content collapse {{ (request()->is('admin/blog*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="{{ route('admin.blog.categories.index') }}" class="{{ (request()->is('admin/blog/categories*')) ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Категории</span>
             </a>
           </li>
           <li>
-            <a href="components-alerts.html">
+            <a href="#" class="{{ (request()->is('admin/blog/posts*')) ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Посты</span>
             </a>
           </li>
           <li>
-            <a href="components-alerts.html">
+            <a href="#" class="{{ (request()->is('admin/blog/tags*')) ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Теги</span>
           </li>
         </ul>
@@ -295,6 +295,5 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/admin/js/admin.js') }}"></script>
-
 </body>
 </html>

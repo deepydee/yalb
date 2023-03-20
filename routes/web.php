@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\Blog\CategoryController as BlogCategoryController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\PodcastController;
-use App\Mail\HelloMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +27,8 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('index');
+
+    Route::prefix('blog')->name('blog.')->group(function () {
+        Route::resource('/categories', BlogCategoryController::class);
+    });
 });
