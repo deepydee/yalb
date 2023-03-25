@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Blog\CategoryController;
+use App\Http\Controllers\Admin\Blog\PostController;
 use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\PodcastController;
@@ -35,5 +36,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('blog')->name('blog.')->group(function () {
         Route::resource('/tags', TagController::class);
+    });
+
+    Route::prefix('blog')->name('blog.')->group(function () {
+        Route::resource('/posts', PostController::class);
     });
 });

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blog_post_tag', function (Blueprint $table) {
+        Schema::create('blog_post_blog_tag', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('blog_tag_id')->unsigned();
             $table->integer('blog_post_id')->unsigned();

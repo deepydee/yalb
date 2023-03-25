@@ -19,6 +19,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/admin/css/admin.css') }}" rel="stylesheet">
+  @stack('styles')
 </head>
 
 <body class="d-flex flex-column justify-content-between h-100">
@@ -269,8 +270,8 @@
             </a>
           </li>
           <li>
-            <a href="#" class="{{ (request()->is('admin/blog/posts*')) ? 'active' : '' }}">
-              <i class="bi bi-circle"></i><span>Посты</span>
+            <a href="{{ route('admin.blog.posts.index') }}" class="{{ (request()->is('admin/blog/posts*')) ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Статьи</span>
             </a>
           </li>
         </ul>
@@ -306,5 +307,6 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/admin/js/admin.js') }}"></script>
+  @stack('scripts')
 </body>
 </html>
