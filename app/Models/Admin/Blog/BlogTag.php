@@ -11,6 +11,8 @@ class BlogTag extends Model
 {
     use HasFactory, Sluggable;
 
+    protected $fillable = ['title'];
+
     public function posts()
     {
         return $this->belongsToMany(BlogPost::class);

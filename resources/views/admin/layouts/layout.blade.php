@@ -264,13 +264,14 @@
             </a>
           </li>
           <li>
-            <a href="#" class="{{ (request()->is('admin/blog/posts*')) ? 'active' : '' }}">
-              <i class="bi bi-circle"></i><span>Посты</span>
+            <a href="{{ route('admin.blog.tags.index') }}" class="{{ (request()->is('admin/blog/tags*')) ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Теги</span>
             </a>
           </li>
           <li>
-            <a href="#" class="{{ (request()->is('admin/blog/tags*')) ? 'active' : '' }}">
-              <i class="bi bi-circle"></i><span>Теги</span>
+            <a href="#" class="{{ (request()->is('admin/blog/posts*')) ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Посты</span>
+            </a>
           </li>
         </ul>
       </li><!-- End Components Nav -->
@@ -297,7 +298,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; ТОО <strong><span>СИЛМАСТЕР</span></strong>
+      &copy; {{ date('Y') }} ТОО <strong><span>СИЛМАСТЕР</span></strong>
     </div>
   </footer><!-- End Footer -->
 

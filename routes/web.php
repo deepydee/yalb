@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\Blog\CategoryController as BlogCategoryController;
+use App\Http\Controllers\Admin\Blog\CategoryController;
+use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\PodcastController;
 use Illuminate\Support\Facades\Mail;
@@ -29,6 +30,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('index');
 
     Route::prefix('blog')->name('blog.')->group(function () {
-        Route::resource('/categories', BlogCategoryController::class);
+        Route::resource('/categories', CategoryController::class);
+    });
+
+    Route::prefix('blog')->name('blog.')->group(function () {
+        Route::resource('/tags', TagController::class);
     });
 });

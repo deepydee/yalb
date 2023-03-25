@@ -1,6 +1,7 @@
 @extends('admin.layouts.layout')
 
-@section('title', 'Создание категории')
+@section('title', 'Редактирование тега')
+
 
 @section('main-content')
 
@@ -9,11 +10,12 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Создать категорию</h5>
+                  <h5 class="card-title">Редактировать тег "{{ $tag->title }}"</h5>
 
                   <!-- Floating Labels Form -->
-                  <form action="{{ route('admin.blog.categories.store') }}" method="POST" class="row g-3">
+                  <form action="{{ route('admin.blog.tags.update', ['tag' => $tag->id]) }}" method="POST" class="row g-3">
                     @csrf
+                    @method('PUT')
                     <div class="col-md-12">
                       <div class="form-floating">
                         <input
@@ -21,13 +23,13 @@
                         name="title"
                         class="form-control @error('title') is-invalid @enderror"
                         id="floatingName"
-                        placeholder="Название">
-                        <label for="floatingName">Название категории</label>
+                        value="{{ $tag->title }}">
+                        <label for="floatingName">Название тега</label>
                       </div>
                     </div>
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Создать</button>
-                      <a href="{{ route('admin.blog.categories.index') }}" type="reset" class="btn btn-secondary">Отмена</a>
+                      <button type="submit" class="btn btn-primary">Редактировать</button>
+                      <a href="{{ route('admin.blog.tags.index') }}" type="reset" class="btn btn-secondary">Отмена</a>
                     </div>
                   </form><!-- End floating Labels Form -->
 
