@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Blog\PostController;
 use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\PodcastController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -20,14 +21,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('home');
+
+Route::view('/blog', 'front.blog.index')->name('blog');
 
 // Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 //     Route::get('/', [MainController::class, 'index'])->name('index');
 // });
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('index');
 
     Route::prefix('blog')->name('blog.')->group(function () {
@@ -42,3 +45,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/posts', PostController::class);
     });
 });
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/register', [UserController::class, 'create'])->name('register.create');
+    Route::post('/register', [UserController::class, 'store'])->name('register.store');
+    Route::get('/login', [UserController::class, 'loginForm'])->name('login.create');
+    Route::post('/login', [UserController::class, 'login'])->name('login');
+});
+
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout')
+                                                        ->middleware('auth');
