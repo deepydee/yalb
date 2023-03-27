@@ -8,8 +8,17 @@ ENV PATH="./vendor/bin:$PATH" \
     PHP_OPCACHE_MAX_ACCELERATED_FILES=8000 \
     PHP_OPCACHE_MEMORY_CONSUMPTION=128
 
+RUN apt-get update && apt-get install -y \
+    zip \
+    libxml2-dev \
+    libzip-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
 
-RUN docker-php-ext-install pdo_mysql \
+RUN docker-php-ext-install pdo_mysql zip \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug opcache\
     && a2enmod rewrite

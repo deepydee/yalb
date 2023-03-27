@@ -2,8 +2,12 @@
 
 @section('title', 'Новая статья')
 
+
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+<script src="{{ asset('assets/admin/ckeditor5/build/ckeditor.js') }}"></script>
+@include('ckfinder::setup')
+
 <script>
     const multipleCancelButton = new Choices('#tags', {
         removeItemButton: true,
@@ -11,6 +15,37 @@
         // searchResultLimit:5,
         // renderChoiceLimit:5
     });
+
+    ClassicEditor
+        .create( document.querySelector( '#description' ), {
+            ckfinder: {
+                // To avoid issues, set it to an absolute path that does not start with dots, e.g. '/ckfinder/core/php/(...)'
+                uploadUrl: '{{ route('ckfinder_connector') }}?command=QuickUpload&type=Files&responseType=json'
+            },
+            toolbar: [ 'heading', 'blockQuote', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
+        } )
+        .then( function( editor ) {
+            // console.log( editor );
+        } )
+        .catch( function( error ) {
+            console.error( error );
+        } );
+
+    ClassicEditor
+        .create( document.querySelector( '#content' ), {
+            ckfinder: {
+                // To avoid issues, set it to an absolute path that does not start with dots, e.g. '/ckfinder/core/php/(...)'
+                uploadUrl: '{{ route('ckfinder_connector') }}?command=QuickUpload&type=Files&responseType=json'
+            },
+            //toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
+        } )
+        .then( function( editor ) {
+            // console.log( editor );
+        } )
+        .catch( function( error ) {
+            console.error( error );
+        } );
+
 </script>
 @endpush
 
@@ -28,7 +63,6 @@
   background-color: #dde0e3;
   cursor: pointer;
 }
-
 .choices__inner {
     background-color: #fff;
     padding: 7.5px 7.5px 3.75px;
@@ -36,19 +70,26 @@
     font-size: 1rem;
     overflow: hidden;
 }
-
 .choices__input {
     background-color: #fff;
+}
+
+.ck {
+    --ck-border-radius: 0.375rem;
+}
+
+
+.ck-editor__editable_inline {
+    min-height: 400px;
 }
 </style>
 @endpush
 
 
 @section('main-content')
-
 <section>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Новая статья</h5>
@@ -74,8 +115,6 @@
                             id="description"
                             name="description"
                             style="height: 100px;"></textarea>
-
-                        <label for="description">Описание</label>
                       </div>
 
                       <div class="form-floating mb-3">
@@ -84,9 +123,7 @@
                             placeholder="Текст статьи"
                             id="content"
                             name="content"
-                            style="height: 100px;"></textarea>
-
-                        <label for="content">Текст статьи</label>
+                            ></textarea>
                       </div>
 
                       <div class="form-floating mb-3">
@@ -125,5 +162,4 @@
         </div>
     </div>
 </section>
-
 @endsection

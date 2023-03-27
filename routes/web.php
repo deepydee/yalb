@@ -56,3 +56,11 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout')
                                                         ->middleware('auth');
+
+Route::group(['middleware' => 'admin'], function () {
+    Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+        ->name('ckfinder_connector');
+
+    Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+        ->name('ckfinder_browser');
+});
