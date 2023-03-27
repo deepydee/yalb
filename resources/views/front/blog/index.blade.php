@@ -90,16 +90,9 @@
         </div>
 
         <aside class="col-md-3 text-start mb-4 categories-list">
-          <header>
-            <h3 class="fw-bold">Категории</h3>
-          </header>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" ><a href="" class="no-underline">Технологии</a><span class="badge bg-primary rounded-pill">2</span></li>
-            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="" class="no-underline">Технологии</a><span class="badge bg-primary rounded-pill">2</span></li>
-            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><a href="" class="no-underline">Технологии</a><span class="badge bg-primary rounded-pill">2</span></li>
-            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active" aria-current="true"><a href="" class="no-underline">Технологии</a><span class="badge bg-primary rounded-pill">2</span></li>
-          </ul>
+            @include('front.layouts.chunks.sidebar')
         </aside>
+
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
             <li class="page-item disabled">

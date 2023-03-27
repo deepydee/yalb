@@ -72,9 +72,13 @@ class TagController extends Controller
      */
     public function destroy(string $id)
     {
-        BlogTag::destroy($id);
+        $tag = BlogTag::find($id);
+
+        if ($tag->posts->count()) {
+            return back()->with('error', 'У тега есть записи');
+        }
 
         return redirect()->route('admin.blog.tags.index')
-        ->with('success', "Тег успешно удален");
+        ->with('success', "Тег \"{$tag->title}\" успешно удален");
     }
 }

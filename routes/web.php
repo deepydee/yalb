@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Blog\CategoryController;
 use App\Http\Controllers\Admin\Blog\PostController;
 use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Mail;
@@ -24,7 +25,12 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::view('/blog', 'front.blog.index')->name('blog');
+Route::prefix('blog')->name('blog.')->group(function () {
+    Route::get('/', [BlogPostController::class, 'index'])->name('index');
+    Route::view('category', 'front.blog.category')->name('category');
+    Route::get('article', [BlogPostController::class, 'show'])->name('page');
+});
+
 
 // Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 //     Route::get('/', [MainController::class, 'index'])->name('index');

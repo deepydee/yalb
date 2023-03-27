@@ -49,7 +49,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('blog') }}">Блог</a>
+              <a class="nav-link" href="{{ route('blog.index') }}">Блог</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="/about.html" id="goods" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Компания</a>
@@ -84,13 +84,7 @@
         </div>
       </div>
     </nav>
-    <!-- <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Главная</a></li>
-          <li class="breadcrumb-item"><a href="#">Sub</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Текущая</li>
-        </ol>
-      </nav>
-    </div> -->
+    @if (!request()->is('/'))
+        @include('front.layouts.chunks.breadcrumbs')
+    @endif
   </header>
