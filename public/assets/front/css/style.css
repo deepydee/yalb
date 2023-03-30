@@ -12,7 +12,7 @@
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 400;
-  src: local("Noto Sans"), url("../fonts/noto-sans-v27-cyrillic_latin/noto-sans-v27-cyrillic_latin-Regular.woff2") format("woff2"), url("../fonts/noto-sans-v27-cyrillic_latin/noto-sans-v27-cyrillic_latin-Regular.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local("Noto Sans"), url(/fonts/noto-sans-v27-cyrillic_latin-Regular.woff2?4f212fcfbdbc2767696b8ca6cc2560a4) format("woff2"), url(/fonts/noto-sans-v27-cyrillic_latin-Regular.woff?1500fc93a2bfc9b6830188146f4a4403) format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* noto-sans-700 - cyrillic_latin */
 @font-face {
@@ -20,7 +20,7 @@
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 700;
-  src: local("Noto Sans"), url("../fonts/noto-sans-v27-cyrillic_latin/noto-sans-v27-cyrillic_latin-Bold.woff2") format("woff2"), url("../fonts/noto-sans-v27-cyrillic_latin/noto-sans-v27-cyrillic_latin-Bold.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local("Noto Sans"), url(/fonts/noto-sans-v27-cyrillic_latin-Bold.woff2?203420a6cf36375292abd091fa5ffc3f) format("woff2"), url(/fonts/noto-sans-v27-cyrillic_latin-Bold.woff?6d0f45d0aa08189f89ad433a17ef9908) format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* open-sans-regular - cyrillic_latin */
 @font-face {
@@ -28,7 +28,7 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  src: local("Open Sans"), url("../fonts/open-sans-v34-cyrillic_latin/open-sans-v34-cyrillic_latin-Regular.woff2") format("woff2"), url("../fonts/open-sans-v34-cyrillic_latin/open-sans-v34-cyrillic_latin-Regular.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local("Open Sans"), url(/fonts/open-sans-v34-cyrillic_latin-Regular.woff2?3c59762f44fc47f952b07e95bca80dd6) format("woff2"), url(/fonts/open-sans-v34-cyrillic_latin-Regular.woff?a7d1d96be5a03ab0fc7be6fc1416700a) format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* open-sans-700 - cyrillic_latin */
 @font-face {
@@ -36,7 +36,7 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  src: local("Open Sans"), url("../fonts/open-sans-v34-cyrillic_latin/open-sans-v34-cyrillic_latin-Bold.woff2") format("woff2"), url("../fonts/open-sans-v34-cyrillic_latin/open-sans-v34-cyrillic_latin-Bold.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local("Open Sans"), url(/fonts/open-sans-v34-cyrillic_latin-Bold.woff2?197d5bcc87b1c4d1f5f061d60f3ee4f4) format("woff2"), url(/fonts/open-sans-v34-cyrillic_latin-Bold.woff?482417918467e4ff0c4be6d16d4a5698) format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-regular - cyrillic_latin */
 @font-face {
@@ -44,7 +44,7 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  src: local("Roboto"), url("../fonts/roboto-v30-cyrillic_latin/roboto-v30-cyrillic_latin-Regular.woff2") format("woff2"), url("../fonts/roboto-v30-cyrillic_latin/roboto-v30-cyrillic_latin-Regular.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local("Roboto"), url(/fonts/roboto-v30-cyrillic_latin-Regular.woff2?4fffc5153fbed09f129b4715eca6782b) format("woff2"), url(/fonts/roboto-v30-cyrillic_latin-Regular.woff?f80311e1d670291983300cee75529f8e) format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-700 - cyrillic_latin */
 @font-face {
@@ -52,7 +52,7 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  src: local("Roboto"), url("../fonts/roboto-v30-cyrillic_latin/roboto-v30-cyrillic_latin-Bold.woff2") format("woff2"), url("../fonts/roboto-v30-cyrillic_latin/roboto-v30-cyrillic_latin-Bold.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local("Roboto"), url(/fonts/roboto-v30-cyrillic_latin-Bold.woff2?a3f18f14e8ed9cc1f976fed277f99206) format("woff2"), url(/fonts/roboto-v30-cyrillic_latin-Bold.woff?7bd45dae328c719f75597e4ffc8a67f2) format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 :root {
   --text-dark: hsla(217, 33%, 17%, 1);
@@ -79,7 +79,6 @@ body:hover::-webkit-scrollbar-thumb {
 }
 
 .main-menu-header {
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -103,70 +102,70 @@ body:hover::-webkit-scrollbar-thumb {
   transition: all 0.4s ease;
 }
 .icon-phone-out {
-  background-image: url("../img/icons/telephone-outbound.svg");
+  background-image: url(/images/telephone-outbound.svg?4c92842ed3b6f5a44da3cb8577f06df5);
 }
 .icon-wa {
-  background-image: url("../img/icons/whatsapp.svg");
+  background-image: url(/images/whatsapp.svg?bd02df8e7a5ef128e55bcd2a40a8b4a5);
 }
 .icon-inst {
-  background-image: url("../img/icons/instagram.svg");
+  background-image: url(/images/instagram.svg?4d969dd141d389ed7a2fe7584b56d681);
 }
 .icon-tg {
-  background-image: url("../img/icons/telegram.svg");
+  background-image: url(/images/telegram.svg?7a397da97f58e52383916be3bd0075d7);
 }
 .icon-yt {
-  background-image: url("../img/icons/youtube.svg");
+  background-image: url(/images/youtube.svg?85c2f09d0ead35313e7bb2812e3c66f5);
 }
 .icon-phone-in {
-  background-image: url("../img/icons/telephone-inbound.svg");
+  background-image: url(/images/telephone-inbound.svg?c95888edd25de446545053171439c701);
 }
 .icon-quote {
-  background-image: url("../img/icons/quote.svg");
+  background-image: url(/images/quote.svg?c6c890543c978d6999c74e9f83661097);
 }
 .icon-location {
-  background-image: url("../img/icons/geo-alt.svg");
+  background-image: url(/images/geo-alt.svg?aa0c8e24080229518a4e571c63cac341);
 }
 .icon-clock {
-  background-image: url("../img/icons/clock.svg");
+  background-image: url(/images/clock.svg?d2df5f347823101283c7f7184bd80d40);
 }
 .icon-mail {
-  background-image: url("../img/icons/envelope.svg");
+  background-image: url(/images/envelope.svg?ceed57e9483391a79813f313693eb103);
 }
 .icon-fw-30 {
-  background-image: url("../img/icons/carbon/carbon_forward-30.svg");
+  background-image: url(/images/carbon_forward-30.svg?eae4275eed259f3aabd6e5e3d6e5d7fe);
 }
 .icon-thumbs-up {
-  background-image: url("../img/icons/carbon/carbon_thumbs-up.svg");
+  background-image: url(/images/carbon_thumbs-up.svg?a822477b4763612f1a4f1dba1eebf2d1);
 }
 .icon-tools-alt {
-  background-image: url("../img/icons/carbon/carbon_tools-alt.svg");
+  background-image: url(/images/carbon_tools-alt.svg?7b11daae9b22ba6239021af0e2ffa485);
 }
 .icon-tool-kit {
-  background-image: url("../img/icons/carbon/carbon_tool-kit.svg");
+  background-image: url(/images/carbon_tool-kit.svg?8d572d6983295bf50a69592fb6769814);
 }
 .icon-delivery-truck {
-  background-image: url("../img/icons/carbon/carbon_delivery-truck.svg");
+  background-image: url(/images/carbon_delivery-truck.svg?e0d4877c236fa0d604b31a7dadeb0c4c);
 }
 .icon-education {
-  background-image: url("../img/icons/carbon/carbon_education.svg");
+  background-image: url(/images/carbon_education.svg?e0dcb65b5c615ff9b92385f9cecf7c62);
 }
 .icon-chevron-up {
-  background-image: url("../img/icons/chevron-up.svg");
+  background-image: url(/images/chevron-up.svg?21ead3be1dbf588b9fb74874b00dd155);
 }
 .icon-24-hours {
-  background-image: url("../img/icons/carbon/ri_24-hours-fill.svg");
+  background-image: url(/images/ri_24-hours-fill.svg?33310377ea5d9ee70aba2c723d204ddc);
 }
 .icon-chart-ring {
-  background-image: url("../img/icons/carbon/carbon_chart-ring.svg");
+  background-image: url(/images/carbon_chart-ring.svg?4eedc4ffef4b947b8b4bcb1f91bb6320);
 }
 .icon-data-sharing-group {
-  background-image: url("../img/icons/carbon/carbon_db2-data-sharing-group.svg");
+  background-image: url(/images/carbon_db2-data-sharing-group.svg?b8cf3b3eac48f6ec5b88c1a164c5ab9b);
 }
 .icon-time {
-  background-image: url("../img/icons/carbon/carbon_time.svg");
+  background-image: url(/images/carbon_time.svg?cc918b9609d4fd300700495493bdbe65);
 }
 .icon-crossroads {
-  background-image: url("../img/icons/carbon/carbon_crossroads.svg");
+  background-image: url(/images/carbon_crossroads.svg?cdf117d090678323617bb310fcdd4aa0);
 }
 .icon:hover {
   filter: invert(30%) sepia(69%) saturate(4467%) hue-rotate(197deg) brightness(92%) contrast(98%);
@@ -193,7 +192,7 @@ body:hover::-webkit-scrollbar-thumb {
   top: 0;
   left: 0;
   z-index: 2;
-  background: url("../img/texture.png");
+  background: url(/images/texture.png?de1445d9d2dad2796fe8017421054933);
 }
 
 .carousel-item {
@@ -208,7 +207,7 @@ body:hover::-webkit-scrollbar-thumb {
   bottom: 0;
   right: 0;
   left: 0;
-  background: hsl(223deg, 82%, 11%);
+  background: hsl(223, 82%, 11%);
   opacity: 0.6;
   z-index: 1;
 }
@@ -313,7 +312,7 @@ body:hover::-webkit-scrollbar-thumb {
 
 .feature-card h3 {
   padding-top: 16px;
-  border-top: 1px solid hsl(218deg, 13%, 88%);
+  border-top: 1px solid hsl(218, 13%, 88%);
 }
 
 .blockquote {
@@ -332,7 +331,7 @@ body:hover::-webkit-scrollbar-thumb {
 }
 @media (min-width: 768px) {
   .carousel-testimonials .carousel-control-next,
-.carousel-testimonials .carousel-control-prev {
+  .carousel-testimonials .carousel-control-prev {
     align-items: center;
     bottom: 0;
   }
@@ -393,6 +392,7 @@ body:hover::-webkit-scrollbar-thumb {
 
 .blog-card {
   overflow: hidden;
+  height: 100%;
 }
 .blog-card img {
   background: #000;
@@ -455,8 +455,8 @@ body:hover::-webkit-scrollbar-thumb {
 
 .about {
   min-height: 100vh;
-  background-color: hsl(212deg, 17%, 21%);
-  background-image: url("../img/bg-about.jpg");
+  background-color: hsl(212, 17%, 21%);
+  background-image: url(/images/bg-about.jpg?53a13d45ea7a7ed6e2e155f154a9bc58);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -476,7 +476,7 @@ body:hover::-webkit-scrollbar-thumb {
     display: block;
     width: 100%;
     height: 100%;
-    background: hsl(212deg, 16%, 45%);
+    background: hsl(212, 16%, 45%);
     transform: translateY(10%);
     z-index: 0;
   }
@@ -514,7 +514,7 @@ body:hover::-webkit-scrollbar-thumb {
 }
 .good-card .overlay {
   position: absolute;
-  background: hsla(212deg, 17%, 21%, 0.1);
+  background: hsla(212, 17%, 21%, 0.1);
   /* center overlay text */
   display: flex;
   align-items: center;
@@ -542,7 +542,7 @@ body:hover::-webkit-scrollbar-thumb {
 
 .our-benefits,
 .cta-section {
-  background: hsl(205deg, 23%, 96%);
+  background: hsl(205, 23%, 96%);
 }
 
 .icon-benefit {
@@ -681,7 +681,7 @@ body:hover::-webkit-scrollbar-thumb {
 }
 
 .post-image {
-  border: 8px solid hsl(223deg, 90%, 92%);
+  border: 8px solid hsl(223, 90%, 92%);
 }
 
 .categories-list .list-group-item.active {
@@ -750,6 +750,6 @@ body:hover::-webkit-scrollbar-thumb {
 }
 .card-catalog:hover {
   cursor: pointer;
-  color: hsl(212deg, 16%, 45%);
+  color: hsl(212, 16%, 45%);
   box-shadow: 0 0 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}/*# sourceMappingURL=style.css.map */
+}

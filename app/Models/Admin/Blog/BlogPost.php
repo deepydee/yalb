@@ -2,10 +2,14 @@
 
 namespace App\Models\Admin\Blog;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Date;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 
 class BlogPost extends Model
@@ -64,5 +68,21 @@ class BlogPost extends Model
         return $this->thumbnail ?
             asset("storage/uploads/{$this->thumbnail}") :
             asset('assets/admin/img/placeholder-image.jpg');
+    }
+
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            // get: fn (string $value) => Carbon::parse($value)->format('l j F Y H:i:s'),
+            get: fn (string $value) => Date::parse($value)->format('j F Y'),
+        );
+    }
+
+    protected function updatedAt(): Attribute
+    {
+        return Attribute::make(
+            // get: fn (string $value) => Carbon::parse($value)->format('l j F Y H:i:s'),
+            get: fn (string $value) => Date::parse($value)->format('j F Y'),
+        );
     }
 }

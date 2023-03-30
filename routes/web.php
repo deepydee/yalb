@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Blog\CategoryController;
 use App\Http\Controllers\Admin\Blog\PostController;
 use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\UserController;
@@ -28,7 +29,8 @@ Route::get('/', function () {
 Route::prefix('blog')->name('blog.')->group(function () {
     Route::get('/', [BlogPostController::class, 'index'])->name('index');
     Route::view('category', 'front.blog.category')->name('category');
-    Route::get('article', [BlogPostController::class, 'show'])->name('page');
+    Route::get('article/{slug}', [BlogPostController::class, 'show'])->name('page');
+    Route::get('category/{slug}', [BlogCategoryController::class, 'show'])->name('category');
 });
 
 
@@ -69,4 +71,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
         ->name('ckfinder_browser');
+
+    Route::any('/ckfinder/examples/{example?}', '\CKSource\CKFinderBridge\Controller\CKFinderController@examplesAction')
+    ->name('ckfinder_examples');
 });

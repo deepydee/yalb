@@ -21,7 +21,7 @@
                 // To avoid issues, set it to an absolute path that does not start with dots, e.g. '/ckfinder/core/php/(...)'
                 uploadUrl: '{{ route('ckfinder_connector') }}?command=QuickUpload&type=Files&responseType=json'
             },
-            toolbar: [ 'heading', 'blockQuote', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
+            toolbar: [ 'heading', 'blockQuote', '|', 'bold', 'italic', 'underline', 'strikethrough', 'code', 'subscript', 'superscript', '|', 'undo', 'redo' ]
         } )
         .then( function( editor ) {
             // console.log( editor );

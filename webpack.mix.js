@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+let productionSourceMaps = false;
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -36,11 +37,20 @@ mix.scripts([
 mix.copyDirectory('resources/assets/admin/vendor/bootstrap-icons/fonts', 'public/assets/admin/css/fonts');
 mix.copyDirectory('resources/assets/admin/img', 'public/assets/admin/img');
 
+mix.sass('resources/assets/front/css/app.scss', 'public/assets/front/css/')
+   .combine(
+        [
+            'resources/assets/front/vendor/bootstrap/css/bootstrap.min.css',
+            'public/assets/front/css/app.css'
+        ],
+        'public/assets/front/css/style.css'
+   )
+   .sourceMaps(productionSourceMaps, "source-map");;
 
-mix.styles([
-    'resources/assets/front/vendor/bootstrap/css/bootstrap.min.css',
-    'resources/assets/front/css/style.css'
-], 'public/assets/front/css/style.css').sourceMaps();
+// mix.styles([
+//     'resources/assets/front/vendor/bootstrap/css/bootstrap.min.css',
+//     'resources/assets/front/css/style.css'
+// ], 'public/assets/front/css/style.css').sourceMaps();
 
 mix.scripts([
     'resources/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js',
