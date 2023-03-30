@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin\Blog;
 
+use Carbon\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
