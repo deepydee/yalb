@@ -1,3 +1,5 @@
+<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" title="Наверх" role="button"><span class="icon icon-chevron-up"></span></a>
+
 <footer class="footer mt-auto bg-light">
     <div class="container-fluid contacts-footer p-0">
       <div class="container py-4">

@@ -1,5 +1,5 @@
 <div class="row g-4">
-    <div class="col-12">
+    <div class="col-12 mb-4">
       <h3 class="fw-bold">Категории</h3>
 
       <ul class="list-group list-group-flush">
@@ -11,7 +11,7 @@
       </ul>
     </div>
 
-    <div class="col-12">
+    <div class="col-12 mb-4">
       <h3 class="fw-bold">Теги</h3>
       @if ($tags->count())
         @foreach ($tags as $tag)
@@ -21,10 +21,9 @@
     </div>
 
     <div class="col-12">
-        <form action="" method="POST">
-            @csrf
+        <form action="{{ route('blog.search') }}" method="GET">
             <div class="input-group mb-3">
-                <input type="search" class="form-control" placeholder="Поиск..." aria-label="Поиск по блогу" aria-describedby="buttonSearch" id="site-search" name="q">
+                <input type="search" class="form-control @error('q') is-invalid @enderror" placeholder="Поиск..." aria-label="Поиск по блогу" aria-describedby="buttonSearch" id="site-search" name="q" required>
                 <button class="btn btn-outline-secondary" type="submit" id="buttonSearch">Искать</button>
               </div>
         </form>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\BlogSearchController;
 use App\Http\Controllers\BlogTagController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\UserController;
@@ -32,6 +33,7 @@ Route::prefix('blog')->name('blog.')->group(function () {
     Route::get('article/{slug}', [BlogPostController::class, 'show'])->name('page');
     Route::get('category/{slug}', [BlogCategoryController::class, 'show'])->name('category');
     Route::get('tag/{slug}', [BlogTagController::class, 'show'])->name('tag');
+    Route::get('search', [BlogSearchController::class, 'index'])->name('search');
 });
 
 

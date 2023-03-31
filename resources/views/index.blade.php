@@ -1255,7 +1255,4 @@
         </div>
       </div>
     </section>
-
-    <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" title="Наверх" role="button"><span class="icon icon-chevron-up"></span></a>
-
 @endsection

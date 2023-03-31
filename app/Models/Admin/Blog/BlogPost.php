@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Date;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -92,5 +93,11 @@ class BlogPost extends Model
 
     public function getHumanReadableUpdatedAt() {
         return Date::parse($this->updated_at)->format('j F Y');
+    }
+
+    public function scopeSearch(Builder $query, $q)
+    {
+        return $query->where('title', 'LIKE', "%{$q}%")
+        ->orWhereFullText('content', $q);
     }
 }

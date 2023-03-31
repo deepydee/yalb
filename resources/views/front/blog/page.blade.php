@@ -14,17 +14,15 @@
       </div>
     </header>
 
-    <div class="container-fluid breadcrumb-container">
-        <div class="container">
-          <nav aria-label="breadcrumb">
+    <div class="container">
+        <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Блог</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('blog.category', ['slug' => $post->category->slug]) }}">{{ $post->category->title }}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{ $post->title }}</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Блог</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('blog.category', ['slug' => $post->category->slug]) }}">{{ $post->category->title }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $post->title }}</li>
             </ol>
-          </nav>
-        </div>
+        </nav>
     </div>
 
     <div class="container blog-post-text">
