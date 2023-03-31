@@ -31,6 +31,10 @@
   <main>
     @yield('content')
   </main>
+  <aside class="container mb-5">
+    @yield('aside')
+  </aside>
+
   @include('front.layouts.chunks.footer')
 
   <script src="{{ asset('assets/front/js/main.js') }}"></script>

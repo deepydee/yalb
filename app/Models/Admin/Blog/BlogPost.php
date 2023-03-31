@@ -70,19 +70,27 @@ class BlogPost extends Model
             asset('assets/admin/img/placeholder-image.jpg');
     }
 
-    protected function createdAt(): Attribute
-    {
-        return Attribute::make(
-            // get: fn (string $value) => Carbon::parse($value)->format('l j F Y H:i:s'),
-            get: fn (string $value) => Date::parse($value)->format('j F Y'),
-        );
+    // protected function createdAt(): Attribute
+    // {
+    //     return Attribute::make(
+    //         // get: fn (string $value) => Carbon::parse($value)->format('l j F Y H:i:s'),
+    //         get: fn (string $value) => Date::parse($value)->format('j F Y'),
+    //     );
+    // }
+
+    public function getHumanReadableCreatedAt() {
+        return Date::parse($this->created_at)->format('j F Y');
     }
 
-    protected function updatedAt(): Attribute
-    {
-        return Attribute::make(
-            // get: fn (string $value) => Carbon::parse($value)->format('l j F Y H:i:s'),
-            get: fn (string $value) => Date::parse($value)->format('j F Y'),
-        );
+    // protected function updatedAt(): Attribute
+    // {
+    //     return Attribute::make(
+    //         // get: fn (string $value) => Carbon::parse($value)->format('l j F Y H:i:s'),
+    //         get: fn (string $value) => Date::parse($value)->format('j F Y'),
+    //     );
+    // }
+
+    public function getHumanReadableUpdatedAt() {
+        return Date::parse($this->updated_at)->format('j F Y');
     }
 }

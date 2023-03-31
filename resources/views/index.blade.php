@@ -10,18 +10,18 @@
 
 @push('scripts')
 <script>
-const carouselElement = document.getElementById('carousel');
-const carousel = new bootstrap.Carousel(carouselElement, {
-  ride: false,
-  interval: 10000,
-  touch: true,
-  pause: 'hover',
-  keyboard: true,
-});
+    const carouselElement = document.getElementById('carousel');
+    const carousel = new bootstrap.Carousel(carouselElement, {
+    ride: false,
+    interval: 10000,
+    touch: true,
+    pause: 'hover',
+    keyboard: true,
+    });
 
-const reviewsUrl = 'https://public-api.reviews.2gis.com/2.0/branches/70000001045235526/reviews?limit=12&is_advertiser=false&fields=reviews.is_verified&without_my_first_review=false&rated=true&sort_by=date_edited&key=37c04fe6-a560-4549-b459-02309cf643ad&locale=ru_KZ';
-getReviews(reviewsUrl);
-  </script>
+    const reviewsUrl = 'https://public-api.reviews.2gis.com/2.0/branches/70000001045235526/reviews?limit=12&is_advertiser=false&fields=reviews.is_verified&without_my_first_review=false&rated=true&sort_by=date_edited&key=37c04fe6-a560-4549-b459-02309cf643ad&locale=ru_KZ';
+    getReviews(reviewsUrl);
+</script>
 @endpush
 
 @section('content')
@@ -1258,36 +1258,4 @@ getReviews(reviewsUrl);
 
     <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" title="Наверх" role="button"><span class="icon icon-chevron-up"></span></a>
 
-    <!-- Modal Body -->
-    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-    <div class="modal fade" id="modalAskPhoneCall" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalAskPhoneCallTitleId" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalAskPhoneCallTitleId">Перезвоните мне</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="#">
-              <p>Оставьте контактные данные и наш менеджер с радостью перезвонит и ответит на все интересующие Вас вопросы</p>
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control" name="userName" id="userName" placeholder="Ваше имя (необязательно)">
-                <label for="userName">Ваше имя (необязательно)</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="tel"
-                  class="form-control" name="userPhone" id="userPhone" placeholder="+7(747)123-45-67" required>
-                <label for="userPhone">Ваш телефон</label>
-              </div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary">Заказать звонок</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
 @endsection

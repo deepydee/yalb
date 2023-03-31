@@ -29,7 +29,7 @@
                 <footer class="card-footer">
                   <span  itemprop="author" itemscope itemtype="https://schema.org/Person"><a itemprop="url" href="https://example.com/profile/johndoe123"><img src="https://source.unsplash.com/25x25/?businessman" class="rounded-circle img-responsive img-fluid me-2">
                   <span class="card-text">Алексей Алексеев</span></a></span>
-                  <div class="mt-1"><time datetime="2022-03-03" class="form-text text-muted" itemprop="datePublished" content="2015-02-05T08:00:00+08:00">{{ $post->created_at }}</time> <small>(обновлено <time datetime="2022-03-03" class="form-text text-muted" itemprop="dateModified" content="2015-02-05T08:00:00+08:00">{{ $post->updated_at }}</time>)</small></div>
+                  <div class="mt-1"><time datetime="{{ $post->created_at }}" class="form-text text-muted" itemprop="datePublished" content="{{ $post->created_at }}">{{ $post->getHumanReadableCreatedAt() }}</time> <small>(обновлено <time datetime="{{ $post->updated_at }}" class="form-text text-muted" itemprop="dateModified" content="{{ $post->updated_at }}">{{ $post->getHumanReadableUpdatedAt() }}</time>)</small></div>
                 </footer>
               </article>
             </div>

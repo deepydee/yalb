@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavId">
           <ul class="navbar-nav me-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="/" aria-current="page">Главная <span class="visually-hidden">(текущая)</span></a>
+              <a class="nav-link active" href="{{ route('home') }}" aria-current="page">Главная <span class="visually-hidden">(текущая)</span></a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="/goods/catalog.html" id="production" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Производство</a>
@@ -84,7 +84,4 @@
         </div>
       </div>
     </nav>
-    @if (!request()->is('/'))
-        @include('front.layouts.chunks.breadcrumbs')
-    @endif
   </header>

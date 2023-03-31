@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\BlogTagController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Mail;
@@ -28,9 +29,9 @@ Route::get('/', function () {
 
 Route::prefix('blog')->name('blog.')->group(function () {
     Route::get('/', [BlogPostController::class, 'index'])->name('index');
-    Route::view('category', 'front.blog.category')->name('category');
     Route::get('article/{slug}', [BlogPostController::class, 'show'])->name('page');
     Route::get('category/{slug}', [BlogCategoryController::class, 'show'])->name('category');
+    Route::get('tag/{slug}', [BlogTagController::class, 'show'])->name('tag');
 });
 
 

@@ -18,6 +18,12 @@ class BlogPostController extends Controller
 
     public function show($slug)
     {
-        return view('front.blog.page');
+        $post = BlogPost::where('slug', $slug)
+            ->firstOrFail(); //->with('category, tags')
+
+        $post->views++;
+        $post->update();
+
+        return view('front.blog.page', compact('post'));
     }
 }

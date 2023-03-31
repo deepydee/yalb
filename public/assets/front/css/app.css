@@ -726,7 +726,7 @@ body:hover::-webkit-scrollbar-thumb {
   height: 1rem;
   width: 1rem;
   left: -20px;
-  background-image: url("/img/icons/eye.svg");
+  background-image: url(/images/eye.svg?e99d74334ad6397152628e2098cbc42b);
 }
 
 .card-catalog {

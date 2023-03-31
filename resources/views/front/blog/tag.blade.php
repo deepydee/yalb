@@ -1,12 +1,12 @@
 @extends('front.layouts.layout')
 
-@section('title', $category->title)
+@section('title', $tag->title)
 
 @section('content')
 
 <section class="container">
     <header>
-      <h1 class="display-5 fw-bold mb-5">{{ $category->title }}</h1>
+      <h1 class="display-5 fw-bold mb-5">{{ $tag->title }}</h1>
     </header>
 
     <div class="container-fluid breadcrumb-container">
@@ -15,7 +15,7 @@
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
               <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Блог</a></li>
-              <li class="breadcrumb-item active">{{ $category->title }}</li>
+              <li class="breadcrumb-item active">{{ $tag->title }}</li>
             </ol>
           </nav>
         </div>
@@ -32,7 +32,7 @@
                   <a href="{{ route('blog.page', ['slug' => $post->slug]) }}"><img class="card-img-top" src="{{ $post->getImage() }}" alt="{{ $post->title }}" itemprop="image"></a>
                   <div class="card-body">
                     <header>
-                      <h5 class="text-uppercase fs-6 fw-bold mb-4">{{ $category->title }}</h5>
+                      <h5 class="text-uppercase fs-6 fw-bold mb-4">{{ $post->category->title }}</h5>
                     </header>
                     <h4 class="card-title fw-bold mb-3"><a href="{{ route('blog.page', ['slug' => $post->slug]) }}" class="blog-post" itemprop="headline">{{ $post->title }}</a></h4>
                     <p class="card-description">{!! $post->description !!}</p>
