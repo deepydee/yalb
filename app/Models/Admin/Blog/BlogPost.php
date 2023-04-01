@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin\Blog;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,8 @@ class BlogPost extends Model
         'content',
         'category_id',
         'thumbnail',
+        'status',
+        'is_featured',
     ];
 
     public function tags()
@@ -34,6 +37,11 @@ class BlogPost extends Model
     public function category()
     {
         return $this->belongsTo(BlogCategory::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -58,7 +66,7 @@ class BlogPost extends Model
             }
 
             $folder = date('Y-m-d');
-           return $request->file('thumbnail')->store("images/{$folder}");
+            return $request->file('thumbnail')->store("images/{$folder}");
         }
 
         return null;
@@ -71,25 +79,9 @@ class BlogPost extends Model
             asset('assets/admin/img/placeholder-image.jpg');
     }
 
-    // protected function createdAt(): Attribute
-    // {
-    //     return Attribute::make(
-    //         // get: fn (string $value) => Carbon::parse($value)->format('l j F Y H:i:s'),
-    //         get: fn (string $value) => Date::parse($value)->format('j F Y'),
-    //     );
-    // }
-
     public function getHumanReadableCreatedAt() {
         return Date::parse($this->created_at)->format('j F Y');
     }
-
-    // protected function updatedAt(): Attribute
-    // {
-    //     return Attribute::make(
-    //         // get: fn (string $value) => Carbon::parse($value)->format('l j F Y H:i:s'),
-    //         get: fn (string $value) => Date::parse($value)->format('j F Y'),
-    //     );
-    // }
 
     public function getHumanReadableUpdatedAt() {
         return Date::parse($this->updated_at)->format('j F Y');
@@ -99,5 +91,31 @@ class BlogPost extends Model
     {
         return $query->where('title', 'LIKE', "%{$q}%")
         ->orWhereFullText('content', $q);
+    }
+
+    public function setDraft()
+    {
+        $this->status = 'draft';
+        $this->save();
+    }
+
+    public function setPublic()
+    {
+        $this->status = 'publushed';
+        $this->save();
+    }
+
+    public function toggleStatus()
+    {
+        $this->status = $this->status === 'publushed' ?
+            $this->setDraft() :
+            $this->setPublic();
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status === 'published' ?
+            'Опубликовано' :
+            'Черновик';
     }
 }

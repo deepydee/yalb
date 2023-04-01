@@ -10,6 +10,7 @@ class BlogPostController extends Controller
     public function index()
     {
         $posts = BlogPost::with(['category', 'tags'])
+            ->where('status', 'published')
             ->orderBy('id', 'desc')
             ->paginate(4);
 

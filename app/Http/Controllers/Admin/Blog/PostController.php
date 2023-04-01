@@ -43,11 +43,25 @@ class PostController extends Controller
             'content' => 'required',
             'category_id' => 'required|integer',
             'thumbnail' => 'nullable|image',
+            'status' => 'nullable',
+            'is_featured' => 'nullable',
         ]);
 
-        $data = $request->all();
+        $status = $request->boolean('status') ?
+            'published' :
+            'draft';
+        $isFeatured = $request->boolean('is_featured');
 
-        $data['thumbnail'] = BlogPost::uploadImage($request);
+        if ($status === 'draft' && $isFeatured) {
+            !$isFeatured;
+        }
+
+        $data = [
+            ...$request->all(),
+            'thumbnail' => BlogPost::uploadImage($request),
+            'status' => $status,
+            'is_featured' => $isFeatured,
+        ];
 
         $post = BlogPost::create($data);
         $post->tags()->sync($request->tags);
@@ -79,11 +93,20 @@ class PostController extends Controller
             'content' => 'required',
             'category_id' => 'required|integer',
             'thumbnail' => 'nullable|image',
+            'status' => 'nullable',
+            'is_featured' => 'nullable',
         ]);
 
 
         $post = BlogPost::find($id);
-        $data = $request->all();
+
+        $data = [
+            ...$request->all(),
+            'status' => $request->boolean('status') ?
+                        'published' :
+                        'draft',
+            'is_featured' => $request->boolean('is_featured')
+        ];
 
         if ($file = BlogPost::uploadImage($request, $post->thumbnail)) {
            $data['thumbnail'] = $file;

@@ -18,11 +18,12 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Наименование</th>
+                    <th scope="col">Название</th>
                     <th scope="col">Изображение</th>
                     <th scope="col">Категория</th>
                     <th scope="col">Теги</th>
-                    <th scope="col">Дата</th>
+                    <th scope="col">Дата публикации</th>
+                    <th scope="col">Статус</th>
                     <th scope="col">Действия</th>
                   </tr>
                 </thead>
@@ -35,6 +36,7 @@
                         <td>{{ $post->category->title }}</td>
                         <td>{!! $post->tags->pluck('title')->map(fn(string $tag) => "<span class='badge bg-info text-white'>{$tag}</span>")->join(' ') !!}</td>
                         <td>{{ $post->created_at }}</td>
+                        <td>{{ $post->getStatus() }} @if ($post->is_featured), в рекомендовынных @endif</td>
                         <td>
                             <div class="d-flex">
                                 <a href="{{ route('admin.blog.posts.edit', ['post' => $post->id]) }}" class="btn btn-outline-secondary border-0" title="Редактировать"><i class="bi bi-pencil-square"></i></a>

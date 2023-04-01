@@ -46,6 +46,18 @@
             console.error( error );
         } );
 
+    const statusCheck = document.getElementById('status');
+    const featuredCheck = document.getElementById('featured');
+
+    statusCheck.addEventListener('change', (event) => {
+        if (!event.currentTarget.checked) {
+            featuredCheck.checked = false;
+            featuredCheck.disabled = true;
+        } else {
+            featuredCheck.disabled = false;
+        }
+    });
+
 </script>
 @endpush
 
@@ -141,6 +153,16 @@
                                  <option value="{{ $id }}">{{ $title }}</option>
                             @endforeach
                         </select>
+                      </div>
+
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="status" name="status">
+                        <label class="form-check-label" for="status">Опубликовать</label>
+                      </div>
+
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="featured" name="is_featured" disabled>
+                        <label class="form-check-label" for="featured">В рекомендованные</label>
                       </div>
 
                       <div class="input-group custom-file-button">

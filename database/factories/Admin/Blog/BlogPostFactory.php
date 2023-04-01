@@ -34,6 +34,8 @@ class BlogPostFactory extends Factory
             'category_id' => BlogCategory::factory(),
             'views' => fake()->randomNumber(5, false),
             'thumbnail' => 'images/' . basename($fakerFileName),
+            'status' => fake()->randomElement(['published' , 'draft']),
+            'is_featured' => fake()->randomElement([0 , 1]),
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

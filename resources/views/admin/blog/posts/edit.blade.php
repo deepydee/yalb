@@ -45,6 +45,18 @@
             console.error( error );
         } );
 
+    const statusCheck = document.getElementById('status');
+    const featuredCheck = document.getElementById('featured');
+
+    statusCheck.addEventListener('change', (event) => {
+        if (!event.currentTarget.checked) {
+            featuredCheck.checked = false;
+            featuredCheck.disabled = true;
+        } else {
+            featuredCheck.disabled = false;
+        }
+    });
+
 </script>
 @endpush
 
@@ -150,7 +162,17 @@
                         </label>
                       </div>
 
-                      <img src="{{ @blank($post->thumbnail) ? asset('assets/admin/img/placeholder-image.jpg') : asset("storage/uploads/{$post->thumbnail}") }}" class="img-thumbnail" width="100" alt="{{ $post->title }}">
+                      <img src="{{ @blank($post->thumbnail) ? asset('assets/admin/img/placeholder-image.jpg') : asset("storage/uploads/{$post->thumbnail}") }}" class="img-thumbnail mb-3" width="100" alt="{{ $post->title }}">
+
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="status" name="status" @checked($post->status === 'published')>
+                        <label class="form-check-label" for="status">Опубликовано</label>
+                      </div>
+
+                      <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="featured" name="is_featured" @checked($post->is_featured)>
+                        <label class="form-check-label" for="featured">В рекомендованных</label>
+                      </div>
 
                     </div>
                     <div class="text-center">
