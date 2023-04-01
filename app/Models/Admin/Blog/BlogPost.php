@@ -44,6 +44,12 @@ class BlogPost extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments()
+    {
+       return $this->hasMany(BlogPostComment::class)
+        ->orderBy('created_at');
+    }
+
     /**
      * Return the sluggable configuration array for this model.
      *

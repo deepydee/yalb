@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Admin\Blog\BlogPost;
+use App\Models\Admin\Blog\BlogPostComment;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,5 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     public function posts()
     {
         return $this->hasMany(BlogPost::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(BlogPostComment::class);
     }
 }
