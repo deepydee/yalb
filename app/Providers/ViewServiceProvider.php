@@ -47,13 +47,32 @@ class ViewServiceProvider extends ServiceProvider
                 $popularPosts = Cache::get('popularPosts');
             } else {
                 $popularPosts = BlogPost::orderBy('views', 'desc')
-                ->limit(4)->get();
+                ->limit(4)
+                ->get();
 
                 Cache::put('popularPosts', $popularPosts, 30);
             }
 
             $view->with([
                 'popularPosts' => $popularPosts,
+            ]);
+        });
+
+        Facades\View::composer('front.layouts.chunks.featured', function(View $view)
+        {
+            if (Cache::has('featuredPosts')) {
+                $featuredPosts = Cache::get('featuredPosts');
+            } else {
+                $featuredPosts = BlogPost::where('is_featured', 1)
+                    ->orderBy('updated_at', 'desc')
+                    ->limit(4)
+                    ->get();
+
+                Cache::put('featuredPosts', $featuredPosts, 30);
+            }
+
+            $view->with([
+                'featuredPosts' => $featuredPosts,
             ]);
         });
     }

@@ -2,6 +2,13 @@
 
 @section('title', 'Создание тега')
 
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Администратор</a></li>
+    <li class="breadcrumb-item">Блог</li>
+    <li class="breadcrumb-item active">Теги</li>
+</ol>
+@endsection
 
 @section('main-content')
 

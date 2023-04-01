@@ -2,6 +2,14 @@
 
 @section('title', 'Создание категории')
 
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Администратор</a></li>
+    <li class="breadcrumb-item">Блог</li>
+    <li class="breadcrumb-item active">Категории</li>
+</ol>
+@endsection
+
 @section('main-content')
 
 <section>

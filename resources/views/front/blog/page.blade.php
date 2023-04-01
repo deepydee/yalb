@@ -50,6 +50,7 @@
             </div>
             <aside class="col-12 text-start mb-4 categories-list">
                 @include('front.layouts.chunks.sidebar')
+                @include('front.layouts.chunks.featured')
             </aside>
           </div>
         </div>

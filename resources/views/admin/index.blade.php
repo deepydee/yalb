@@ -2,6 +2,12 @@
 
 @section('title', 'Административная панель')
 
+@section('breadcrumb')
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Администратор</li>
+  </ol>
+@endsection
+
 @section('main-content')
   <section class="section">
     <div class="row">

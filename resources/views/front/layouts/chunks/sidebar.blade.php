@@ -20,7 +20,7 @@
       @endif
     </div>
 
-    <div class="col-12">
+    <div class="col-12 mb-4">
         <form action="{{ route('blog.search') }}" method="GET">
             <div class="input-group mb-3">
                 <input type="search" class="form-control @error('q') is-invalid @enderror" placeholder="Поиск..." aria-label="Поиск по блогу" aria-describedby="buttonSearch" id="site-search" name="q" required>

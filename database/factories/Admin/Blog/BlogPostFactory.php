@@ -27,6 +27,11 @@ class BlogPostFactory extends Factory
             600
         );
 
+        $status = fake()->randomElement(['published' , 'draft']);
+        $isFeatured = $status === 'published' ?
+            fake()->randomElement([0 , 1]) :
+            0;
+
         return [
             'title' => fake()->sentence(),
             'description' => fake()->paragraphs(3, true),
@@ -34,8 +39,8 @@ class BlogPostFactory extends Factory
             'category_id' => BlogCategory::factory(),
             'views' => fake()->randomNumber(5, false),
             'thumbnail' => 'images/' . basename($fakerFileName),
-            'status' => fake()->randomElement(['published' , 'draft']),
-            'is_featured' => fake()->randomElement([0 , 1]),
+            'status' => $status,
+            'is_featured' => $isFeatured,
             'created_at' => fake()->unixTime(),
             'updated_at' => fake()->unixTime(),
         ];

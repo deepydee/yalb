@@ -2,6 +2,14 @@
 
 @section('title', 'Редактирование статьи')
 
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Администратор</a></li>
+    <li class="breadcrumb-item">Блог</li>
+    <li class="breadcrumb-item active">Статьи</li>
+</ol>
+@endsection
+
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
 <script src="{{ asset('assets/admin/ckeditor5/build/ckeditor.js') }}"></script>

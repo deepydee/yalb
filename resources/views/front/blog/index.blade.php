@@ -40,6 +40,7 @@
 
         <aside class="col-md-3 text-start mb-4 categories-list">
             @include('front.layouts.chunks.sidebar')
+            @include('front.layouts.chunks.featured')
         </aside>
 
         {{ $posts->links('vendor.pagination.bootstrap-5') }}
