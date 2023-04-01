@@ -15,8 +15,8 @@ return new class extends Migration
             $table->foreign('category_id')
                   ->references('id')
                   ->on('blog_categories')
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade');
+                  ->cascadeOnDelete()
+                  ->cascadeOnUpdate();
         });
     }
 

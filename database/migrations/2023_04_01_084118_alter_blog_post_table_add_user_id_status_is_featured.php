@@ -18,7 +18,9 @@ return new class extends Migration
 
             $table->foreign('user_id')
                    ->references('id')
-                   ->on('users');
+                   ->on('users')
+                   ->cascadeOnDelete()
+                   ->cascadeOnUpdate();
 
 
             $table->enum('status', ['published', 'draft'])
