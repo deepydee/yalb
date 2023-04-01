@@ -1,5 +1,11 @@
     <div class="row">
         <div class="col-12">
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    <p>{{ session('message') }}</p>
+                </div>
+            @endif
+
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul class="list-unstyled">
