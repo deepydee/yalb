@@ -41,7 +41,7 @@
                 <tbody>
                     @foreach ($categories as $category)
                     <tr class="align-middle">
-                        <th scope="row">{{ $category->id }}</th>
+                        <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $category->title }}</td>
                         <td>{{ $category->slug }}</td>
                         <td class="d-flex">

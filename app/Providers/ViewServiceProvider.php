@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Admin\Blog\BlogCategory;
 use App\Models\Admin\Blog\BlogPost;
 use App\Models\Admin\Blog\BlogTag;
+use App\Models\FormMessage;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Cache;
@@ -73,6 +74,17 @@ class ViewServiceProvider extends ServiceProvider
 
             $view->with([
                 'featuredPosts' => $featuredPosts,
+            ]);
+        });
+
+        Facades\View::composer('admin.layouts.layout', function(View $view)
+        {
+
+            $messages = FormMessage::orderBy('created_at', 'desc')
+                ->get();
+
+            $view->with([
+                'messages' => $messages,
             ]);
         });
     }

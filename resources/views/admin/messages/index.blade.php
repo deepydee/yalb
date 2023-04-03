@@ -1,12 +1,11 @@
 @extends('admin.layouts.layout')
 
-@section('title', 'Теги')
+@section('title', 'Сообщения')
 
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Администратор</a></li>
-    <li class="breadcrumb-item">Блог</li>
-    <li class="breadcrumb-item active">Теги</li>
+    <li class="breadcrumb-item active">Сообщения</li>
 </ol>
 @endsection
 
@@ -14,42 +13,39 @@
 
 <section class="section">
     <div class="row">
-       <div class="col-12 col-xl-6">
+       <div class="col-12">
         <div class="card-body">
-            <h5 class="card-title">Список тегов</h5>
+            <h5 class="card-title">Сообщения с сайта</h5>
 
-            {{-- <button
-                class="btn btn-outline-primary mb-4"
-                data-bs-toggle="modal"
-                data-bs-target="#addBlogCategoryModal">
-                Добавить
-            </button> --}}
-
-            <a href="{{ route('admin.blog.tags.create') }}"
-            class="btn btn-outline-primary mb-4">Добавить</a>
-
-            @if (count($tags))
+            @if (count($messages))
             <table class="table table-hover">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Наименование</th>
-                    <th scope="col">Слаг</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Телефон</th>
+                    <th scope="col">Сообщение</th>
+                    <th scope="col">Дата</th>
                     <th scope="col">Действия</th>
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tags as $tag)
+                    @foreach ($messages as $message)
                     <tr class="align-middle">
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $tag->title }}</td>
-                        <td>{{ $tag->slug }}</td>
-                        <td class="d-flex">
-                            <a href="{{ route('admin.blog.tags.edit', ['tag' => $tag->id]) }}" class="btn btn-outline-secondary border-0" title="Редактировать"><i class="bi bi-pencil-square"></i></a>
-                            <form action="{{ route('admin.blog.tags.destroy', ['tag' => $tag->id]) }}" method="POST">
+                        <td>{{ $message->name }}</td>
+                        <td><a href="tel:{{ $message->phone }}">{{ $message->phone }}</a></td>
+                        <td>
+                            <a href="{{ route('admin.messages.single', $message->id) }}">
+                                {{ \Illuminate\Support\Str::limit($message->message, 50, $end='...') }}
+                            </a>
+                        </td>
+                        <td>{{ $message->created_at }}</td>
+                        <td >
+                            <form action="{{ route('admin.message.destroy', $message->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-outline-danger border-0" title="Удалить" onclick="return confirm('Вы действительно хотите удалить тег?')"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-outline-danger border-0" title="Удалить" onclick="return confirm('Вы действительно хотите удалить сообщение?')"><i class="bi bi-trash"></i></button>
                             </form>
                         </td>
                      </tr>
@@ -57,9 +53,9 @@
                 </tbody>
               </table>
 
-              {{ $tags->links('vendor.pagination.bootstrap-5') }}
+              {{ $messages->links('vendor.pagination.bootstrap-5') }}
             @else
-                <p>Нет тегов</p>
+                <p>Нет сообщений...</p>
             @endif
 
           </div>

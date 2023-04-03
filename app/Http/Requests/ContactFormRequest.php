@@ -22,7 +22,7 @@ class ContactFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => ['nullable', 'regex:/^(\+)?\d{11}+/'],
+            'phone' => ['nullable', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
             'name' => 'nullable|alpha_dash',
             'message' => 'required|string|min:5',
         ];

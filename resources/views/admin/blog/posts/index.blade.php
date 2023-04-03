@@ -38,7 +38,7 @@
                 <tbody>
                     @foreach ($posts as $post)
                     <tr class="align-middle">
-                        <th scope="row">{{ $post->id }}</th>
+                        <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $post->title }}</td>
                         <td><img src="{{ $post->getImage() }}" class="img-thumbnail" width="100" alt="{{ $post->title }}"></td>
                         <td>{{ $post->category->title }}</td>

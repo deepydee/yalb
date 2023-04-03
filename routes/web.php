@@ -45,6 +45,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], f
         Route::resource('/tags', TagController::class);
         Route::resource('/posts', PostController::class);
     });
+
+    Route::prefix('messages')->group(function() {
+        Route::get('/', [MainController::class, 'showMessages'])->name('messages.index');
+        Route::get('message/{id}', [MainController::class, 'showMessage'])->name('messages.single');
+        Route::delete('message/{id}', [MainController::class, 'deleteMessage'])->name('message.destroy');
+    });
 });
 
 Route::group(['middleware' => 'guest'], function () {
