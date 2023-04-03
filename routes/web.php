@@ -9,6 +9,7 @@ use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\BlogSearchController;
 use App\Http\Controllers\BlogTagController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,8 @@ use Illuminate\Support\Str;
 Route::get('/', function () {
     return view('index');
 })->name('home');
+
+Route::post('/contact-form', [IndexController::class, 'contactForm'])->name('contact-form.process');
 
 Route::prefix('blog')->name('blog.')->group(function () {
     Route::get('/', [BlogPostController::class, 'index'])->name('index');
