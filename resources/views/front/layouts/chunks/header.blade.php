@@ -81,6 +81,13 @@
             <a href="https://wa.me/77764407004?text=Здравствуйте%2C+у+меня+есть+вопрос" title="Напишите нам в WhatsApp"><span class="icon icon-wa" target="_blank"></span></a>
             <a href="https://www.youtube.com/@user-ng3jr8ss1b" title="Youtube канал ТОО СИЛМАСТЕР" target="_blank"><span class="icon icon-yt"></span></a>
           </div>
+          @auth('web')
+            <a class="no-underline" href="{{ route('logout') }}">Выйти</a>
+          @endauth
+
+          @guest
+            <a class="no-underline" href="{{ route('login') }}">Войти</a>
+          @endguest
         </div>
       </div>
     </nav>

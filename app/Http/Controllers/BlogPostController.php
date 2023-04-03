@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogCommentForm;
 use App\Models\Admin\Blog\BlogPost;
-use Illuminate\Http\Request;
 
 class BlogPostController extends Controller
 {
@@ -26,5 +26,14 @@ class BlogPostController extends Controller
         $post->update();
 
         return view('front.blog.page', compact('post'));
+    }
+
+    public function comment($id, BlogCommentForm $request)
+    {
+        $post = BlogPost::findOrFail($id)->with('comments');
+
+        $post->comments()->create($request->validated());
+
+        return redirect()->route('blog.page', $post->slug);
     }
 }

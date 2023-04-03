@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>ТОО СИЛМАСТЕР | Регистрация</title>
+  <title>ТОО СИЛМАСТЕР | Вход</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -48,10 +48,10 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Вход в личный кабинет</h5>
+                    <h5 class="card-title text-center pb-0 fs-4">Восстановление пароля</h5>
                   </div>
 
-                  <form action="{{ route('login') }}" method="POST" class="row g-3 needs-validation">
+                  <form action="{{ route('password.email') }}" method="POST" class="row g-3 needs-validation">
                     @csrf
 
                     <div class="col-12">
@@ -66,17 +66,13 @@
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Пароль</label>
-                      <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="yourPassword" required>
-                      <div class="invalid-feedback">Придумайте надежный пароль</div>
-                    </div>
-
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Войти</button>
+                      <button class="btn btn-primary w-100" type="submit">Сбросить пароль</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Еще не зарегистрированы? <a href="{{ route('register.create') }}">Зарегистрироваться</a></p>
-                      <p class="small mb-0">Забыли пароль? <a href="{{ route('password.request') }}">Восстановить пароль</a></p>
+                        <p class="small mb-0">Уже есть профиль? <a href="{{ route('login') }}">Войти</a></p>
+                      </div>
+                    <div class="col-12">
+                      <p class="small mb-0">Еще не зарегистрированы? <a href="{{ route('register') }}">Зарегистрироваться</a></p>
                     </div>
                   </form>
 

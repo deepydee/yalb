@@ -41,7 +41,7 @@
 
 
                 <div class="row">
-                    <h1>Подтвердите Email</h1>
+                    <h2>Подтвердите Email</h2>
 
                     <div class="col-12">
                         @isset($message)

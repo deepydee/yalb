@@ -56,6 +56,7 @@
         </div>
       </div>
     </div>
+    @include('front.layouts.chunks.comments-block', ['post' => $post])
   </article>
 @endsection
 
