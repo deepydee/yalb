@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Blog;
 
+use App\Actions\BlogPostDestroyAction;
+use App\Actions\BlogPostUpdateAction;
+use App\Actions\BlogPostStoreAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Blog\PostFormRequest;
 use App\Models\Admin\Blog\BlogCategory;
 use App\Models\Admin\Blog\BlogPost;
 use App\Models\Admin\Blog\BlogTag;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller
 {
@@ -35,36 +38,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostFormRequest $request, BlogPostStoreAction $action)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'content' => 'required',
-            'category_id' => 'required|integer',
-            'thumbnail' => 'nullable|image',
-            'status' => 'nullable',
-            'is_featured' => 'nullable',
-        ]);
-
-        $status = $request->boolean('status') ?
-            'published' :
-            'draft';
-        $isFeatured = $request->boolean('is_featured');
-
-        if ($status === 'draft' && $isFeatured) {
-            !$isFeatured;
-        }
-
-        $data = [
-            ...$request->all(),
-            'thumbnail' => BlogPost::uploadImage($request),
-            'status' => $status,
-            'is_featured' => $isFeatured,
-        ];
-
-        $post = BlogPost::create($data);
-        $post->tags()->sync($request->tags);
+        $action->handle($request);
 
         return redirect()->route('admin.blog.posts.index')
                          ->with('success', 'Статья успешно добавлена');
@@ -85,35 +61,10 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostFormRequest $request, BlogPostUpdateAction $action, string $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'content' => 'required',
-            'category_id' => 'required|integer',
-            'thumbnail' => 'nullable|image',
-            'status' => 'nullable',
-            'is_featured' => 'nullable',
-        ]);
-
-
         $post = BlogPost::find($id);
-
-        $data = [
-            ...$request->all(),
-            'status' => $request->boolean('status') ?
-                        'published' :
-                        'draft',
-            'is_featured' => $request->boolean('is_featured')
-        ];
-
-        if ($file = BlogPost::uploadImage($request, $post->thumbnail)) {
-           $data['thumbnail'] = $file;
-        }
-
-        $post->update($data);
-        $post->tags()->sync($request->tags);
+        $action->handle($post, $request);
 
         return redirect()->route('admin.blog.posts.index')
                          ->with('success', 'Изменения сохранены');
@@ -122,15 +73,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(BlogPostDestroyAction $action, string $id)
     {
         $post = BlogPost::find($id);
-        $post->tags()->sync([]);
-
-        if ($post->thumbnail) {
-            Storage::delete($post->thumbnail);
-        }
-        $post->delete();
+        $action->handle($post);
 
         return redirect()->route('admin.blog.posts.index')
                          ->with('success', 'Статья удалена');

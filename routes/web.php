@@ -37,21 +37,21 @@ Route::prefix('blog')->name('blog.')->group(function () {
 });
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
-    Route::get('/', [MainController::class, 'index'])->name('index');
+// Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
+//     Route::get('/', [MainController::class, 'index'])->name('index');
 
-    Route::prefix('blog')->name('blog.')->group(function () {
-        Route::resource('/categories', CategoryController::class);
-        Route::resource('/tags', TagController::class);
-        Route::resource('/posts', PostController::class);
-    });
+//     Route::prefix('blog')->name('blog.')->group(function () {
+//         Route::resource('/categories', CategoryController::class);
+//         Route::resource('/tags', TagController::class);
+//         Route::resource('/posts', PostController::class);
+//     });
 
-    Route::prefix('messages')->group(function() {
-        Route::get('/', [MainController::class, 'showMessages'])->name('messages.index');
-        Route::get('message/{id}', [MainController::class, 'showMessage'])->name('messages.single');
-        Route::delete('message/{id}', [MainController::class, 'deleteMessage'])->name('message.destroy');
-    });
-});
+//     Route::prefix('messages')->group(function() {
+//         Route::get('/', [MainController::class, 'showMessages'])->name('messages.index');
+//         Route::get('message/{id}', [MainController::class, 'showMessage'])->name('messages.single');
+//         Route::delete('message/{id}', [MainController::class, 'deleteMessage'])->name('message.destroy');
+//     });
+// });
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');

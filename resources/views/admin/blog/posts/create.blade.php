@@ -124,7 +124,8 @@
                             name="title"
                             class="form-control @error('title') is-invalid @enderror"
                             id="title"
-                            placeholder="Название">
+                            placeholder="Название"
+                            value="{{ old('title') }}">
                         <label for="title">Название</label>
                       </div>
 
@@ -134,7 +135,7 @@
                             placeholder="Добавьте описание"
                             id="description"
                             name="description"
-                            style="height: 100px;"></textarea>
+                            style="height: 100px;">{{ old('description') }}</textarea>
                       </div>
 
                       <div class="form-floating mb-3">
@@ -143,13 +144,13 @@
                             placeholder="Текст статьи"
                             id="content"
                             name="content"
-                            ></textarea>
+                            >{{ old('content') }}</textarea>
                       </div>
 
                       <div class="form-floating mb-3">
                         <select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id" aria-label="Выберите категорию">
                           @foreach ($categories as $id => $title)
-                              <option value="{{ $id }}">{{ $title }}</option>
+                              <option value="{{ $id }}" @selected($id == old('category_id'))>{{ $title }}</option>
                           @endforeach
                         </select>
                         <label for="category_id">Выберите категорию</label>
@@ -158,18 +159,18 @@
                       <div class="form-floating mb-3">
                         <select class="form-select" id="tags" name="tags[]" placeholder="Выберите теги" multiple>
                             @foreach ($tags as $id => $title)
-                                 <option value="{{ $id }}">{{ $title }}</option>
+                                 <option value="{{ $id }}" @if (old('tags')) @selected(in_array($id, old('tags'))) @endif>{{ $title }}</option>
                             @endforeach
                         </select>
                       </div>
 
                       <div class="form-check form-switch mb-3">
-                        <input class="form-check-input" type="checkbox" id="status" name="status">
+                        <input class="form-check-input" type="checkbox" id="status" name="status" {{ old('status') == 'on' ? 'checked' : '' }}>
                         <label class="form-check-label" for="status">Опубликовать</label>
                       </div>
 
                       <div class="form-check form-switch mb-3">
-                        <input class="form-check-input" type="checkbox" id="featured" name="is_featured" disabled>
+                        <input class="form-check-input" type="checkbox" id="featured" name="is_featured" disabled {{ old('is_featured') == 'on' ? 'checked' : '' }}>
                         <label class="form-check-label" for="featured">В рекомендованные</label>
                       </div>
 
