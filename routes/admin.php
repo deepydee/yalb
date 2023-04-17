@@ -19,6 +19,7 @@ Route::prefix('blog')->name('blog.')->group(function () {
         Route::get('message/{id}', [CommentsController::class, 'showComment'])->name('single');
         Route::delete('message/{id}', [CommentsController::class, 'deleteComment'])->name('destroy');
         Route::get('make-comment-public/{id}', [CommentsController::class, 'toggleCommentPublic'])->name('publish');
+        Route::get('make-comment-unread/{id}', [CommentsController::class, 'makeCommentUnread'])->name('unread');
     });
 });
 

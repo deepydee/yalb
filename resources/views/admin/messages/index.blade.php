@@ -31,7 +31,7 @@
                 </thead>
                 <tbody>
                     @foreach ($messages as $message)
-                    <tr class="align-middle @if($message->is_read === 0) table-active @endif">
+                    <tr class="align-middle @if(!$message->isRead()) table-active @endif">
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $message->name }}</td>
                         <td><a href="tel:{{ $message->phone }}">{{ $message->phone }}</a></td>

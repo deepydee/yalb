@@ -32,7 +32,7 @@
                 </thead>
                 <tbody>
                     @foreach ($comments as $comment)
-                    <tr class="align-middle">
+                    <tr class="align-middle @if(!$comment->isRead()) table-active @endif">
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $comment->user->name }}</td>
                         <td><a href="{{ route('blog.page', $comment->post->slug) }}" target="_blank">{{ $comment->post->title }}</a></td>
@@ -43,6 +43,7 @@
                         </td>
                         <td>{{ $comment->created_at }}</td>
                         <td class="text-center">
+                            <a href="{{ route('admin.blog.comments.unread',  $comment->id) }}" title="Пометить непрочитанным"><i class="bi bi-book{{ $comment->isRead() ? '' : '-fill' }}"></i></a>
                             <a href="{{ route('admin.blog.comments.publish',  $comment->id) }}" title="{{$comment->isPublic() ? 'Снять с публикации' : 'Опубликовать'}}"><i class="bi bi-eye{{$comment->isPublic() ? '' : '-slash'}}"></i></a>
                             <form action="{{ route('admin.blog.comments.destroy', $comment->id) }}" method="POST">
                                 @csrf

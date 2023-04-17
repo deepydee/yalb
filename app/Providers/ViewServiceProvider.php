@@ -88,7 +88,7 @@ class ViewServiceProvider extends ServiceProvider
             $postCount = BlogPost::all()->count();
             $categoriesCount = BlogCategory::all()->count();
             $tagsCount = BlogTag::all()->count();
-            $commentsCount = BlogPostComment::all()->count();
+            $unreadCommentsCount = BlogPostComment::where('is_read', 0)->count();
 
             $view->with([
                 'messages' => $messages,
@@ -96,7 +96,7 @@ class ViewServiceProvider extends ServiceProvider
                 'postCount' => $postCount,
                 'categoriesCount' => $categoriesCount,
                 'tagsCount' => $tagsCount,
-                'commentsCount' => $commentsCount,
+                'commentsCount' => $unreadCommentsCount,
             ]);
         });
     }

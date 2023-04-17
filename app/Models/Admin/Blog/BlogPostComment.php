@@ -17,6 +17,7 @@ class BlogPostComment extends Model
         'user_id',
         'post_id',
         'is_published',
+        'is_read',
     ];
 
     public function post()
@@ -39,5 +40,10 @@ class BlogPostComment extends Model
     public function isPublic()
     {
         return $this->is_published;
+    }
+
+    public function isRead()
+    {
+        return $this->is_read;
     }
 }

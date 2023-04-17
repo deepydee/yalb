@@ -21,6 +21,8 @@ class CommentsController extends Controller
     {
         $comment = BlogPostComment::findOrFail($id);
 
+        $comment->update(['is_read' => 1]);
+
         return view('admin.blog.comments.single', compact('comment'));
     }
 
@@ -40,6 +42,14 @@ class CommentsController extends Controller
         $isPublished = !$isPublished;
 
         $comment->update(['is_published' => $isPublished]);
+
+        return redirect()->route('admin.blog.comments.index');
+    }
+
+    public function makeCommentUnread($id)
+    {
+        BlogPostComment::findOrFail($id)
+            ->update(['is_read' => 0]);
 
         return redirect()->route('admin.blog.comments.index');
     }
