@@ -44,6 +44,7 @@ class BlogPost extends Model
     public function comments()
     {
        return $this->hasMany(BlogPostComment::class)
+        ->where('is_published', 1)
         ->orderBy('created_at');
     }
 

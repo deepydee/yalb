@@ -16,11 +16,12 @@ class BlogPostComment extends Model
         'text',
         'user_id',
         'post_id',
+        'is_published',
     ];
 
     public function post()
     {
-        return $this->belongsTo(BlogPost::class);
+        return $this->belongsTo(BlogPost::class, 'blog_post_id');
     }
 
     public function user()
@@ -33,5 +34,10 @@ class BlogPostComment extends Model
         return Attribute::make(
             get: fn (string $value) => Date::parse($value)->format('j F Y в H:i'),
         );
+    }
+
+    public function isPublic()
+    {
+        return $this->is_published;
     }
 }

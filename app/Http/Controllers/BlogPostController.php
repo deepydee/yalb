@@ -20,12 +20,15 @@ class BlogPostController extends Controller
     public function show($slug)
     {
         $post = BlogPost::where('slug', $slug)
-            ->firstOrFail(); //->with('category, tags')
+            ->with('comments')
+            ->firstOrFail();
+
+        $comments = $post->comments;
 
         $post->views++;
         $post->update();
 
-        return view('front.blog.page', compact('post'));
+        return view('front.blog.page', compact('post', 'comments'));
     }
 
     public function comment($id, BlogCommentForm $request)

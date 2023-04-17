@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Admin\Blog\BlogCategory;
 use App\Models\Admin\Blog\BlogPost;
+use App\Models\Admin\Blog\BlogPostComment;
 use App\Models\Admin\Blog\BlogTag;
 use App\Models\FormMessage;
 use Illuminate\Support\ServiceProvider;
@@ -84,9 +85,18 @@ class ViewServiceProvider extends ServiceProvider
             $messages = $allMessages->get();
             $unreadMessages = $allMessages->where('is_read', 0)->get();
 
+            $postCount = BlogPost::all()->count();
+            $categoriesCount = BlogCategory::all()->count();
+            $tagsCount = BlogTag::all()->count();
+            $commentsCount = BlogPostComment::all()->count();
+
             $view->with([
                 'messages' => $messages,
                 'unreadMessages' => $unreadMessages,
+                'postCount' => $postCount,
+                'categoriesCount' => $categoriesCount,
+                'tagsCount' => $tagsCount,
+                'commentsCount' => $commentsCount,
             ]);
         });
     }

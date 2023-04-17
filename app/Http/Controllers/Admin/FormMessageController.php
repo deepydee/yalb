@@ -5,13 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\FormMessage;
 
-class MainController extends Controller
+class FormMessageController extends Controller
 {
-    public function index()
-    {
-        return view('admin.index');
-    }
-
     public function showMessages()
     {
         $messages = FormMessage::orderBy('created_at', 'desc')

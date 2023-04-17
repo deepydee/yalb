@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row justify-content-center">
       <aside class="col-12 col-xl-6 be-comment-block">
-        <h3 class="comments-title mb-5">Комментарии ({{$post->comments->count()}})</h3>
+        <h3 class="comments-title mb-5">Комментарии ({{$comments->count()}})</h3>
 
-        @if ($post->comments->count())
-            @foreach ($post->comments as $comment)
+        @if ($comments->count())
+            @foreach ($comments as $comment)
                 @include('front.layouts.chunks.comment', $comment)
             @endforeach
         @endif
