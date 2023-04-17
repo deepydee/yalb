@@ -15,6 +15,7 @@ class FormMessage extends Model
         'phone',
         'name',
         'message',
+        'is_read',
     ];
 
     protected function phone(): Attribute

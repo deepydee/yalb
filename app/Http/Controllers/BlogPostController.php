@@ -30,7 +30,7 @@ class BlogPostController extends Controller
 
     public function comment($id, BlogCommentForm $request)
     {
-        $post = BlogPost::findOrFail($id)->with('comments');
+        $post = BlogPost::findOrFail($id);
 
         $post->comments()->create($request->validated());
 

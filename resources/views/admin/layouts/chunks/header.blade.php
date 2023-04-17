@@ -103,7 +103,9 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">{{ $messages->count() }}</span>
+            @if ($unreadMessages->count())
+            <span class="badge bg-success badge-number">{{ $unreadMessages->count() }}</span>
+            @endif
           </a><!-- End Messages Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">

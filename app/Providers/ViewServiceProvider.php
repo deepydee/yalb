@@ -80,11 +80,13 @@ class ViewServiceProvider extends ServiceProvider
         Facades\View::composer('admin.layouts.layout', function(View $view)
         {
 
-            $messages = FormMessage::orderBy('created_at', 'desc')
-                ->get();
+            $allMessages = FormMessage::orderBy('created_at', 'desc');
+            $messages = $allMessages->get();
+            $unreadMessages = $allMessages->where('is_read', 0)->get();
 
             $view->with([
                 'messages' => $messages,
+                'unreadMessages' => $unreadMessages,
             ]);
         });
     }

@@ -23,6 +23,7 @@ class MainController extends Controller
     public function showMessage($id)
     {
         $message = FormMessage::findOrFail($id);
+        $message->update(['is_read' => 1]);
 
         return view('admin.messages.single', compact('message'));
     }

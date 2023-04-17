@@ -1,13 +1,13 @@
 @if ($messages->count())
 <li class="dropdown-header">
-    У вас {{ $messages->count() }} непрочитанных сообщения
+    У вас {{ $unreadMessages->count() }} непрочитанных сообщения
     <a href="{{ route('admin.messages.index') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">Смотреть все</span></a>
   </li>
   <li>
     <hr class="dropdown-divider">
   </li>
 
-  @foreach ($messages as $message)
+  @foreach ($unreadMessages as $message)
   @if ($loop->iteration === 4)
       @break
   @endif

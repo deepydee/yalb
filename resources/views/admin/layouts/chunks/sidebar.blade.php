@@ -12,7 +12,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.messages.index') }}" class="{{ (request()->is('admin/messages*')) ? 'active' : '' }}">
             <i class="bi bi-envelope"></i>
-            <span>Сообщения @if ($messages->count())  <span class="badge bg-success badge-number">{{$messages->count()}}</span> @endif</span>
+            <span>Сообщения @if ($unreadMessages->count())  <span class="badge bg-success badge-number">{{$unreadMessages->count()}}</span> @endif</span>
         </a>
       </li>
 
