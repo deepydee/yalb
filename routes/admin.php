@@ -18,4 +18,5 @@ Route::prefix('messages')->group(function() {
     Route::get('/', [MainController::class, 'showMessages'])->name('messages.index');
     Route::get('message/{id}', [MainController::class, 'showMessage'])->name('messages.single');
     Route::delete('message/{id}', [MainController::class, 'deleteMessage'])->name('message.destroy');
+    Route::get('make-message-unread/{id}', [MainController::class, 'makeMessageUnread'])->name('message.unread');
 });

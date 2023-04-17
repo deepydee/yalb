@@ -35,4 +35,12 @@ class MainController extends Controller
                 ->with('success', 'Сообщение удалено');
         }
     }
+
+    public function makeMessageUnread($id)
+    {
+        FormMessage::findOrFail($id)
+            ->update(['is_read' => 0]);
+
+            return redirect()->route('admin.messages.index');
+    }
 }
