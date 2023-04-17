@@ -42,7 +42,7 @@
                         </td>
                         <td>{{ $message->created_at }}</td>
                         <td class="text-center">
-                            <a href="{{ route('admin.message.unread',  $message->id) }}" title="Пометить непрочитанным"><i class="bi bi-eye-slash"></i></a>
+                            <a href="{{ route('admin.message.unread',  $message->id) }}" title="Пометить непрочитанным"><i class="bi bi-book{{ $message->isRead() ? '' : '-fill' }}"></i></a>
                             <form action="{{ route('admin.message.destroy', $message->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

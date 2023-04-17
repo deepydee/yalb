@@ -40,4 +40,9 @@ class FormMessage extends Model
     {
         return Date::parse($this->created_at)->diffForHumans();
     }
+
+    public function isRead()
+    {
+        return $this->is_read;
+    }
 }
