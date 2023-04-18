@@ -39,7 +39,7 @@
                     @foreach ($posts as $post)
                     <tr class="align-middle">
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $post->title }}</td>
+                        <td>@if ($post->isPublic()) <a href="{{ route('blog.page', $post->slug) }}" target="_blank">{{ $post->title }}</a> @else {{ $post->title }} @endif</td>
                         <td><img src="{{ $post->getImage() }}" class="img-thumbnail" width="100" alt="{{ $post->title }}"></td>
                         <td>{{ $post->category->title }}</td>
                         <td>{!! $post->tags->pluck('title')->map(fn(string $tag) => "<span class='badge bg-info text-white'>{$tag}</span>")->join(' ') !!}</td>

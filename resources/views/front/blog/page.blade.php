@@ -28,6 +28,7 @@
     <div class="container blog-post-text">
       <div class="row g-4 justify-content-around">
         <div class="col-12 col-lg-6">
+            <p>{!! $post->description !!}</p>
             {!! $post->content !!}
           <div class="tags mb-4">
             @if ($post->tags->count())

@@ -109,6 +109,11 @@ class BlogPost extends Model
         $this->save();
     }
 
+    public function isPublic()
+    {
+        return $this->status === 'published';
+    }
+
     public function toggleStatus()
     {
         $this->status = $this->status === 'publushed' ?
