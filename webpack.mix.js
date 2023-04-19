@@ -1,5 +1,16 @@
 const mix = require('laravel-mix');
 let productionSourceMaps = false;
+
+/**  ckeditor 5 webpack config ****/
+const CKEditorStyles = require('@ckeditor/ckeditor5-dev-utils').styles;
+const {CKEditorTranslationsPlugin} = require( '@ckeditor/ckeditor5-dev-translations' );
+
+//Includes SVGs and CSS files from "node_modules/ckeditor5-*" and any other custom directories
+const CKEditorRegex = {
+    svg: /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/, //If you have any custom plugins in your project with SVG icons, include their path in this regex as well.
+    css: /ckeditor5-[^/\\]+[/\\].+\.css$/,
+};
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -21,6 +32,8 @@ mix.styles([
     'resources/assets/admin/vendor/simple-datatables/style.css',
     'resources/assets/admin/css/style.css'
 ], 'public/assets/admin/css/admin.css').sourceMaps();
+
+mix.js('resources/assets/admin/js/ckeditor.js', 'public/assets/admin/js/ckeditor.js');
 
 mix.scripts([
     'resources/assets/admin/vendor/apexcharts/apexcharts.min.js',
@@ -60,3 +73,66 @@ mix.scripts([
 mix.copyDirectory('resources/assets/front/img', 'public/assets/front/img');
 mix.copyDirectory('resources/assets/front/fonts', 'public/assets/front/fonts');
 mix.copyDirectory('resources/assets/front/certificates', 'public/assets/front/certificates');
+
+mix.webpackConfig({
+    plugins: [
+        // More plugins.
+        // ...
+
+        new CKEditorTranslationsPlugin( {
+            // See https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
+            language: 'ru'
+        } )
+    ],
+    module: {
+      rules: [
+        {
+          test: CKEditorRegex.svg,
+          use: ['raw-loader']
+        },
+        {
+          test: CKEditorRegex.css,
+          use: [
+            {
+              loader: 'style-loader',
+              options: {
+                injectType: 'singletonStyleTag',
+                attributes: {
+                  'data-cke': true
+                }
+              }
+            },
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                postcssOptions: CKEditorStyles.getPostCssConfig({
+                  themeImporter: {
+                    themePath: require.resolve('@ckeditor/ckeditor5-theme-lark')
+                  },
+                  minify: true
+                })
+              }
+            }
+          ]
+        }
+      ]
+    }
+  });
+
+//Exclude CKEditor regex from mix's default rules
+mix.override(config => {
+    const rules = config.module.rules;
+    const targetSVG = (/(\.(png|jpe?g|gif|webp|avif)$|^((?!font).)*\.svg$)/).toString();
+    const targetFont = (/(\.(woff2?|ttf|eot|otf)$|font.*\.svg$)/).toString();
+    const targetCSS = (/\.p?css$/).toString();
+
+    rules.forEach(rule => {
+        let test = rule.test.toString();
+        if ([targetSVG, targetFont].includes(rule.test.toString())) {
+            rule.exclude = CKEditorRegex.svg;
+        } else if (test === targetCSS) {
+            rule.exclude = CKEditorRegex.css;
+        }
+    });
+});

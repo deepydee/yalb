@@ -2,6 +2,8 @@
 
 @section('title', $post->title)
 
+@section('description', strip_tags($post->description))
+
 @section('content')
 <article itemscope itemtype="http://schema.org/Article">
     <header class="mb-5">
@@ -27,7 +29,7 @@
 
     <div class="container blog-post-text">
       <div class="row g-4 justify-content-around">
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-8 ck-content">
             <p>{!! $post->description !!}</p>
             {!! $post->content !!}
           <div class="tags mb-4">

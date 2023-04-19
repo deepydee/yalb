@@ -1,4 +1,5 @@
 {
+    "/assets/admin/js/ckeditor.js": "/assets/admin/js/ckeditor.js",
     "/assets/front/css/app.css": "/assets/front/css/app.css",
     "/assets/admin/css/admin.css": "/assets/admin/css/admin.css",
     "/assets/admin/js/admin.js": "/assets/admin/js/admin.js",
