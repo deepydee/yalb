@@ -49,7 +49,7 @@ class ViewServiceProvider extends ServiceProvider
                 $popularPosts = Cache::get('popularPosts');
             } else {
                 $popularPosts = BlogPost::orderBy('views', 'desc')
-                ->limit(4)
+                ->limit(3)
                 ->get();
 
                 Cache::put('popularPosts', $popularPosts, 30);

@@ -2,7 +2,7 @@
     <a href="{{ route('blog.page', ['slug' => $post->slug]) }}"><img class="card-img-top" src="{{ $post->getImage() }}" alt="{{ $post->title }}" itemprop="image"></a>
     <div class="card-body">
       <header>
-        <h5 class="text-uppercase fs-6 fw-bold mb-4">{{ $post->category->title }}</h5>
+        <h5 class="text-uppercase fs-6 fw-bold mb-4"><a href="{{ route('blog.category', $post->category->slug) }}">{{ $post->category->title }}</a></h5>
       </header>
       <h4 class="card-title fw-bold mb-3"><a href="{{ route('blog.page', ['slug' => $post->slug]) }}" class="blog-post" itemprop="headline">{{ $post->title }}</a></h4>
       <p class="card-description">{!! \Illuminate\Support\Str::limit($post->description, 100, $end='...') !!}</p>

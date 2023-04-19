@@ -64,5 +64,6 @@
 @endsection
 
 @section('aside')
+  <h3 class="mb-4 fw-bold">Читайте также</h3>
   @include('front.layouts.chunks.popular-posts')
 @endsection
