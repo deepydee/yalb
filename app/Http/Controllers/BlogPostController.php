@@ -11,32 +11,26 @@ class BlogPostController extends Controller
     {
         $posts = BlogPost::with(['category', 'tags'])
             ->where('status', 'published')
-            ->orderBy('id', 'desc')
+            ->latest()
             ->paginate(4);
 
         return view('front.blog.index', compact('posts'));
     }
 
-    public function show($slug)
+    public function show(BlogPost $blogPost)
     {
-        $post = BlogPost::where('slug', $slug)
-            ->with('comments')
-            ->firstOrFail();
+        $comments = $blogPost->load('comments');
 
-        $comments = $post->comments;
+        $blogPost->views++;
+        $blogPost->update();
 
-        $post->views++;
-        $post->update();
-
-        return view('front.blog.page', compact('post', 'comments'));
+        return view('front.blog.page', compact('blogPost'));
     }
 
-    public function comment($id, BlogCommentForm $request)
+    public function comment(BlogPost $blogPost, BlogCommentForm $request)
     {
-        $post = BlogPost::findOrFail($id);
+        $blogPost->comments()->create($request->validated());
 
-        $post->comments()->create($request->validated());
-
-        return redirect()->route('blog.page', $post->slug);
+        return redirect()->route('blog.page', $blogPost);
     }
 }

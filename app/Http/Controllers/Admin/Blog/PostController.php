@@ -19,7 +19,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = BlogPost::with('category', 'tags')->paginate(20);
+        $posts = BlogPost::with('category', 'tags')
+            ->latest()
+            ->paginate(20);
 
         return view('admin.blog.posts.index', compact('posts'));
     }
@@ -49,9 +51,8 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(BlogPost $post)
     {
-        $post = BlogPost::find($id);
         $categories = BlogCategory::pluck('title', 'id')->all();
         $tags = BlogTag::pluck('title', 'id')->all();
 
@@ -61,9 +62,11 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PostFormRequest $request, BlogPostUpdateAction $action, string $id)
-    {
-        $post = BlogPost::find($id);
+    public function update(
+        BlogPost $post,
+        PostFormRequest $request,
+        BlogPostUpdateAction $action
+    ) {
         $action->handle($post, $request);
 
         return redirect()->route('admin.blog.posts.index')
@@ -73,9 +76,8 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BlogPostDestroyAction $action, string $id)
+    public function destroy(BlogPost $post, BlogPostDestroyAction $action)
     {
-        $post = BlogPost::find($id);
         $action->handle($post);
 
         return redirect()->route('admin.blog.posts.index')

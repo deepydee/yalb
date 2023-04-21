@@ -13,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = BlogCategory::paginate(20);
+        $categories = BlogCategory::latest()
+            ->paginate(20);
 
         return view('admin.blog.categories.index', compact('categories'));
     }
@@ -45,23 +46,20 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(BlogCategory $category)
     {
-       $category = BlogCategory::find($id);
-
        return view('admin.blog.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BlogCategory $category, Request $request)
     {
         $request->validate([
             'title' => 'required',
         ]);
 
-        $category = BlogCategory::find($id);
         $category->update($request->all());
 
         return redirect()->route('admin.blog.categories.index')
@@ -71,9 +69,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(BlogCategory $category)
     {
-        $category = BlogCategory::find($id);
         if ($category->posts->count()) {
             return back()->with('error', 'У категории есть записи');
         }

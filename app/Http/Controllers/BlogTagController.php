@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin\Blog\BlogTag;
-use Illuminate\Http\Request;
 
 class BlogTagController extends Controller
 {
-    public function show($slug) {
-        $tag = BlogTag::where('slug', $slug)
-            ->firstOrFail();
+    public function show(BlogTag $blogTag) {
 
-        $posts = $tag->posts()
+        $posts = $blogTag->posts()
             ->with('category')
-            ->orderBy('id', 'desc')
+            ->latest()
             ->paginate(4);
 
-            return view('front.blog.tag', compact('tag', 'posts'));
+            return view(
+                'front.blog.tag',
+                ['tag' => $blogTag, 'posts' => $posts]
+            );
     }
 }

@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin\Blog\BlogCategory;
-use Illuminate\Http\Request;
 
 class BlogCategoryController extends Controller
 {
-    function show ($slug) {
+    function show (BlogCategory $blogCategory) {
 
-        $category = BlogCategory::where('slug', $slug)
-            ->firstOrFail();
+        $posts = $blogCategory->posts()
+            ->latest()
+            ->paginate(4);
 
-        $posts = $category->posts()
-                          ->orderBy('id', 'desc')
-                          ->paginate(4);
-
-        return view('front.blog.category', compact('category', 'posts'));
+        return
+            view('front.blog.category',
+            ['category' => $blogCategory, 'posts' => $posts]
+        );
     }
 }

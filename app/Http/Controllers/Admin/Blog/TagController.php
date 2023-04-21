@@ -13,7 +13,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = BlogTag::paginate(20);
+        $tags = BlogTag::latest()
+            ->paginate(20);
 
         return view('admin.blog.tags.index', compact('tags'));
     }
@@ -44,23 +45,20 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(BlogTag $tag)
     {
-        $tag = BlogTag::find($id);
-
         return view('admin.blog.tags.edit', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BlogTag $tag, Request $request)
     {
         $request->validate([
             'title' => 'required',
         ]);
 
-        $tag = BlogTag::find($id);
         $tag->update($request->all());
 
         return redirect()->route('admin.blog.tags.index')
@@ -70,10 +68,8 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(BlogTag $tag)
     {
-        $tag = BlogTag::find($id);
-
         if ($tag->posts->count()) {
             return back()->with('error', 'У тега есть записи');
         }

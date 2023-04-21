@@ -4,52 +4,48 @@ namespace App\Http\Controllers\Admin\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Blog\BlogPostComment;
-use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
     public function showComments()
     {
-        $comments = BlogPostComment::orderBy('created_at', 'desc')
+        $comments = BlogPostComment::latest()
             ->with(['user', 'post'])
             ->paginate(10);
 
         return view('admin.blog.comments.index', compact('comments'));
     }
 
-    public function showComment($id)
+    public function showComment(BlogPostComment $blogPostComment)
     {
-        $comment = BlogPostComment::findOrFail($id);
+        $blogPostComment->update(['is_read' => 1]);
+        $blogPostComment->load('user');
 
-        $comment->update(['is_read' => 1]);
-
-        return view('admin.blog.comments.single', compact('comment'));
+        return view('admin.blog.comments.single', ['comment' => $blogPostComment]);
     }
 
-    public function deleteComment($id)
+    public function deleteComment(BlogPostComment $blogPostComment)
     {
-        if (BlogPostComment::destroy($id)) {
+        if ($blogPostComment->delete()) {
             return redirect()->route('admin.blog.comments.index')
                 ->with('success', 'Комментарий удален');
         }
     }
 
-    public function toggleCommentPublic($id)
+    public function toggleCommentPublic(BlogPostComment $blogPostComment)
     {
-        $comment = BlogPostComment::findOrFail($id);
-        $isPublished = $comment->is_published;
+        $isPublished = $blogPostComment->is_published;
 
         $isPublished = !$isPublished;
 
-        $comment->update(['is_published' => $isPublished]);
+        $blogPostComment->update(['is_published' => $isPublished]);
 
         return redirect()->route('admin.blog.comments.index');
     }
 
-    public function makeCommentUnread($id)
+    public function makeCommentUnread(BlogPostComment $blogPostComment)
     {
-        BlogPostComment::findOrFail($id)
-            ->update(['is_read' => 0]);
+        $blogPostComment->update(['is_read' => 0]);
 
         return redirect()->route('admin.blog.comments.index');
     }

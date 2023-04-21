@@ -1,16 +1,16 @@
 <div class="container">
     <div class="row justify-content-center">
       <aside class="col-12 col-xl-6 be-comment-block">
-        <h3 class="comments-title mb-5">Комментарии ({{$comments->count()}})</h3>
+        <h3 class="comments-title mb-5">Комментарии ({{$post->comments->count()}})</h3>
 
-        @if ($comments->count())
-            @foreach ($comments as $comment)
+        @if ($post->comments->count())
+            @foreach ($post->comments as $comment)
                 @include('front.layouts.chunks.comment', $comment)
             @endforeach
         @endif
 
 
-        <form action="{{ route('blog.comment', $post->id) }}" class="form-block" method="POST">
+        <form action="{{ route('blog.comment', $post) }}" class="form-block" method="POST">
           @csrf
           <div class="form-floating mb-3">
             <textarea class="form-control be-comment-textarea @error('text') is-invalid @enderror" placeholder="Оставьте комментарий" id="comment" name="text" required></textarea>

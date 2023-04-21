@@ -25,29 +25,13 @@ Route::post('/contact-form', [IndexController::class, 'contactForm'])->name('con
 
 Route::prefix('blog')->name('blog.')->group(function () {
     Route::get('/', [BlogPostController::class, 'index'])->name('index');
-    Route::get('article/{slug}', [BlogPostController::class, 'show'])->name('page');
-    Route::get('category/{slug}', [BlogCategoryController::class, 'show'])->name('category');
-    Route::get('tag/{slug}', [BlogTagController::class, 'show'])->name('tag');
+    Route::get('article/{blog_post:slug}', [BlogPostController::class, 'show'])->name('page');
+    Route::get('category/{blog_category:slug}', [BlogCategoryController::class, 'show'])->name('category');
+    Route::get('tag/{blog_tag:slug}', [BlogTagController::class, 'show'])->name('tag');
     Route::get('search', [BlogSearchController::class, 'index'])->name('search');
-    Route::post('article/{id}', [BlogPostController::class, 'comment'])->middleware('auth')->name('comment');
+    Route::post('article/{blog_post}', [BlogPostController::class, 'comment'])
+        ->middleware('auth')->name('comment');
 });
-
-
-// Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
-//     Route::get('/', [MainController::class, 'index'])->name('index');
-
-//     Route::prefix('blog')->name('blog.')->group(function () {
-//         Route::resource('/categories', CategoryController::class);
-//         Route::resource('/tags', TagController::class);
-//         Route::resource('/posts', PostController::class);
-//     });
-
-//     Route::prefix('messages')->group(function() {
-//         Route::get('/', [MainController::class, 'showMessages'])->name('messages.index');
-//         Route::get('message/{id}', [MainController::class, 'showMessage'])->name('messages.single');
-//         Route::delete('message/{id}', [MainController::class, 'deleteMessage'])->name('message.destroy');
-//     });
-// });
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');

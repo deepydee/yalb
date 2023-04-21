@@ -16,10 +16,10 @@ Route::prefix('blog')->name('blog.')->group(function () {
 
     Route::prefix('comments')->name('comments.')->group(function() {
         Route::get('/', [CommentsController::class, 'showComments'])->name('index');
-        Route::get('message/{id}', [CommentsController::class, 'showComment'])->name('single');
-        Route::delete('message/{id}', [CommentsController::class, 'deleteComment'])->name('destroy');
-        Route::get('make-comment-public/{id}', [CommentsController::class, 'toggleCommentPublic'])->name('publish');
-        Route::get('make-comment-unread/{id}', [CommentsController::class, 'makeCommentUnread'])->name('unread');
+        Route::get('message/{blog_post_comment}', [CommentsController::class, 'showComment'])->name('single');
+        Route::delete('message/{blog_post_comment}', [CommentsController::class, 'deleteComment'])->name('destroy');
+        Route::get('make-comment-public/{blog_post_comment}', [CommentsController::class, 'toggleCommentPublic'])->name('publish');
+        Route::get('make-comment-unread/{blog_post_comment}', [CommentsController::class, 'makeCommentUnread'])->name('unread');
     });
 });
 
