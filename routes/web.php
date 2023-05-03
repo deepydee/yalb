@@ -69,4 +69,6 @@ Route::group(['middleware' => 'admin'], function () {
     ->name('ckfinder_examples');
 });
 
-Route::get('/{category}', [CategoryController::class, 'show']);
+Route::get('/{path}', [CategoryController::class, 'show'])
+    ->where('path', '[a-zA-Z0-9/_-]+')
+    ->name('category.show');

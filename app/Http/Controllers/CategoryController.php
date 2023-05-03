@@ -19,12 +19,15 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category): View
+    public function show($path): View
     {
-        $products = $category->products()
-            ->with('attributes')
-            ->paginate(25);
+        $category = Category::wherePath($path)
+            ->firstOrFail();
 
-        return view('categories.show', compact('products'));
+        // $products = $category->products()
+        //     ->with('attributes')
+        //     ->paginate(25);
+
+        return view('categories.show', compact('category'));
     }
 }

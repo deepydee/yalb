@@ -23,6 +23,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'description' => 'nullable',
         ];
     }
 }

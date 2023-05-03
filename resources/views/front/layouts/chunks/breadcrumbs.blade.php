@@ -2,8 +2,10 @@
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Главная</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Блог</li>
+            @foreach($category->ancestors as $ancestor)
+              <li class="breadcrumb-item"><a href="{{ route('category.show', $ancestor->path) }}">{{ $ancestor->title }}</a></li>
+            @endforeach
+              <li class="breadcrumb-item active" aria-current="page">{{ $category->title }}</li>
         </ol>
       </nav>
     </div>
