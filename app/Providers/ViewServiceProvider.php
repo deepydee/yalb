@@ -47,8 +47,9 @@ class ViewServiceProvider extends ServiceProvider
 
         Facades\View::composer('front.layouts.chunks.dynamic-menu', function (View $view) {
             $categories = Category::defaultOrder()
-                ->whereIsRoot()
-                ->get();
+                ->with('children', 'parent')
+                ->get()
+                ->toTree();
 
             $view->with([
                 'categories' => $categories,

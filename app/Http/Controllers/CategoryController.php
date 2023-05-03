@@ -22,6 +22,7 @@ class CategoryController extends Controller
     public function show($path): View
     {
         $category = Category::wherePath($path)
+            ->with('ancestors')
             ->firstOrFail();
 
         // $products = $category->products()
