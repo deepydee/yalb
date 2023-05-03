@@ -72,15 +72,17 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            Category::create($category);
+           Category::create($category);
         }
 
         $categories = Category::all();
 
         foreach ($categories as $category) {
-            $category
-                ->generatePath()
-                ->save();
+            $category->generatePath();
+
+            $category->update([
+                'description' => fake()->realText(1000),
+            ]);
         }
     }
 }

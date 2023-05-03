@@ -1,14 +1,20 @@
 @extends('admin.layouts.layout')
 
-@section('title', 'Создание категории')
+@section('title', 'Редактирование категории')
 
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Администратор</a></li>
     <li class="breadcrumb-item">Каталог</li>
-    <li class="breadcrumb-item active">Категории</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.catalog.categories.index') }}">Категории</a></li>
+    <li class="breadcrumb-item active">Редактирование</li>
 </ol>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('assets/admin/js/ckeditor.js') }}"></script>
+@include('ckfinder::setup')
+@endpush
 
 @section('main-content')
 
@@ -38,7 +44,7 @@
                             </select>
                             <label for="parent_id">Родительская категория</label>
                         </div>
-                        <div class="form-floating">
+                        <div class="form-floating mb-3">
                             <input
                             type="text"
                             name="title"
@@ -48,6 +54,14 @@
                             value="{{$category->title}}"
                             >
                             <label for="floatingName">Название категории</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea
+                                class="form-control @error('description') is-invalid @enderror"
+                                placeholder="Добавьте описание (необязательно)"
+                                id="description"
+                                name="description"
+                                style="height: 100px;">{{$category->description}}</textarea>
                         </div>
                     </div>
                     <div class="text-center">

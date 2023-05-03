@@ -20,9 +20,6 @@
 <script>
     const multipleCancelButton = new Choices('#tags', {
         removeItemButton: true,
-        // maxItemCount:5,
-        // searchResultLimit:5,
-        // renderChoiceLimit:5
     });
 
     const statusCheck = document.getElementById('status');
@@ -42,38 +39,6 @@
 
 @push('styles')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css"/>
-
-<style>
-.custom-file-button input[type=file]::-webkit-file-upload-button {
-  display: none;
-}
-.custom-file-button input[type=file]::file-selector-button {
-  display: none;
-}
-.custom-file-button:hover label {
-  background-color: #dde0e3;
-  cursor: pointer;
-}
-.choices__inner {
-    background-color: #fff;
-    padding: 7.5px 7.5px 3.75px;
-    border-radius: 0.375rem;
-    font-size: 1rem;
-    overflow: hidden;
-}
-.choices__input {
-    background-color: #fff;
-}
-
-.ck {
-    --ck-border-radius: 0.375rem;
-}
-
-
-.ck-editor__editable_inline {
-    min-height: 400px;
-}
-</style>
 @endpush
 
 
