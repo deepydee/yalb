@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-purgecss');
 let productionSourceMaps = false;
 
 /**  ckeditor 5 webpack config ****/
@@ -31,7 +32,11 @@ mix.styles([
     'resources/assets/admin/vendor/remixicon/remixicon.css',
     'resources/assets/admin/vendor/simple-datatables/style.css',
     'resources/assets/admin/css/style.css'
-], 'public/assets/admin/css/admin.css').sourceMaps();
+], 'public/assets/admin/css/admin.css')
+    .purgeCss({
+        enabled: true,
+    })
+    .sourceMaps();
 
 mix.js('resources/assets/admin/js/ckeditor.js', 'public/assets/admin/js/ckeditor.js');
 
@@ -58,6 +63,9 @@ mix.sass('resources/assets/front/css/app.scss', 'public/assets/front/css/')
         ],
         'public/assets/front/css/style.css'
    )
+   .purgeCss({
+        enabled: true,
+    })
    .sourceMaps(productionSourceMaps, "source-map");;
 
 // mix.styles([

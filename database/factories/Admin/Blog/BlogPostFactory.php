@@ -34,8 +34,9 @@ class BlogPostFactory extends Factory
 
         return [
             'title' => fake()->sentence(),
-            'description' => fake()->paragraphs(3, true),
-            'content' => fake()->text(2000),
+            // 'description' => fake()->paragraphs(3, true),
+            'description' => fake()->realText(),
+            'content' => fake()->realText(3000),
             'category_id' => BlogCategory::factory(),
             'views' => fake()->randomNumber(5, false),
             'thumbnail' => 'images/' . basename($fakerFileName),

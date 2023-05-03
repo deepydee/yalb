@@ -6,6 +6,7 @@ use App\Models\Admin\Blog\BlogCategory;
 use App\Models\Admin\Blog\BlogPost;
 use App\Models\Admin\Blog\BlogPostComment;
 use App\Models\Admin\Blog\BlogTag;
+use App\Models\Category;
 use App\Models\FormMessage;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades;
@@ -44,7 +45,18 @@ class ViewServiceProvider extends ServiceProvider
             ]);
         });
 
-        Facades\View::composer('front.layouts.chunks.popular-posts', function (View $view) {
+        Facades\View::composer('front.layouts.chunks.dynamic-menu', function (View $view) {
+            $categories = Category::defaultOrder()
+                ->whereIsRoot()
+                ->get();
+
+            $view->with([
+                'categories' => $categories,
+            ]);
+        });
+
+        Facades\View::composer('front.layouts.chunks.popular-posts', function (View $view)
+        {
              if (Cache::has('popularPosts')) {
                 $popularPosts = Cache::get('popularPosts');
             } else {
@@ -60,8 +72,7 @@ class ViewServiceProvider extends ServiceProvider
             ]);
         });
 
-        Facades\View::composer('front.layouts.chunks.featured', function(View $view)
-        {
+        Facades\View::composer('front.layouts.chunks.featured', function(View $view) {
             if (Cache::has('featuredPosts')) {
                 $featuredPosts = Cache::get('featuredPosts');
             } else {
@@ -78,8 +89,7 @@ class ViewServiceProvider extends ServiceProvider
             ]);
         });
 
-        Facades\View::composer('admin.layouts.layout', function(View $view)
-        {
+        Facades\View::composer('admin.layouts.layout', function(View $view) {
 
             $allMessages = FormMessage::orderBy('created_at', 'desc');
             $messages = $allMessages->get();

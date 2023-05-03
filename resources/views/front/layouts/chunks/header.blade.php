@@ -15,49 +15,8 @@
             <li class="nav-item">
               <a class="nav-link active" href="{{ route('home') }}" aria-current="page">Главная <span class="visually-hidden">(текущая)</span></a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="/goods/catalog.html" id="production" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Производство</a>
-              <div class="dropdown-menu" aria-labelledby="production">
-                <a class="dropdown-item" href="#">Манжеты и уплотнения</a>
-                <a class="dropdown-item" href="#">РВД и шланги</a>
-                <a class="dropdown-item" href="#">Маслостанции</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="goods" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Товары</a>
-              <div class="dropdown-menu" aria-labelledby="goods">
-                <a class="dropdown-item" href="#">Уплотнения Kastas</a>
-                <a class="dropdown-item" href="#">Гидрокомпоненты</a>
-                <a class="dropdown-item" href="#">Пневмокомпоненты</a>
-                <a class="dropdown-item" href="#">Ремкомплекты гидроцилиндров</a>
-                <a class="dropdown-item" href="#">Металлорукава</a>
-                <a class="dropdown-item" href="#">Стальные трубки</a>
-                <a class="dropdown-item" href="#">Запчасти</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="goods" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ремонт</a>
-              <div class="dropdown-menu" aria-labelledby="goods">
-                <a class="dropdown-item" href="#">Ремонт гидроцилиндров</a>
-                <a class="dropdown-item" href="#">Ремонт пневмоцилиндров</a>
-                <a class="dropdown-item" href="#">Ремонт маслостанций</a>
-                <a class="dropdown-item" href="#">Ремонт гидронасосов</a>
-                <a class="dropdown-item" href="#">Ремонт пневмонасосов</a>
-                <a class="dropdown-item" href="#">Ремонт моторов</a>
-                <a class="dropdown-item" href="#">Ремонт гидрораспределителей</a>
-                <a class="dropdown-item" href="#">Ремонт гидромолотов</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('blog.index') }}">Блог</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="/about.html" id="goods" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Компания</a>
-              <div class="dropdown-menu" aria-labelledby="goods">
-                <a class="dropdown-item" href="/about.html">О компании</a>
-                <a class="dropdown-item" href="#">Новости</a>
-              </div>
-            </li>
+            @include('front.layouts.chunks.dynamic-menu')
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="goods" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Контакты</a>
               <div class="dropdown-menu" aria-labelledby="goods">

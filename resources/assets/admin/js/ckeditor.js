@@ -118,12 +118,12 @@ ClassicEditor.defaultConfig = {
 
 ClassicEditor
     .create( document.querySelector( '#description' ), {
-        toolbar: [ 'heading', 'blockQuote', '|', 'bold', 'italic'],
+        toolbar: [ 'heading', 'blockQuote', '|', 'bold', 'italic', '|', 'sourceEditing'],
         ckfinder: {
             // To avoid issues, set it to an absolute path that does not start with dots, e.g. '/ckfinder/core/php/(...)'
             uploadUrl: '/ckfinder/connector?command=QuickUpload&type=Files&responseType=json'
         },
-        placeholder: 'Предварительное описание',
+          placeholder: 'Предварительное описание',
         /* The editor configuration... */
     } )
     .then( function( editor ) {
@@ -149,16 +149,6 @@ ClassicEditor
             ]
         },
         placeholder: 'Текст статьи',
-        htmlSupport: {
-            allow: [
-                {
-                    name: /.*/,
-                    attributes: true,
-                    classes: true,
-                    styles: true
-                }
-            ]
-        },
         htmlEmbed: {
             showPreviews: true
         },

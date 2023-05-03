@@ -16,10 +16,10 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link {{ (request()->is('admin/blog*')) ? '' : 'collapsed' }}" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link {{ (request()->is('admin/blog*')) ? '' : 'collapsed' }}" data-bs-target="#blog-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journals"></i><span>Блог</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="components-nav" class="nav-content collapse {{ (request()->is('admin/blog*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+        <ul id="blog-nav" class="nav-content collapse {{ (request()->is('admin/blog*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ route('admin.blog.categories.index') }}" class="{{ (request()->is('admin/blog/categories*')) ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Категории @if ($categoriesCount) <span class="badge bg-secondary badge-number">{{$categoriesCount}}</span> @endif</span>
@@ -38,6 +38,19 @@
           <li>
             <a href="{{ route('admin.blog.comments.index') }}" class="{{ (request()->is('admin/blog/comments*')) ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Комментарии @if ($commentsCount) <span class="badge bg-info badge-number">{{$commentsCount}}</span> @endif</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link {{ (request()->is('admin/catalog*')) ? '' : 'collapsed' }}" data-bs-target="#catalog-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journals"></i><span>Каталог</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="catalog-nav" class="nav-content collapse {{ (request()->is('admin/blog*')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('admin.catalog.categories.index') }}" class="{{ (request()->is('admin/catalog/categories*')) ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Категории</span>
             </a>
           </li>
         </ul>

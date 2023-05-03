@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
   <title>ТОО СИЛМАСТЕР | @yield('title', 'Производство манжет и уплотнений в Караганде')</title>

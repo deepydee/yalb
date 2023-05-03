@@ -847,3 +847,20 @@ body {
     border: 1px solid #edeff2;
     border-radius: 3px;
   }
+
+  .dropdown .dropdown-menu {
+    display: none;
+  }
+
+  .dropdown:hover > .dropdown-menu,
+  .dropend:hover > .dropdown-menu {
+    display: block;
+  }
+
+  @media screen and (min-width: 769px) {
+    .dropend:hover > .dropdown-menu {
+        position: absolute;
+        top: 0;
+        left: 100%;
+    }
+}

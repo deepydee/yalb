@@ -5,7 +5,9 @@ use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\BlogSearchController;
 use App\Http\Controllers\BlogTagController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'index')->name('home');
+
+Route::resource('products', ProductController::class);
 
 Route::post('/contact-form', [IndexController::class, 'contactForm'])->name('contact-form.process');
 
@@ -64,3 +68,5 @@ Route::group(['middleware' => 'admin'], function () {
     Route::any('/ckfinder/examples/{example?}', '\CKSource\CKFinderBridge\Controller\CKFinderController@examplesAction')
     ->name('ckfinder_examples');
 });
+
+Route::get('/{category}', [CategoryController::class, 'show']);
