@@ -45,7 +45,9 @@ class ViewServiceProvider extends ServiceProvider
             ]);
         });
 
-        Facades\View::composer('front.layouts.chunks.dynamic-menu', function (View $view) {
+        Facades\View::composer(
+            ['front.layouts.chunks.dynamic-menu', 'front.layouts.chunks.footer'],
+            function (View $view) {
             $categories = Category::defaultOrder()
                 ->with('children', 'parent')
                 ->get()

@@ -36,60 +36,39 @@
    <!-- place footer here -->
     <div class="container p-3">
         <div class="row mb-4">
+
           <div class="col-md-4 mb-4">
             <h3 class="fw-bold">Нужна консультация? Напишите нам, и мы подскажем!</h3>
             @include('front.layouts.chunks.contact-form')
           </div>
-          <div class="col-md-4">
-            <h3 class="fw-bold">Производство</h3>
-            <ul class="footer-links">
-              <li><a href="#">Манжеты и уплотнения</a></li>
-              <li><a href="#">РВД и шланги</a></li>
-              <li><a href="#">Маслостанции</a></li>
-            </ul>
-            <h3 class="fw-bold">Товары</h3>
-            <ul class="footer-links">
-              <li><a href="#">Уплотнения Kastas</a></li>
-              <li><a href="#">Гидрокомпоненты</a></li>
-              <li><a href="#">Пневмокомпоненты</a></li>
-              <li><a href="#">Ремкомплекты гидроцилиндров</a></li>
-              <li><a href="#">Металлорукава</a></li>
-              <li><a href="#">Стальные трубки</a></li>
-              <li><a href="#">Запчасти</a></li>
-            </ul>
-            <h3 class="fw-bold">Ремонт</h3>
-            <ul class="footer-links">
-              <li><a href="#">Ремонт гидроцилиндров</a></li>
-              <li><a href="#">Ремонт пневмоцилиндров</a></li>
-              <li><a href="#">Ремонт маслостанций</a></li>
-              <li><a href="#">Ремонт гидронасосов</a></li>
-              <li><a href="#">Ремонт пневмонасосов</a></li>
-              <li><a href="#">Ремонт моторов</a></li>
-              <li><a href="#">Ремонт гидрораспределителей</a></li>
-              <li><a href="#">Ремонт гидромолотов</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h3 class="fw-bold">Компания</h3>
-            <ul class="footer-links">
-              <li><a href="#">О компании</a></li>
-              <li><a href="#">Оплата и доставка</a></li>
-              <li><a href="#">Акции и скидки</a></li>
-              <li><a href="#">Новости</a></li>
-              <li><a href="#">Блог</a></li>
-              <li><a href="#">Обучение</a></li>
-            </ul>
+
+          <div class="col-md-8">
+            @if (count($categories))
+                @foreach ($categories as $category)
+                    @if (@blank($category->parent))
+                        @if ($category->parent)
+                            <h3 class="fw-bold"><a href="{{ route('category.show', $category->path) }}">{{ $category->title }}</a></h3>
+                        @else
+                            <h4><a href="{{ route('category.show', $category->path) }}">{{ $category->title }}</a></h4>
+                            <ul class="footer-links">
+                                @include('front.layouts.chunks.footer-submenu', ['subcategories' => $category->children])
+                            </ul>
+                        @endif
+                    @endif
+                @endforeach
+            @endif
 
             <p class="fw-bold">Следите за нами в социальных сетях</p>
             <div class="social my-4 my-lg-0">
-              <a href="http://www.instagram.com/sealmasterkz/" title="ТОО СИЛМАСТЕР в Instagram"><span class="icon icon-inst"></span></a>
-              <a href="http://t.me/sealmasterkz" title="ТОО СИЛМАСТЕР в Telegram"><span class="icon icon-tg"></span></a>
-              <a href="https://wa.me/77764407004?text=Здравствуйте%2C+у+меня+есть+вопрос" title="Напишите нам в WhatsApp"><span class="icon icon-wa" target="_blank"></span></a>
-              <a href="https://www.youtube.com/@user-ng3jr8ss1b" title="Youtube канал ТОО СИЛМАСТЕР" target="_blank"><span class="icon icon-yt"></span></a>
+                <a href="http://www.instagram.com/sealmasterkz/" title="ТОО СИЛМАСТЕР в Instagram"><span class="icon icon-inst"></span></a>
+                <a href="http://t.me/sealmasterkz" title="ТОО СИЛМАСТЕР в Telegram"><span class="icon icon-tg"></span></a>
+                <a href="https://wa.me/77764407004?text=Здравствуйте%2C+у+меня+есть+вопрос" title="Напишите нам в WhatsApp"><span class="icon icon-wa" target="_blank"></span></a>
+                <a href="https://www.youtube.com/@user-ng3jr8ss1b" title="Youtube канал ТОО СИЛМАСТЕР" target="_blank"><span class="icon icon-yt"></span></a>
             </div>
 
           </div>
         </div>
+
       <div class="row">
         <span class="text-muted">{{ date('Y') }} &copy; ТОО "СИЛМАСТЕР" | Изготовление и реализация манжет и уплотнений в Караганде</span>
       </div>

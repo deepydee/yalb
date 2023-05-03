@@ -1,4 +1,3 @@
-{{-- @dd($categories) --}}
 @if (count($categories))
     @foreach ($categories as $category)
 
