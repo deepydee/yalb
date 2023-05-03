@@ -18,6 +18,8 @@ class Category extends Model
 
     protected $fillable = [
         'title',
+        'description',
+        'path',
         'parent_id',
     ];
 
@@ -38,6 +40,29 @@ class Category extends Model
         return $instance;
     }
 
+    protected static function booted(): void
+    {
+        static::saving(function (self $model) {
+            if ($model->isDirty('slug', 'parent_id')) {
+                $model->generatePath();
+            }
+        });
+
+        static::saved(function (self $model) {
+            // Данная переменная нужна для того, чтобы потомки не начали вызывать
+            // метод, т.к. для них путь также изменится
+            static $updating = false;
+
+            if ( ! $updating && $model->isDirty('path')) {
+                $updating = true;
+
+                $model->updateDescendantsPaths();
+
+                $updating = false;
+            }
+        });
+    }
+
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
@@ -45,10 +70,33 @@ class Category extends Model
 
     public function getUrl()
     {
-        $slugs = $this->ancestors()->pluck('slug')->all();
-        $slugs[] = $this->slug;
+        // $slugs = $this->ancestors()->pluck('slug')->all();
+        // $slugs[] = $this->slug;
 
-        return implode('/', $slugs);
+        // return implode('/', $slugs);
+
+        return $this->path;
+    }
+
+    public function generatePath()
+    {
+        $slug = $this->slug;
+        $this->path = $this->isRoot() ? $slug : $this->parent->path.'/'.$slug;
+
+        return $this;
+    }
+
+    public function updateDescendantsPaths()
+    {
+        // Получаем всех потомков в древовидном порядке
+        $descendants = $this->descendants()->defaultOrder()->get();
+
+        // Данный метод заполняет отношения parent и children
+        $descendants->push($this)->linkNodes()->pop();
+
+        foreach ($descendants as $model) {
+            $model->generatePath()->save();
+        }
     }
 
     public function getChildrenOrdered()
