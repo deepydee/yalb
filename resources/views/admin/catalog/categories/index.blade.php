@@ -24,7 +24,7 @@
                 @if (count($categories))
                 <ul>
                     @foreach($categories as $category)
-                    <li class="{{ @blank($category->parent_id) ? 'fw-bold' : '' }}">{{ $category->title }}
+                    <li class="{{ @blank($category->parent_id) ? 'fw-bold' : '' }}"><a href="{{ route('category.show', $category->path) }}" target="_blank" rel="noopener noreferrer">{{ $category->title }}</a>
                         <a href="{{ route('admin.catalog.categories.create', compact('category')) }}"
                         class="btn btn-outline-secondary border-0 px-1 py-0"
                         title="Добавить потомка"

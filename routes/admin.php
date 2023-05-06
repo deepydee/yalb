@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Blog\CategoryController;
 use App\Http\Controllers\Admin\Blog\CommentsController;
 use App\Http\Controllers\Admin\Blog\PostController;
 use App\Http\Controllers\Admin\Blog\TagController;
+use App\Http\Controllers\Admin\Catalog\AttributeController;
 use App\Http\Controllers\Admin\Catalog\CategoryController as CatalogCategoryController;
 use App\Http\Controllers\Admin\FormMessageController;
 
@@ -28,6 +29,7 @@ Route::prefix('catalog')->name('catalog.')->group(function () {
     Route::get('/categories/create/{category?}', [CatalogCategoryController::class, 'create'])
         ->name('categories.create');
     Route::resource('/categories', CatalogCategoryController::class);
+    Route::resource('/attributes', AttributeController::class);
 });
 
 Route::prefix('messages')->group(function() {

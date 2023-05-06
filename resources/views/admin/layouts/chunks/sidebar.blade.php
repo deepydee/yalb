@@ -53,6 +53,11 @@
               <i class="bi bi-circle"></i><span>Категории</span>
             </a>
           </li>
+          <li>
+            <a href="{{ route('admin.catalog.attributes.index') }}" class="{{ (request()->is('admin/catalog/attributes*')) ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Аттрибуты</span>
+            </a>
+          </li>
         </ul>
       </li>
 
