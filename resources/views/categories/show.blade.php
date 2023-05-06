@@ -12,38 +12,16 @@
     </div>
 
 <div class="row g-2 g-sm-4">
+    @foreach($products as $product)
     <div class="col-sm-6 col-lg-3">
         <div class="good-card rounded">
         <img src="{{ asset('assets/front/img/repair/001-265x265.jpg') }}" alt="Изготовление РВД и шлангов">
         <div class="overlay overlay-1">
-            <a href="#"><h3>Изготовление РВД и шлангов</h3></a>
+            <a href="{{ route('products.show', ['category_path' => $category->path, 'product' => $product]) }}"><h3>{{ $product->title }}</h3></a>
         </div>
         </div>
     </div>
-    <div class="col-sm-6 col-lg-3">
-        <div class="good-card rounded">
-        <img src="{{ asset('assets/front/img/repair/002-265x265.png') }}" alt="Ремонт гидроцилиндров и пневмоцилиндров">
-        <div class="overlay overlay-1">
-            <a href="#"><h3>Ремонт гидроцилиндров и пневмоцилиндров</h3></a>
-        </div>
-        </div>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <div class="good-card rounded">
-        <img src="{{ asset('assets/front/img/repair/003-265x265.png') }}" alt="Ремонт и производство маслостанций">
-        <div class="overlay overlay-1">
-            <a href="#"><h3>Ремонт и производство маслостанций</h3></a>
-        </div>
-        </div>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <div class="good-card rounded">
-        <img src="{{ asset('assets/front/img/repair/004-265x265.png') }}" alt="Ремонт гидронасосов и моторов">
-        <div class="overlay overlay-1">
-            <a href="#"><h3>Ремонт гидронасосов и моторов</h3></a>
-        </div>
-        </div>
-    </div>
+    @endforeach
 </div>
 @endif
 

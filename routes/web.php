@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index')->name('home');
 
-Route::resource('products', ProductController::class);
+// Route::resource('products', ProductController::class);
 
 Route::post('/contact-form', [IndexController::class, 'contactForm'])->name('contact-form.process');
 
@@ -68,6 +68,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::any('/ckfinder/examples/{example?}', '\CKSource\CKFinderBridge\Controller\CKFinderController@examplesAction')
     ->name('ckfinder_examples');
 });
+
+Route::get('/{category_path}/{product}', [ProductController::class, 'show'])
+    ->where('category_path', '[a-zA-Z0-9/_-]+')
+    ->where('product', '[0-9]+-[a-zA-Z0-9_-]+')
+    ->name('products.show');
 
 Route::get('/{path}', [CategoryController::class, 'show'])
     ->where('path', '[a-zA-Z0-9/_-]+')
