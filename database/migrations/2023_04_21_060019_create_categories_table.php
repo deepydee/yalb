@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique()->nullable();
             $table->text('description')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->string('path')->nullable();
             $table->nestedSet();
             $table->timestamps();

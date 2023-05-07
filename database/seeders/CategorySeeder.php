@@ -3,15 +3,17 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run(Faker $faker): void
     {
         $categories = [
             [
@@ -77,11 +79,25 @@ class CategorySeeder extends Seeder
 
         $categories = Category::all();
 
+        $date = date('Y-m-d');
+        $filePath =  "public/storage/uploads/images/$date/";
+
+        if (!file_exists($filePath)) {
+            mkdir($filePath, 0755);
+        }
+
         foreach ($categories as $category) {
+            $fakerFileName = $faker->image(
+                $filePath,
+                300,
+                300
+            );
+
             $category->generatePath();
 
             $category->update([
                 'description' => fake()->realText(1000),
+                'thumbnail' => 'images/' . basename($fakerFileName),
             ]);
         }
     }

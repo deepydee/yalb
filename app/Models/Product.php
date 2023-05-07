@@ -36,6 +36,19 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function getCategories()
+    {
+        return $this->categories()
+            ->get()
+            ->pluck('title')
+            ->join(', ');
+    }
+
+    public function getImage()
+    {
+        return $this->thumb;
+    }
+
     public function sluggable(): array
     {
         return [

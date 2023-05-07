@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Catalog\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -45,8 +46,13 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        DB::transaction(function () use ($request) {
-            $category = Category::create($request->validated());
+        $data = [
+            ...$request->validated(),
+            'thumbnail' => Category::uploadImage($request),
+        ];
+
+        DB::transaction(function () use ($request, $data) {
+            $category = Category::create($data);
 
             if ($request->parent_id) {
                 $parentNode = Category::find($request->parent_id);
@@ -76,6 +82,11 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
+        $data = $request->validated();
+
+        if ($file = Category::uploadImage($request, $category->thumbnail)) {
+            $data['thumbnail'] = $file;
+        }
         // dd($request->all());
         DB::transaction(function () use ($request, $category) {
             // dd($category->parent_id, $request->parent_id);
@@ -99,7 +110,7 @@ class CategoryController extends Controller
             }
         });
 
-        $category->update($request->validated());
+        $category->update($data);
 
         return redirect()->route('admin.catalog.categories.index')
             ->with('success', "Категория \"{$request->title}\" успешно обновлена");
@@ -110,6 +121,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        if ($category->thumbnail) {
+            Storage::delete($category->thumbnail);
+        }
+
         $category->delete();
 
         return redirect()->route('admin.catalog.categories.index')

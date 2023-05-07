@@ -58,6 +58,11 @@
               <i class="bi bi-circle"></i><span>Аттрибуты</span>
             </a>
           </li>
+          <li>
+            <a href="{{ route('admin.catalog.products.index') }}" class="{{ (request()->is('admin/catalog/products*')) ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Товары</span>
+            </a>
+          </li>
         </ul>
       </li>
 

@@ -822,6 +822,11 @@ body:hover::-webkit-scrollbar-thumb {
 .good-card {
   position: relative;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 .good-card img {
   display: block;

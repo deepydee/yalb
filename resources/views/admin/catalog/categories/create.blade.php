@@ -27,7 +27,7 @@
                   <h5 class="card-title">Создать категорию</h5>
 
                   <!-- Floating Labels Form -->
-                  <form action="{{ route('admin.catalog.categories.store') }}" method="POST" class="row g-3">
+                  <form action="{{ route('admin.catalog.categories.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
                     @csrf
                     <div class="col-md-12">
                         <div class="form-floating mb-3">
@@ -61,6 +61,13 @@
                                 id="description"
                                 name="description"
                                 style="height: 100px;">{{ old('description') }}</textarea>
+                        </div>
+
+                        <div class="input-group custom-file-button">
+                            <input class="form-control custom-file-input hidden" title="Выберите изображение" type="file" name="thumbnail" id="thumbnail" >
+                            <label class="input-group-text" for="thumbnail">
+                              Выбрать изображение
+                            </label>
                         </div>
                     </div>
                     <div class="text-center">

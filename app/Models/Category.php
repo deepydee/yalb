@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Http\Requests\Admin\Catalog\CategoryRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Storage;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends Model
@@ -19,6 +21,7 @@ class Category extends Model
     protected $fillable = [
         'title',
         'description',
+        'thumbnail',
         'path',
         'parent_id',
     ];
@@ -102,6 +105,27 @@ class Category extends Model
     public function getChildrenOrdered()
     {
         return $this->children()->defaultOrder()->get();
+    }
+
+    public static function uploadImage(CategoryRequest $request, $image = null)
+    {
+        if ($request->hasFile('thumbnail')) {
+            if ($image) {
+                Storage::delete($image);
+            }
+
+            $folder = date('Y-m-d');
+            return $request->file('thumbnail')->store("images/{$folder}");
+        }
+
+        return null;
+    }
+
+    public function getImage()
+    {
+        return $this->thumbnail ?
+            asset("storage/uploads/{$this->thumbnail}") :
+            asset('assets/admin/img/placeholder-image.jpg');
     }
 
 

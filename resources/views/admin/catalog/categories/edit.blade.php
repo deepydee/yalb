@@ -26,7 +26,7 @@
                   <h5 class="card-title">Редактировать категорию</h5>
 
                   <!-- Floating Labels Form -->
-                  <form action="{{ route('admin.catalog.categories.update', $category) }}" method="POST" class="row g-3">
+                  <form action="{{ route('admin.catalog.categories.update', $category) }}" method="POST" enctype="multipart/form-data" class="row g-3">
                     @csrf
                     @method('PUT')
                     <div class="col-md-12">
@@ -62,6 +62,15 @@
                                 id="description"
                                 name="description"
                                 style="height: 100px;">{{$category->description}}</textarea>
+                        </div>
+
+                        <img src="{{ @blank($category->thumbnail) ? asset('assets/admin/img/placeholder-image.jpg') : asset("storage/uploads/{$category->thumbnail}") }}" class="img-thumbnail mb-3" width="100" alt="{{ $category->title }}">
+
+                        <div class="input-group custom-file-button mb-3">
+                            <input class="form-control custom-file-input hidden" title="Выберите изображение" type="file" name="thumbnail" id="thumbnail" >
+                            <label class="input-group-text" for="thumbnail">
+                              Выбрать изображение
+                            </label>
                         </div>
                     </div>
                     <div class="text-center">

@@ -7,7 +7,10 @@ use App\Http\Controllers\Admin\Blog\PostController;
 use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\Catalog\AttributeController;
 use App\Http\Controllers\Admin\Catalog\CategoryController as CatalogCategoryController;
+use App\Http\Controllers\Admin\Catalog\ProductController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\FormMessageController;
+use App\Http\Controllers\Admin\ImportController;
 
 Route::view('/', 'admin.index')->name('index');
 
@@ -30,6 +33,7 @@ Route::prefix('catalog')->name('catalog.')->group(function () {
         ->name('categories.create');
     Route::resource('/categories', CatalogCategoryController::class);
     Route::resource('/attributes', AttributeController::class);
+    Route::resource('/products', ProductController::class);
 });
 
 Route::prefix('messages')->group(function() {
@@ -38,3 +42,6 @@ Route::prefix('messages')->group(function() {
     Route::delete('message/{id}', [FormMessageController::class, 'deleteMessage'])->name('message.destroy');
     Route::get('make-message-unread/{id}', [FormMessageController::class, 'makeMessageUnread'])->name('message.unread');
 });
+
+// Route::get('export', [ExportController::class, 'export'])->name('export');
+// Route::post('import', [ImportController::class, 'import'])->name('import');

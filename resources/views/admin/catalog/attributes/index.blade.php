@@ -21,6 +21,16 @@
             <a href="{{ route('admin.catalog.attributes.create') }}"
             class="btn btn-outline-primary mb-4">Добавить</a>
 
+            {{-- <a href="{{ route('admin.export', ['model' => 'App\Models\Attribute']) }}"
+            class="btn btn-outline-primary mb-4">Экспорт</a>
+
+            <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="model" value="App\Models\Attribute">
+                <input type="file" name="file" required>
+                <button class="btn btn-outline-primary mb-4" title="Импорт" type="submit" >Импорт</button>
+            </form> --}}
+
             @if (count($attributes))
             <table class="table table-hover">
                 <thead>
