@@ -97,7 +97,7 @@ class CategorySeeder extends Seeder
 
             $category->update([
                 'description' => fake()->realText(1000),
-                'thumbnail' => 'images/' . basename($fakerFileName),
+                'thumbnail' => "images/$date/" . basename($fakerFileName),
             ]);
         }
     }

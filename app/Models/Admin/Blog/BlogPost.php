@@ -10,10 +10,15 @@ use Date;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class BlogPost extends Model
+class BlogPost extends Model implements HasMedia
 {
     use HasFactory, Sluggable;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'title',
@@ -62,25 +67,26 @@ class BlogPost extends Model
         ];
     }
 
-    public static function uploadImage(Request $request, $image = null)
+    public function registerMediaCollections(): void
     {
-        if ($request->hasFile('thumbnail')) {
-            if ($image) {
-                Storage::delete($image);
-            }
-
-            $folder = date('Y-m-d');
-            return $request->file('thumbnail')->store("images/{$folder}");
-        }
-
-        return null;
+        $this->addMediaCollection('images')
+             ->withResponsiveImages()
+             ->useFallbackUrl(asset('assets/admin/img/placeholder-image.jpg'))
+             ->useFallbackUrl(asset('assets/admin/img/placeholder-image.jpg'), 'thumb')
+             ->useFallbackPath(asset('assets/admin/img/placeholder-image.jpg'))
+             ->useFallbackPath(asset('assets/admin/img/placeholder-image.jpg'), 'thumb');
     }
 
-    public function getImage()
+    public function registerMediaConversions(Media $media = null): void
     {
-        return $this->thumbnail ?
-            asset("storage/uploads/{$this->thumbnail}") :
-            asset('assets/admin/img/placeholder-image.jpg');
+        $this
+            ->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_CROP, 300, 300);
+    }
+
+    public function getImageAttribute()
+    {
+        return $this->getMedia('images')->last();
     }
 
     public function getHumanReadableCreatedAt() {

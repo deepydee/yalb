@@ -107,7 +107,7 @@
                         </label>
                       </div>
 
-                      <img src="{{ @blank($post->thumbnail) ? asset('assets/admin/img/placeholder-image.jpg') : asset("storage/uploads/{$post->thumbnail}") }}" class="img-thumbnail mb-3" width="100" alt="{{ $post->title }}">
+                      <img src="{{ $post->getFirstMediaUrl('images', 'thumb') }}" class="img-thumbnail mb-3" width="100" alt="{{ $post->title }}">
 
                       <div class="form-check form-switch mb-3">
                         <input class="form-check-input" type="checkbox" id="status" name="status" @checked($post->status === 'published')>

@@ -1,5 +1,5 @@
 <article class="card blog-card" itemscope itemtype="http://schema.org/Article">
-    <a href="{{ route('blog.page', $post) }}"><img class="card-img-top" src="{{ $post->getImage() }}" alt="{{ $post->title }}" itemprop="image"></a>
+    <a href="{{ route('blog.page', $post) }}"><img class="card-img-top" src="{{ $post->getFirstMediaUrl('images', 'thumb')  }}" alt="{{ $post->title }}" itemprop="image"></a>
     <div class="card-body">
       <header>
         <h5 class="text-uppercase fs-6 fw-bold mb-4"><a href="{{ route('blog.category', $post->category->slug) }}">{{ $post->category->title }}</a></h5>

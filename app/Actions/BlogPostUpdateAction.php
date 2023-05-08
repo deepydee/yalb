@@ -12,11 +12,20 @@ class BlogPostUpdateAction
 
         $data = $request->validated();
 
-        if ($file = BlogPost::uploadImage($request, $post->thumbnail)) {
-            $data['thumbnail'] = $file;
-        }
+        // if ($file = BlogPost::uploadImage($request, $post->thumbnail)) {
+        //     $data['thumbnail'] = $file;
+        // }
 
         $post->update($data);
+
+        if ($request->hasFile('thumbnail')) {
+            $post->clearMediaCollection('images');
+
+            $post->addMediaFromRequest('thumbnail')
+                 ->withResponsiveImages()
+                 ->toMediaCollection('images');
+        }
+
         $post->tags()->sync($request->tags);
 
     }

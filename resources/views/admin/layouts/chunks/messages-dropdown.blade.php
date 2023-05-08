@@ -2,10 +2,10 @@
 <li class="dropdown-header">
     У вас {{ $unreadMessages->count() }} непрочитанных сообщения
     <a href="{{ route('admin.messages.index') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">Смотреть все</span></a>
-  </li>
-  <li>
-    <hr class="dropdown-divider">
-  </li>
+</li>
+<li>
+<hr class="dropdown-divider">
+</li>
 
   @foreach ($unreadMessages as $message)
   @if ($loop->iteration === 4)
@@ -27,5 +27,10 @@
 
   <li class="dropdown-footer">
     <a href="{{ route('admin.messages.index') }}">Все сообщения</a>
+  </li>
+
+  @else
+  <li class="message-item">
+    Нет сообщений
   </li>
 @endif
