@@ -5,10 +5,8 @@ import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat.js';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
-import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder.js';
-import CKFinderUploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter.js';
 import DataFilter from '@ckeditor/ckeditor5-html-support/src/datafilter.js';
-import DataSchema from '@ckeditor/ckeditor5-html-support/src/dataschema.js';
+import DataFilter from '@ckeditor/ckeditor5-html-support/src/dataschema.js';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
 import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport.js';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading.js';
@@ -42,8 +40,6 @@ ClassicEditor.builtinPlugins = [
 	Autoformat,
 	BlockQuote,
 	Bold,
-	CKFinder,
-	CKFinderUploadAdapter,
 	DataFilter,
 	DataSchema,
 	Essentials,
@@ -85,7 +81,6 @@ ClassicEditor.defaultConfig = {
 			'numberedList',
 			'horizontalLine',
 			'|',
-			'CKFinder',
             'insertImage',
 			'htmlEmbed',
 			'sourceEditing',
@@ -115,47 +110,3 @@ ClassicEditor.defaultConfig = {
 		]
 	}
 };
-
-ClassicEditor
-    .create( document.querySelector( '#description' ), {
-        toolbar: [ 'heading', 'blockQuote', '|', 'bold', 'italic', '|', 'sourceEditing'],
-        ckfinder: {
-            // To avoid issues, set it to an absolute path that does not start with dots, e.g. '/ckfinder/core/php/(...)'
-            uploadUrl: '/ckfinder/connector?command=QuickUpload&type=Files&responseType=json'
-        },
-          placeholder: 'Предварительное описание',
-        /* The editor configuration... */
-    } )
-    .then( function( editor ) {
-        // console.log( editor );
-    } )
-    .catch( function( error ) {
-        console.error( error );
-    } );
-
-
-ClassicEditor
-    .create( document.querySelector( '#content' ), {
-        ckfinder: {
-            // To avoid issues, set it to an absolute path that does not start with dots, e.g. '/ckfinder/core/php/(...)'
-            uploadUrl: '/ckfinder/connector?command=QuickUpload&type=Files&responseType=json'
-        },
-        heading: {
-            options: [
-                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                { model: 'heading2', view: { name: 'h2', classes: 'display-6 fw-bold mt-5 mb-4' }, title: 'Heading 2', class: 'ck-heading_heading2' },
-                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-            ]
-        },
-        placeholder: 'Текст статьи',
-        htmlEmbed: {
-            showPreviews: true
-        },
-    } )
-    .then( function( editor ) {
-        // console.log( editor );
-    } )
-    .catch( function( error ) {
-        console.error( error );
-    } );

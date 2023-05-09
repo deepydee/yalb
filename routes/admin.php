@@ -10,9 +10,12 @@ use App\Http\Controllers\Admin\Catalog\CategoryController as CatalogCategoryCont
 use App\Http\Controllers\Admin\Catalog\ProductController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\FormMessageController;
+use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\ImportController;
 
 Route::view('/', 'admin.index')->name('index');
+
+Route::post('images', [ImageController::class, 'store'])->name('images.store');
 
 Route::prefix('blog')->name('blog.')->group(function () {
     Route::resource('/categories', CategoryController::class);

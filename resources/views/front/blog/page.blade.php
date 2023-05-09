@@ -8,11 +8,13 @@
 <article itemscope itemtype="http://schema.org/Article">
     <header class="mb-5">
       <div class="container-fluid blog-post-header-image p-0 mb-4">
+        @if ($media)
         {{ $media->img()->attributes([
             'alt' => $blogPost->title,
             'class' => 'img-fluid',
             'itemprop' => 'image',
         ]) }}
+        @endif
       </div>
       <div class="container">
         <h1 class="display-5 fw-bold mb-5" itemprop="headline">{{ $blogPost->title }}</h1>

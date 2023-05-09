@@ -10,12 +10,10 @@
 </ol>
 @endsection
 
+@include('admin.layouts.chunks.ckeditor')
 
 @push('scripts')
-<script src="{{ asset('assets/admin/js/ckeditor.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
-
-@include('ckfinder::setup')
 
 <script>
     const multipleCancelButton = new Choices('#tags', {

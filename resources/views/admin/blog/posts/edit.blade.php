@@ -10,11 +10,10 @@
 </ol>
 @endsection
 
-@push('scripts')
-<script src="{{ asset('assets/admin/js/ckeditor.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+@include('admin.layouts.chunks.ckeditor')
 
-@include('ckfinder::setup')
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
 
 <script>
 

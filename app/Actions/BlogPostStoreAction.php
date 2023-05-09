@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Http\Requests\Admin\Blog\PostFormRequest;
 use App\Models\Admin\Blog\BlogPost;
+use \Spatie\MediaLibrary\ResponsiveImages\ResponsiveImageGenerator;
 
 class BlogPostStoreAction
 {
@@ -31,6 +32,9 @@ class BlogPostStoreAction
             $post->addMediaFromRequest('thumbnail')
                  ->withResponsiveImages()
                  ->toMediaCollection('images');
+
+
+
         }
 
         $post->tags()->sync($request->tags);
