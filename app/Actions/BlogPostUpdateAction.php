@@ -12,10 +12,6 @@ class BlogPostUpdateAction
 
         $data = $request->validated();
 
-        // if ($file = BlogPost::uploadImage($request, $post->thumbnail)) {
-        //     $data['thumbnail'] = $file;
-        // }
-
         $post->update($data);
 
         if ($request->hasFile('thumbnail')) {

@@ -46,19 +46,20 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $data = [
-            ...$request->validated(),
-            'thumbnail' => Category::uploadImage($request),
-        ];
-
-        DB::transaction(function () use ($request, $data) {
-            $category = Category::create($data);
+        DB::transaction(function () use ($request) {
+            $category = Category::create($request->validated());
 
             if ($request->parent_id) {
                 $parentNode = Category::find($request->parent_id);
                 $parentNode->appendNode($category);
             }
+
+            if ($request->hasFile('thumbnail')) {
+                $category->addMediaFromRequest('thumbnail')
+                         ->toMediaCollection('images');
+            }
         });
+
 
         return redirect()->route('admin.catalog.categories.index')
             ->with('success', "Категория \"{$request->title}\" успешно создана");
@@ -82,14 +83,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $data = $request->validated();
-
-        if ($file = Category::uploadImage($request, $category->thumbnail)) {
-            $data['thumbnail'] = $file;
-        }
-        // dd($request->all());
         DB::transaction(function () use ($request, $category) {
-            // dd($category->parent_id, $request->parent_id);
             if (!$request->parent_id) {
                 $category->saveAsRoot();
             }
@@ -110,7 +104,13 @@ class CategoryController extends Controller
             }
         });
 
-        $category->update($data);
+        $category->update($request->validated());
+
+        if ($request->hasFile('thumbnail')) {
+            $category->clearMediaCollection('images');
+            $category->addMediaFromRequest('thumbnail')
+                     ->toMediaCollection('images');
+        }
 
         return redirect()->route('admin.catalog.categories.index')
             ->with('success', "Категория \"{$request->title}\" успешно обновлена");

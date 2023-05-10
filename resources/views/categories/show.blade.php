@@ -15,7 +15,7 @@
    @foreach ($category->descendants as $subcategory)
    <div class="col-sm-6 col-lg-3">
         <div class="good-card rounded">
-            <img src="{{ $subcategory->getImage() }}" alt="{{ $subcategory->title }}">
+            <img src="{{ $subcategory->getFirstMediaUrl('images', 'thumb') }}" alt="{{ $subcategory->title }}">
             <div class="overlay overlay-1">
                 <a href="{{ route('category.show', ['path' => $subcategory->path]) }}"><h3>{{ $subcategory->title }}</h3></a>
             </div>
@@ -40,7 +40,7 @@
 @endif
 
 <div class="row mb-4">
-    <div class="col-12">
+    <div class="col-12 ck-content">
         {!! $category->description !!}
     </div>
 </div>

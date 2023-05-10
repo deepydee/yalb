@@ -21,7 +21,6 @@ class BlogPostStoreAction
 
         $data = [
             ...$request->validated(),
-            // 'thumbnail' => BlogPost::uploadImage($request),
             'status' => $status,
             'is_featured' => $isFeatured,
         ];
@@ -32,9 +31,6 @@ class BlogPostStoreAction
             $post->addMediaFromRequest('thumbnail')
                  ->withResponsiveImages()
                  ->toMediaCollection('images');
-
-
-
         }
 
         $post->tags()->sync($request->tags);

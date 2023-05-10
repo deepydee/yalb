@@ -17,16 +17,6 @@ class BlogPostFactory extends Factory
      */
     public function definition(): array
     {
-
-        // $folder = date('Y-m-d');
-        $filePath =  "public/storage/uploads/images/";
-
-        $fakerFileName = $this->faker->image(
-            $filePath,
-            800,
-            600
-        );
-
         $status = fake()->randomElement(['published' , 'draft']);
         $isFeatured = $status === 'published' ?
             fake()->randomElement([0 , 1]) :
@@ -34,12 +24,10 @@ class BlogPostFactory extends Factory
 
         return [
             'title' => fake()->sentence(),
-            // 'description' => fake()->paragraphs(3, true),
             'description' => fake()->realText(),
             'content' => fake()->realText(3000),
             'category_id' => BlogCategory::factory(),
             'views' => fake()->randomNumber(5, false),
-            'thumbnail' => 'images/' . basename($fakerFileName),
             'status' => $status,
             'is_featured' => $isFeatured,
             'created_at' => fake()->unixTime(),

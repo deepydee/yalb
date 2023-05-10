@@ -11,17 +11,13 @@
 </ol>
 @endsection
 
-@push('scripts')
-<script src="{{ asset('assets/admin/js/ckeditor.js') }}"></script>
-@include('ckfinder::setup')
-@endpush
-
+@include('admin.layouts.chunks.ckeditor')
 
 @section('main-content')
 
 <section>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Создать категорию</h5>
@@ -56,11 +52,11 @@
 
                         <div class="form-floating mb-3">
                             <textarea
-                                class="form-control @error('description') is-invalid @enderror"
+                                class="form-control @error('content') is-invalid @enderror"
                                 placeholder="Добавьте описание (необязательно)"
-                                id="description"
+                                id="content"
                                 name="description"
-                                style="height: 100px;">{{ old('description') }}</textarea>
+                                style="height: 100px;">{{ old('content') }}</textarea>
                         </div>
 
                         <div class="input-group custom-file-button">

@@ -11,16 +11,13 @@
 </ol>
 @endsection
 
-@push('scripts')
-<script src="{{ asset('assets/admin/js/ckeditor.js') }}"></script>
-@include('ckfinder::setup')
-@endpush
+@include('admin.layouts.chunks.ckeditor')
 
 @section('main-content')
 
 <section>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Редактировать категорию</h5>
@@ -57,14 +54,14 @@
                         </div>
                         <div class="form-floating mb-3">
                             <textarea
-                                class="form-control @error('description') is-invalid @enderror"
+                                class="form-control @error('content') is-invalid @enderror"
                                 placeholder="Добавьте описание (необязательно)"
-                                id="description"
+                                id="content"
                                 name="description"
                                 style="height: 100px;">{{$category->description}}</textarea>
                         </div>
 
-                        <img src="{{ @blank($category->thumbnail) ? asset('assets/admin/img/placeholder-image.jpg') : asset("storage/uploads/{$category->thumbnail}") }}" class="img-thumbnail mb-3" width="100" alt="{{ $category->title }}">
+                        <img src="{{ $category->getFirstMediaUrl('images', 'thumb') }}" class="img-thumbnail mb-3" width="100" alt="{{ $category->title }}">
 
                         <div class="input-group custom-file-button mb-3">
                             <input class="form-control custom-file-input hidden" title="Выберите изображение" type="file" name="thumbnail" id="thumbnail" >

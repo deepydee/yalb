@@ -8,11 +8,16 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Kalnoy\Nestedset\NodeTrait;
 
-class Category extends Model
+class Category extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
     use Sluggable, NodeTrait {
         NodeTrait::replicate as replicateNode;
         Sluggable::replicate as replicateSlug;
@@ -21,7 +26,6 @@ class Category extends Model
     protected $fillable = [
         'title',
         'description',
-        'thumbnail',
         'path',
         'parent_id',
     ];
@@ -66,6 +70,23 @@ class Category extends Model
         });
     }
 
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('images')
+             ->useFallbackUrl(asset('assets/admin/img/placeholder-image.jpg'))
+             ->useFallbackUrl(asset('assets/admin/img/placeholder-image.jpg'), 'thumb')
+             ->useFallbackPath(asset('assets/admin/img/placeholder-image.jpg'))
+             ->useFallbackPath(asset('assets/admin/img/placeholder-image.jpg'), 'thumb');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_CROP, 336, 336)
+            ->nonQueued();
+    }
+
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
@@ -73,11 +94,6 @@ class Category extends Model
 
     public function getUrl()
     {
-        // $slugs = $this->ancestors()->pluck('slug')->all();
-        // $slugs[] = $this->slug;
-
-        // return implode('/', $slugs);
-
         return $this->path;
     }
 

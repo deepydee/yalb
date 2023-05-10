@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Date;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
@@ -25,7 +23,6 @@ class BlogPost extends Model implements HasMedia
         'description',
         'content',
         'category_id',
-        'thumbnail',
         'status',
         'is_featured',
     ];
@@ -81,7 +78,8 @@ class BlogPost extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('thumb')
-            ->fit(Manipulations::FIT_CROP, 300, 300);
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
     }
 
     public function getImageAttribute()

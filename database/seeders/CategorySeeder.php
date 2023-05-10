@@ -97,8 +97,12 @@ class CategorySeeder extends Seeder
 
             $category->update([
                 'description' => fake()->realText(1000),
-                'thumbnail' => "images/$date/" . basename($fakerFileName),
             ]);
+
+            $mediaPath = storage_path("app/public/uploads/images/$date/" . basename($fakerFileName));
+
+            $category->addMedia($mediaPath)
+                ->toMediaCollection('images');
         }
     }
 }
