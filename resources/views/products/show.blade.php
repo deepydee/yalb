@@ -9,14 +9,14 @@
         <caption>Характеристики для {{ $product->title }}</caption>
         <thead class="thead-dark">
             <tr>
-            @foreach($attributes as $attribute)
+            @foreach($product->attributes as $attribute)
             <th scope="col">{{ $attribute->title }}</th>
             @endforeach
             </tr>
         </thead>
         <tbody>
             <tr scope="row">
-            @foreach($attributes as $attribute)
+            @foreach($product->attributes as $attribute)
             <td>{!! $attribute->pivot->value !!}</td>
             @endforeach
             </tr>

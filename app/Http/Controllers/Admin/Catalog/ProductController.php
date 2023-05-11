@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\Catalog;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,7 +16,7 @@ class ProductController extends Controller
      */
     public function index(): View
     {
-        $products = Product::with('categories')
+        $products = Product::with('categories', 'media')
             ->paginate(20);
 
         return view('admin.catalog.products.index', compact('products'));
@@ -23,9 +25,15 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $categories = Category::pluck('title', 'id')->all();
+        $attributes = Attribute::pluck('title', 'id')->all();
+
+        return view(
+            'admin.catalog.products.create',
+            compact('categories', 'attributes')
+        );
     }
 
     /**
@@ -33,23 +41,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        dd($request->all());
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product): View
     {
-        //
+        return view('admin.catalog.products.edit', compact('product'));
     }
 
     /**
@@ -63,8 +63,11 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route('admin.catalog.products.index')
+            ->with('success', "Товар \"{$product->title}\" успешно удален");
     }
 }

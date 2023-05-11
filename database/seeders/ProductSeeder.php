@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder
             [   'code' => 'K114',
                 'title' => 'K114 - Уплотнение штока поршня',
                 'description' => 'Уплотнение поршня-шатуна K114 - это уплотнительный элемент одностороннего действия, который благодаря симметричной конструкции может работать как на поршне, так и на штоке.',
-                'thumb' => 'product-images/K114.png',
+                'thumb' => 'product-images/K114_Kesit.png',
                 'category' => 'Гидравлические уплотнительные элементы поршня-штока'
             ],
             [   'code' => 'K21',
@@ -60,10 +60,17 @@ class ProductSeeder extends Seeder
 
             unset($product['category']);
 
-            Product::factory()
-                ->create($product)
-                ->categories()
-                ->sync(Category::whereSlug($slug)->first());
+            $mediaPath = storage_path("app/public/uploads/images/" . $product['thumb']);
+            unset($product['thumb']);
+
+            Product::factory()->create($product)
+                    ->categories()
+                    ->sync(Category::whereSlug($slug)->first());
+
+            Product::whereCode($product['code'])->firstOrFail()
+                ->addMedia($mediaPath)
+                ->preservingOriginal()
+                ->toMediaCollection('images');
         }
     }
 }

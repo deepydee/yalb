@@ -121,10 +121,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if ($category->thumbnail) {
-            Storage::delete($category->thumbnail);
-        }
-
         $category->delete();
 
         return redirect()->route('admin.catalog.categories.index')

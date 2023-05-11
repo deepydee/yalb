@@ -29,7 +29,7 @@
     @foreach($products as $product)
     <div class="col-sm-6 col-lg-3">
         <div class="good-card rounded">
-        <img src="{{ asset('assets/front/img/repair/001-265x265.jpg') }}" alt="Изготовление РВД и шлангов">
+        <img src="{{ $product->getFirstMediaUrl('images', 'thumb') }}" alt="Изготовление РВД и шлангов">
         <div class="overlay overlay-1">
             <a href="{{ route('products.show', ['category_path' => $category->path, 'product' => $product]) }}"><h3>{{ $product->title }}</h3></a>
         </div>

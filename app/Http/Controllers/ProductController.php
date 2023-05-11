@@ -12,10 +12,9 @@ class ProductController extends Controller
     public function show(string $categoryPath, Product $product): View
     {
         $category = Category::wherePath($categoryPath)
-            ->firstOrFail();
+            ->firstOrFail()
+            ->with('attributes');
 
-        $attributes = $product->attributes()->get();
-
-        return view('products.show', compact('category', 'product', 'attributes'));
+        return view('products.show', compact('category', 'product'));
     }
 }

@@ -108,8 +108,12 @@ function SimpleUploadAdapterPlugin( editor ) {
     };
 }
 
-ClassicEditor
-    .create( document.querySelector( '#description' ), {
+const descriptionTextarea = document?.querySelector( '#description' );
+const contentTextarea = document?.querySelector( '#content' );
+
+if (descriptionTextarea) {
+    ClassicEditor
+    .create( descriptionTextarea, {
         extraPlugins: [ SimpleUploadAdapterPlugin ],
         language: 'ru',
         toolbar: [ 'heading', 'blockQuote', '|', 'bold', 'italic', '|', 'sourceEditing'],
@@ -122,10 +126,11 @@ ClassicEditor
     .catch( function( error ) {
         console.error( error );
     } );
+}
 
-
-ClassicEditor
-    .create( document.querySelector( '#content' ), {
+if (contentTextarea) {
+    ClassicEditor
+    .create( contentTextarea, {
         extraPlugins: [ SimpleUploadAdapterPlugin ],
         language: 'ru',
         heading: {
@@ -147,7 +152,7 @@ ClassicEditor
     .catch( function( error ) {
         console.error( error );
     } );
-
+}
 
 </script>
 @endpush

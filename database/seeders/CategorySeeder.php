@@ -87,11 +87,11 @@ class CategorySeeder extends Seeder
         }
 
         foreach ($categories as $category) {
-            $fakerFileName = $faker->image(
-                $filePath,
-                300,
-                300
-            );
+            // $fakerFileName = $faker->image(
+            //     $filePath,
+            //     300,
+            //     300
+            // );
 
             $category->generatePath();
 
@@ -99,10 +99,10 @@ class CategorySeeder extends Seeder
                 'description' => fake()->realText(1000),
             ]);
 
-            $mediaPath = storage_path("app/public/uploads/images/$date/" . basename($fakerFileName));
+            // $mediaPath = storage_path("app/public/uploads/images/$date/" . basename($fakerFileName));
 
-            $category->addMedia($mediaPath)
-                ->toMediaCollection('images');
+            // $category->addMedia($mediaPath)
+            //     ->toMediaCollection('images');
         }
     }
 }

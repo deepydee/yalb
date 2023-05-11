@@ -18,9 +18,12 @@ Route::view('/', 'admin.index')->name('index');
 Route::post('images', [ImageController::class, 'store'])->name('images.store');
 
 Route::prefix('blog')->name('blog.')->group(function () {
-    Route::resource('/categories', CategoryController::class);
-    Route::resource('/tags', TagController::class);
-    Route::resource('/posts', PostController::class);
+    Route::resource('/categories', CategoryController::class)
+        ->except('show');
+    Route::resource('/tags', TagController::class)
+        ->except('show');
+    Route::resource('/posts', PostController::class)
+        ->except('show');
 
     Route::prefix('comments')->name('comments.')->group(function() {
         Route::get('/', [CommentsController::class, 'showComments'])->name('index');
@@ -34,9 +37,12 @@ Route::prefix('blog')->name('blog.')->group(function () {
 Route::prefix('catalog')->name('catalog.')->group(function () {
     Route::get('/categories/create/{category?}', [CatalogCategoryController::class, 'create'])
         ->name('categories.create');
-    Route::resource('/categories', CatalogCategoryController::class);
-    Route::resource('/attributes', AttributeController::class);
-    Route::resource('/products', ProductController::class);
+    Route::resource('/categories', CatalogCategoryController::class)
+        ->except('show');
+    Route::resource('/attributes', AttributeController::class)
+        ->except('show');
+    Route::resource('/products', ProductController::class)
+        ->except('show');
 });
 
 Route::prefix('messages')->group(function() {

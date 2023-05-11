@@ -22,6 +22,7 @@
             class="btn btn-outline-primary mb-4">Добавить</a>
 
             @if (count($products))
+            {{-- @dd($products) --}}
             <table class="table table-hover">
                 <thead>
                   <tr>
@@ -37,10 +38,10 @@
                     @foreach ($products as $product)
                     <tr class="align-middle">
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $product->title }}</td>
-                        <td><img src="{{ $product->getImage() }}" class="img-thumbnail" width="100" alt="{{ $product->title }}"></td>
+                        <td><a href="{{ route('products.show', ['category_path' => $product->categories->first()->path, 'product' => $product]) }}" target="_blank">{{ $product->title }}</a></td>
+                        <td><img src="{{ $product->getFirstMediaUrl('images', 'thumb') }}" class="img-thumbnail" width="100" alt="{{ $product->title }}"></td>
                         <td>{{ $product->code }}</td>
-                        <td>{{ $product->getCategories() }}</td>
+                        <td><a href="{{ route('category.show', ['path' => $product->categories->first()->path]) }}" target="_blank">{{ $product->categories->first()->title }}</a></td>
                         <td>
                             <div class="d-flex">
                                 <a href="{{ route('admin.catalog.products.edit', $product) }}" class="btn btn-outline-secondary border-0" title="Редактировать"><i class="bi bi-pencil-square"></i></a>
