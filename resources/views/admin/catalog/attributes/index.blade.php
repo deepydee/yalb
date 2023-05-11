@@ -37,7 +37,8 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Название</th>
-                      <th scope="col">Действия</th>
+                    <th scope="col">Тип</th>
+                    <th scope="col">Действия</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,7 @@
                     <tr class="align-middle">
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $attribute->title }}</td>
+                        <td>{{ $attribute->type }}</td>
                         <td class="d-flex">
                             <a href="{{ route('admin.catalog.attributes.edit', $attribute) }}" class="btn btn-outline-secondary border-0" title="Редактировать"><i class="bi bi-pencil-square"></i></a>
                             <form action="{{ route('admin.catalog.attributes.destroy', $attribute) }}" method="POST">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AttributeType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ class Attribute extends Model
 
     protected $fillable = [
         'title',
+        'type',
     ];
 
     public function getRouteKeyName()
@@ -39,4 +41,8 @@ class Attribute extends Model
             ]
         ];
     }
+
+    protected $casts = [
+        'type' => AttributeType::class
+    ];
 }

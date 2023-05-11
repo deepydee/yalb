@@ -35,8 +35,6 @@
 
         const attributes = document.querySelectorAll('.attribute');
 
-        console.log(attributes);
-
         [...attributes].forEach(attribute =>
             attribute.hidden = !selectedOptions.includes(attribute.id));
     });
@@ -75,23 +73,33 @@
 
                         <div class="form-floating mb-3">
                             <select class="form-select" id="attributes" name="attributes[]" placeholder="Выберите аттрибуты" multiple>
-                                @foreach ($attributes as $id => $title)
-                                     <option value="{{ $id }}" @if (old('attributes')) @selected(in_array($id, old('attributes'))) @endif>{{ $title }}</option>
+                                @foreach ($attributes as $attribute)
+                                     <option value="{{ $attribute->id }}" @if (old('attributes')) @selected(in_array($attribute->id, old('attributes'))) @endif>{{ $attribute->title }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        @foreach ($attributes as $id => $title)
-                        <div class="form-floating mb-3 attribute" id="{{ $id }}" hidden>
+                        @foreach ($attributes as $attribute)
+                        @if ($attribute->type->name === 'Text')
+                        <div class="form-floating mb-3 attribute" id="{{ $attribute->id }}" hidden>
                             <input
                                 type="text"
-                                name="values[{{ $id }}]"
-                                class="form-control @error('{{ $title }}') is-invalid @enderror"
-                                id="{{ $id }}"
-                                placeholder="{{ $title }}"
-                                value="{{ old($title) }}">
-                            <label for="title">{{ $title }}</label>
+                                name="values[{{ $attribute->id }}]"
+                                class="form-control @error('{{ $attribute->title }}') is-invalid @enderror"
+                                id="{{ $attribute->id }}"
+                                placeholder="{{ $attribute->title }}"
+                                value="{{ old($attribute->title) }}">
+                            <label for="title">{{ $attribute->title }}</label>
                         </div>
+                        @endif
+                        @if ($attribute->type->name === 'Image')
+                        <div class="input-group custom-file-button mb-3 attribute" id="{{ $attribute->id }}" hidden>
+                            <input class="form-control custom-file-input hidden" title="Выберите изображение" type="file" name="values[{{ $attribute->id }}]">
+                            <label class="input-group-text" for="{{ $attribute->id }}">
+                              Выбрать изображение
+                            </label>
+                        </div>
+                        @endif
                         @endforeach
 
                         <div class="form-floating mb-3">

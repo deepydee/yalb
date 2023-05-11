@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function create(): View
     {
         $categories = Category::pluck('title', 'id')->all();
-        $attributes = Attribute::pluck('title', 'id')->all();
+        $attributes = Attribute::all(['id', 'title', 'type']);
 
         return view(
             'admin.catalog.products.create',

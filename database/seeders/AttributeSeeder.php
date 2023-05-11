@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\AttributeType;
 use App\Models\Attribute;
 use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,14 +16,14 @@ class AttributeSeeder extends Seeder
     public function run(): void
     {
         $attributes = [
-            ['title' => 'Преимущества'],
-            ['title' => 'Область применения'],
-            ['title' => 'Материал'],
-            ['title' => 'Давление (макс), БАР'],
-            ['title' => 'Температура (макс), °C'],
-            ['title' => 'Скорость скольжения (макс), м/с'],
-            ['title' => 'Скорость скольжения (макс), м/с'],
-            ['title' => 'Чертеж'],
+            ['title' => 'Преимущества', 'type' => AttributeType::Text],
+            ['title' => 'Область применения', 'type' => AttributeType::Text],
+            ['title' => 'Материал', 'type' => AttributeType::Text],
+            ['title' => 'Давление (макс), БАР', 'type' => AttributeType::Text],
+            ['title' => 'Температура (макс), °C', 'type' => AttributeType::Text],
+            ['title' => 'Скорость скольжения (макс), м/с', 'type' => AttributeType::Text],
+            ['title' => 'Скорость скольжения (макс), м/с', 'type' => AttributeType::Text],
+            ['title' => 'Чертеж', 'type' => AttributeType::Image],
         ];
 
         $values = [

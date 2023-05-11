@@ -45,7 +45,7 @@ const generateWorkingHoursList = () => {
   ];
 
   const now = new Date();
-  const currentDay = Math.abs(now.getDay() + 6);
+  const currentDay = now.getDay() - 1;
   const whList = document.getElementById('schedule-list');
 
   WORK_HOURS.forEach((el, idx) => {

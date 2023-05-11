@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Catalog;
 
+use App\Enums\AttributeType;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\View\View;
 
 class AttributeController extends Controller
@@ -35,6 +37,7 @@ class AttributeController extends Controller
     {
         $request->validate([
             'title' => 'required',
+            'type' => [new Enum(AttributeType::class)],
         ]);
 
         Attribute::create($request->all());
@@ -61,6 +64,7 @@ class AttributeController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'type' => [new Enum(AttributeType::class)],
         ]);
 
         $attribute->update($request->all());
