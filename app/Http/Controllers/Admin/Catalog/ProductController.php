@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Catalog;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Catalog\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Attribute;
@@ -17,6 +18,7 @@ class ProductController extends Controller
     public function index(): View
     {
         $products = Product::with('categories', 'media')
+            ->latest()
             ->paginate(20);
 
         return view('admin.catalog.products.index', compact('products'));
@@ -39,9 +41,35 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        dd($request->all());
+        $attibutes = array_filter($request->values);
+        $attibutes = array_map(fn ($e) => ['value' => $e], $attibutes);
+
+        $product = Product::create($request->validated());
+        $category = Category::findOrFail($request->category);
+        $product->categories()->sync($category);
+
+        foreach ($attibutes as $key => $value) {
+            if ($request->hasFile('values.' . $key)) {
+                $product->addMediaFromRequest('values.' . $key)
+                    ->toMediaCollection('product_attribute_images');
+
+                $url = $product->getFirstMediaUrl('product_attribute_images');
+                $attibutes[$key]['value'] = $url;
+            }
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $product->addMediaFromRequest('thumbnail')
+                     ->toMediaCollection('images');
+        }
+
+        $product->attributes()->sync($attibutes);
+
+        return redirect()->route('admin.catalog.products.index')
+            ->with('success', "Товар \"{$request->title}\" успешно создан");
+
     }
 
     /**

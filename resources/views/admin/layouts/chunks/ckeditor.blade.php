@@ -117,7 +117,7 @@ if (descriptionTextarea) {
         extraPlugins: [ SimpleUploadAdapterPlugin ],
         language: 'ru',
         toolbar: [ 'heading', 'blockQuote', '|', 'bold', 'italic', '|', 'sourceEditing'],
-        placeholder: 'Предварительное описание',
+        placeholder: 'Наберите текст',
         /* The editor configuration... */
     } )
     .then( function( editor ) {
@@ -141,7 +141,7 @@ if (contentTextarea) {
                 { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
             ]
         },
-        placeholder: 'Текст статьи',
+        placeholder: 'Наберите текст',
         htmlEmbed: {
             showPreviews: true
         },

@@ -36,6 +36,9 @@ class Product extends Model implements HasMedia
              ->useFallbackUrl(asset('assets/admin/img/placeholder-image.jpg'), 'thumb')
              ->useFallbackPath(asset('assets/admin/img/placeholder-image.jpg'))
              ->useFallbackPath(asset('assets/admin/img/placeholder-image.jpg'), 'thumb');
+
+        $this->addMediaCollection('product_attribute_images')
+            ->useFallbackUrl(asset('assets/admin/img/placeholder-image.jpg'));
     }
 
     public function registerMediaConversions(Media $media = null): void

@@ -72,6 +72,28 @@
                         </div>
 
                         <div class="form-floating mb-3">
+                            <input
+                                type="text"
+                                name="title"
+                                class="form-control @error('title') is-invalid @enderror"
+                                id="title"
+                                placeholder="Название"
+                                value="{{ old('title') }}">
+                            <label for="title">Название</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input
+                                type="text"
+                                name="code"
+                                class="form-control @error('code') is-invalid @enderror"
+                                id="code"
+                                placeholder="Код"
+                                value="{{ old('code') }}">
+                            <label for="title">Код</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
                             <select class="form-select" id="attributes" name="attributes[]" placeholder="Выберите аттрибуты" multiple>
                                 @foreach ($attributes as $attribute)
                                      <option value="{{ $attribute->id }}" @if (old('attributes')) @selected(in_array($attribute->id, old('attributes'))) @endif>{{ $attribute->title }}</option>
@@ -81,14 +103,14 @@
 
                         @foreach ($attributes as $attribute)
                         @if ($attribute->type->name === 'Text')
-                        <div class="form-floating mb-3 attribute" id="{{ $attribute->id }}" hidden>
+                        <div class="form-floating mb-3 attribute" id="{{ $attribute->id }}" @if (! old('values.'. $attribute->id)) hidden @endif>
                             <input
                                 type="text"
                                 name="values[{{ $attribute->id }}]"
-                                class="form-control @error('{{ $attribute->title }}') is-invalid @enderror"
+                                class="form-control @error('values[{{ $attribute->id }}]') is-invalid @enderror"
                                 id="{{ $attribute->id }}"
                                 placeholder="{{ $attribute->title }}"
-                                value="{{ old($attribute->title) }}">
+                                value="{{ old('values.'. $attribute->id) }}">
                             <label for="title">{{ $attribute->title }}</label>
                         </div>
                         @endif

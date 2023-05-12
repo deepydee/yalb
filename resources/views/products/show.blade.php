@@ -5,6 +5,7 @@
     <h1>{{ $product->title }}</h1>
 
     <h2>Характеристики:</h2>
+    <img src="{{ $product->getFirstMediaUrl('images', 'thumb') }}" alt="{{ $product->title }}">
     <table class="table-responsive-sm table-bordered table-hover">
         <caption>Характеристики для {{ $product->title }}</caption>
         <thead class="thead-dark">
@@ -17,7 +18,12 @@
         <tbody>
             <tr scope="row">
             @foreach($product->attributes as $attribute)
-            <td>{!! $attribute->pivot->value !!}</td>
+            @if ($attribute->type === App\Enums\AttributeType::Text)
+                <td>{!! $attribute->pivot->value !!}</td>
+            @endif
+            @if ($attribute->type === App\Enums\AttributeType::Image)
+            <td><img src="{{ $attribute->pivot->value }}"></td>
+            @endif
             @endforeach
             </tr>
         </tbody>

@@ -83,8 +83,6 @@ class AttributeSeeder extends Seeder
             Attribute::updateOrCreate($attribute);
         }
 
-        $cnt = 1;
-
         foreach ($values as $value) {
             $code = $value['code'];
 
@@ -101,10 +99,5 @@ class AttributeSeeder extends Seeder
                     7 => [ 'value' => $value['tech_drawing'] ],
                 ]);
         }
-
-
-
-
-
     }
 }
