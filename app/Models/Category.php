@@ -13,6 +13,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Kalnoy\Nestedset\NodeTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Category extends Model implements HasMedia
 {
@@ -26,6 +27,8 @@ class Category extends Model implements HasMedia
     protected $fillable = [
         'title',
         'description',
+        'content',
+        'keywords',
         'path',
         'parent_id',
     ];
@@ -144,6 +147,19 @@ class Category extends Model implements HasMedia
             asset('assets/admin/img/placeholder-image.jpg');
     }
 
+    protected function keywords(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $val) => join(', ', $this->castAttribute('keywords', $val)),
+            set: fn (string $val) =>
+                '['.(join(',', array_map(fn ($e) =>
+                    '"'.trim($e).'"', explode(',', $val)) ).']'),
+        );
+    }
+
+    protected $casts = [
+        'keywords' => 'array',
+    ];
 
      /**
      * Return the sluggable configuration array for this model.

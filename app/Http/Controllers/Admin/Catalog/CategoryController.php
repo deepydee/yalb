@@ -103,7 +103,7 @@ class CategoryController extends Controller
                 $parentNode->appendNode($category);
             }
         });
-
+// dd($request->validated());
         $category->update($request->validated());
 
         if ($request->hasFile('thumbnail')) {

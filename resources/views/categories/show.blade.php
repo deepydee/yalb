@@ -1,4 +1,15 @@
 @extends('front.layouts.layout')
+
+@section('title', $category->title)
+
+@if ($category->keywords)
+    @section('keywords', $category->keywords)
+@endif
+
+@if ($category->description)
+    @section('description', strip_tags($category->description))
+@endif
+
 @section('content')
 
 @if ($category)
@@ -40,9 +51,11 @@
 @endif
 
 <div class="row mb-4">
+    @if ($category->content)
     <div class="col-12 ck-content">
-        {!! $category->description !!}
+        {!! $category->content !!}
     </div>
+    @endif
 </div>
 
 @endsection

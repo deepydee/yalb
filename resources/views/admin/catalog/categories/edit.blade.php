@@ -52,13 +52,37 @@
                             >
                             <label for="floatingName">Название категории</label>
                         </div>
+
+                        <div class="form-floating mb-3">
+                            <input
+                            type="text"
+                            name="keywords"
+                            class="form-control @error('keywords') is-invalid @enderror"
+                            id="keywords"
+                            placeholder="Название"
+                            value="@if ($category->keywords) {{ $category->keywords }} @endif"
+                            >
+                            <label for="floatingName">Ключевые слова через запятую</label>
+                        </div>
+
+                        <label for="description" class="mb-2">Краткое описание</label>
+                        <div class="form-floating mb-3">
+                            <textarea
+                                class="form-control @error('description') is-invalid @enderror"
+                                placeholder="Добавьте описание (необязательно)"
+                                id="description"
+                                name="description"
+                                style="height: 100px;">@if ($category->description) {{$category->description}} @endif</textarea>
+                        </div>
+
+                        <label for="description" class="mb-2">Основной контент</label>
                         <div class="form-floating mb-3">
                             <textarea
                                 class="form-control @error('content') is-invalid @enderror"
                                 placeholder="Добавьте описание (необязательно)"
                                 id="content"
-                                name="description"
-                                style="height: 100px;">{{$category->description}}</textarea>
+                                name="content"
+                                style="height: 100px;">@if ($category->content) {{$category->content}} @endif</textarea>
                         </div>
 
                         <img src="{{ $category->getFirstMediaUrl('images', 'thumb') }}" class="img-thumbnail mb-3" width="100" alt="{{ $category->title }}">
