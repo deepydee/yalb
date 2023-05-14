@@ -77,15 +77,50 @@ class ProductController extends Controller
      */
     public function edit(Product $product): View
     {
-        return view('admin.catalog.products.edit', compact('product'));
+        $categories = Category::pluck('title', 'id')->all();
+        $attributes = Attribute::all(['id', 'title', 'type']);
+
+        $product->load('attributes', 'categories');
+
+        return view(
+            'admin.catalog.products.edit',
+            compact('product', 'categories', 'attributes')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $attibutes = array_filter($request->values);
+        $attibutes = array_map(fn ($e) => ['value' => $e], $attibutes);
+
+        $product->update($request->validated());
+        $category = Category::findOrFail($request->category);
+        $product->categories()->sync($category);
+
+        foreach ($attibutes as $key => $value) {
+            if ($request->hasFile('values.' . $key)) {
+                $product->clearMediaCollection('product_attribute_images');
+                $product->addMediaFromRequest('values.' . $key)
+                    ->toMediaCollection('product_attribute_images');
+
+                $url = $product->getFirstMediaUrl('product_attribute_images');
+                $attibutes[$key]['value'] = $url;
+            }
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $product->clearMediaCollection('images');
+            $product->addMediaFromRequest('thumbnail')
+                     ->toMediaCollection('images');
+        }
+
+        $product->attributes()->syncWithoutDetaching($attibutes);
+
+        return redirect()->route('admin.catalog.products.index')
+            ->with('success', "Товар \"{$request->title}\" успешно обновлен");
     }
 
     /**
