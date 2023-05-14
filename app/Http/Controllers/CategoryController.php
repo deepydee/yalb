@@ -22,11 +22,11 @@ class CategoryController extends Controller
     public function show($path): View
     {
         $category = Category::wherePath($path)
-            ->with(['ancestors', 'descendants', 'products.attributes'])
+            ->with(['ancestors', 'descendants.media', 'media', 'products.attributes'])
             ->firstOrFail();
 
         $products = $category->products()
-            ->with('attributes')
+            ->with('attributes', 'media')
             ->paginate(8);
 
         return view('categories.show', compact('category', 'products'));
