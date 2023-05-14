@@ -24,6 +24,7 @@
 </script>
 @endpush
 
+{{-- @dd($goods) --}}
 @section('content')
 <main>
     <section class="container-fluid slider mb-3 mb-sm-5">

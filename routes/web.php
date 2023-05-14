@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'index')->name('home');
+Route::get('/', [IndexController::class, 'index'])->name('home');
 
 // Route::resource('products', ProductController::class);
 
