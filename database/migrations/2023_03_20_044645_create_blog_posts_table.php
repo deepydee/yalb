@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique()->nullable();
             $table->text('description');
+            $table->text('keywords')->nullable();
             $table->text('content');
             $table->integer('category_id')->unsigned();
             $table->integer('views')->unsigned()->default(0);

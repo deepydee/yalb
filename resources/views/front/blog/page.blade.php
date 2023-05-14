@@ -2,14 +2,18 @@
 
 @section('title', $blogPost->title)
 
+@if ($blogPost->keywords)
+    @section('keywords', $blogPost->keywords)
+@endif
+
 @section('description', strip_tags($blogPost->description))
 
 @section('content')
 <article itemscope itemtype="http://schema.org/Article">
     <header class="mb-5">
       <div class="container-fluid blog-post-header-image p-0 mb-4">
-        @if ($media)
-        {{ $media->img()->attributes([
+        @if ($blogPost->getFirstMedia('images'))
+        {{ $blogPost->getFirstMedia('images')->img()->attributes([
             'alt' => $blogPost->title,
             'class' => 'img-fluid',
             'itemprop' => 'image',

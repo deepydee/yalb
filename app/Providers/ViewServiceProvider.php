@@ -28,65 +28,69 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Facades\View::composer('front.layouts.chunks.sidebar', function (View $view) {
-            if (Cache::has('categories')) {
-                $categories = Cache::get('categories');
-            } else {
-                $categories = BlogCategory::withCount('posts')
-                ->orderBy('posts_count', 'desc')
-                ->get();
+        if (Cache::has('categories')) {
+            $categories = Cache::get('categories');
+        } else {
+            $categories = BlogCategory::withCount('posts')
+            ->orderBy('posts_count', 'desc')
+            ->get();
 
-                Cache::put('categories', $categories, 30);
-            }
+            Cache::put('categories', $categories, 30);
+        }
+        $tags = BlogTag::all();
 
+        Facades\View::composer('front.layouts.chunks.sidebar', function (View $view) use ($categories, $tags) {
             $view->with([
                 'categories' => $categories,
-                'tags' => BlogTag::all(),
+                'tags' =>  $tags,
             ]);
         });
+
+        $categories = Category::defaultOrder()
+            ->with('children', 'parent')
+            ->get()
+            ->toTree();
 
         Facades\View::composer(
             ['front.layouts.chunks.dynamic-menu', 'front.layouts.chunks.footer'],
-            function (View $view) {
-            $categories = Category::defaultOrder()
-                ->with('children', 'parent')
-                ->get()
-                ->toTree();
+            function (View $view) use($categories) {
 
             $view->with([
                 'categories' => $categories,
             ]);
         });
 
-        Facades\View::composer('front.layouts.chunks.popular-posts', function (View $view)
-        {
-             if (Cache::has('popularPosts')) {
-                $popularPosts = Cache::get('popularPosts');
-            } else {
-                $popularPosts = BlogPost::orderBy('views', 'desc')
+        if (Cache::has('popularPosts')) {
+            $popularPosts = Cache::get('popularPosts');
+        } else {
+            $popularPosts = BlogPost::orderBy('views', 'desc')
+                ->with('media', 'category')
                 ->limit(3)
                 ->get();
 
-                Cache::put('popularPosts', $popularPosts, 30);
-            }
+            Cache::put('popularPosts', $popularPosts, 30);
+        }
 
+        Facades\View::composer('front.layouts.chunks.popular-posts', function (View $view) use ($popularPosts)
+        {
             $view->with([
                 'popularPosts' => $popularPosts,
             ]);
         });
 
-        Facades\View::composer('front.layouts.chunks.featured', function(View $view) {
-            if (Cache::has('featuredPosts')) {
-                $featuredPosts = Cache::get('featuredPosts');
-            } else {
-                $featuredPosts = BlogPost::where('is_featured', 1)
-                    ->orderBy('updated_at', 'desc')
-                    ->limit(4)
-                    ->get();
+        if (Cache::has('featuredPosts')) {
+            $featuredPosts = Cache::get('featuredPosts');
+        } else {
+            $featuredPosts = BlogPost::where('is_featured', 1)
+                ->latest()
+                ->with('media', 'category')
+                ->limit(4)
+                ->get();
 
-                Cache::put('featuredPosts', $featuredPosts, 30);
-            }
+            Cache::put('featuredPosts', $featuredPosts, 30);
+        }
 
+        Facades\View::composer('front.layouts.chunks.featured', function(View $view) use ($featuredPosts) {
             $view->with([
                 'featuredPosts' => $featuredPosts,
             ]);

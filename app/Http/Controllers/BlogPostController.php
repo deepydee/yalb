@@ -19,13 +19,12 @@ class BlogPostController extends Controller
 
     public function show(BlogPost $blogPost)
     {
-        $comments = $blogPost->load('comments');
-        $media = $blogPost->getFirstMedia('images');
+        $blogPost->load('comments.user', 'category', 'media');
 
         $blogPost->views++;
         $blogPost->update();
 
-        return view('front.blog.page', compact('blogPost', 'media'));
+        return view('front.blog.page', compact('blogPost'));
     }
 
     public function comment(BlogPost $blogPost, BlogCommentForm $request)

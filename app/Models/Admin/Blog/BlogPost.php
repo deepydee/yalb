@@ -12,6 +12,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class BlogPost extends Model implements HasMedia
 {
@@ -21,6 +22,7 @@ class BlogPost extends Model implements HasMedia
     protected $fillable = [
         'title',
         'description',
+        'keywords',
         'content',
         'category_id',
         'status',
@@ -131,4 +133,18 @@ class BlogPost extends Model implements HasMedia
             'Опубликовано' :
             'Черновик';
     }
+
+    protected function keywords(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $val) => join(', ', $this->castAttribute('keywords', $val)),
+            set: fn (string $val) =>
+                '['.(join(',', array_map(fn ($e) =>
+                    '"'.trim($e).'"', explode(',', $val)) ).']'),
+        );
+    }
+
+    protected $casts = [
+        'keywords' => 'array',
+    ];
 }

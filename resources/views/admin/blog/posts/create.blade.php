@@ -63,6 +63,19 @@
                         <label for="title">Название</label>
                       </div>
 
+                    <div class="form-floating mb-3">
+                        <input
+                        type="text"
+                        name="keywords"
+                        class="form-control @error('keywords') is-invalid @enderror"
+                        id="keywords"
+                        placeholder="Название"
+                        value="{{ old('keywords') }}"
+                        >
+                        <label for="floatingName">Ключевые слова через запятую</label>
+                    </div>
+
+                      <label for="description" class="mb-2">Краткое описание</label>
                       <div class="form-floating mb-3">
                         <textarea
                             class="form-control @error('description') is-invalid @enderror"
@@ -72,6 +85,7 @@
                             style="height: 100px;">{{ old('description') }}</textarea>
                       </div>
 
+                      <label for="content" class="mb-2">Основной контент</label>
                       <div class="form-floating mb-3">
                         <textarea
                             class="form-control @error('content') is-invalid @enderror"

@@ -1,5 +1,5 @@
 
-@if ($featuredPosts->count())
+@if ($featuredPosts)
 <div class="col-12">
     <h3 class="fw-bold">Рекомендуем</h3>
 

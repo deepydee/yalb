@@ -25,6 +25,7 @@ class BlogPostFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'description' => fake()->realText(),
+            'keywords' => fake()->words(fake()->numberBetween(3, 7)),
             'content' => fake()->realText(3000),
             'category_id' => BlogCategory::factory(),
             'views' => fake()->randomNumber(5, false),
