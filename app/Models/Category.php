@@ -29,6 +29,7 @@ class Category extends Model implements HasMedia
         'description',
         'content',
         'keywords',
+        'thumb',
         'path',
         'parent_id',
     ];
@@ -86,7 +87,7 @@ class Category extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('thumb')
-            ->fit(Manipulations::FIT_CROP, 336, 336)
+            ->fit(Manipulations::FIT_CONTAIN, 336, 336)
             ->nonQueued();
     }
 
@@ -151,9 +152,9 @@ class Category extends Model implements HasMedia
     {
         return Attribute::make(
             get: fn (string $val) => join(', ', $this->castAttribute('keywords', $val)),
-            set: fn (string $val) =>
-                '['.(join(',', array_map(fn ($e) =>
-                    '"'.trim($e).'"', explode(',', $val)) ).']'),
+            // set: fn (string $val) =>
+            //     '['.(join(',', array_map(fn ($e) =>
+            //         '"'.trim($e).'"', explode(',', $val)) ).']'),
         );
     }
 

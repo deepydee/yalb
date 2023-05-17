@@ -29,17 +29,18 @@ class CategorySeeder extends Seeder
                 'children' => [
                     [
                         'title' => 'Уплотнения Kastas',
+                        'thumb' => 'categories/kastas/kastas.png',
                         'children' => [
-                            ['title' => 'Направляющие элементы'],
-                            ['title' => 'Гидравлические уплотнительные элементы поршня-штока'],
-                            ['title' => 'Гидравлические уплотнительные элементы поршня'],
-                            ['title' => 'Гидравлические уплотнительные элементы штока'],
-                            ['title' => 'Другие уплотнительные элементы'],
-                            ['title' => 'Пневматические уплотнительные элементы поршня'],
-                            ['title' => 'Пневматические уплотнительные элементы штока'],
-                            ['title' => 'Радиальные уплотнительные элементы'],
-                            ['title' => 'Статические уплотнительные элементы'],
-                            ['title' => 'Грязесъемники'],
+                            ['title' => 'Направляющие элементы', 'thumb' => 'categories/kastas/rotary-seals.jpg'],
+                            ['title' => 'Гидравлические уплотнительные элементы поршня-штока', 'thumb' => 'categories/kastas/hydraulic-guiding-elements.jpg'],
+                            ['title' => 'Гидравлические уплотнительные элементы поршня', 'thumb' => 'categories/kastas/hydraulic-piston-seals.jpg'],
+                            ['title' => 'Гидравлические уплотнительные элементы штока', 'thumb' => 'categories/kastas/hydraulic-rod-seals.jpg'],
+                            ['title' => 'Другие уплотнительные элементы', 'thumb' => 'categories/kastas/other-sealing-elements.jpg'],
+                            ['title' => 'Пневматические уплотнительные элементы поршня', 'thumb' => 'categories/kastas/pneumatic-piston-seals.jpg'],
+                            ['title' => 'Пневматические уплотнительные элементы штока', 'thumb' => 'categories/kastas/pneumatic-rod-seals.jpg'],
+                            ['title' => 'Радиальные уплотнительные элементы', 'thumb' => 'categories/kastas/rotary-seals.jpg'],
+                            ['title' => 'Статические уплотнительные элементы', 'thumb' => 'categories/kastas/static-sealing-elements.jpg'],
+                            ['title' => 'Грязесъемники', 'thumb' => 'categories/kastas/wipers.jpg'],
                         ],
                     ],
                     ['title' => 'Гидрокомпоненты'],
@@ -79,21 +80,28 @@ class CategorySeeder extends Seeder
 
         $categories = Category::all();
 
-        $date = date('Y-m-d');
-        $filePath =  "public/storage/uploads/images/$date/";
+        // $date = date('Y-m-d');
+        // $filePath =  "public/storage/uploads/images/$date/";
 
-        if (!file_exists($filePath)) {
-            mkdir($filePath, 0755);
-        }
+        // if (!file_exists($filePath)) {
+        //     mkdir($filePath, 0755);
+        // }
 
         foreach ($categories as $category) {
-            $fakerFileName = $faker->image(
-                $filePath,
-                300,
-                300
-            );
+            // $fakerFileName = $faker->image(
+            //     $filePath,
+            //     300,
+            //     300
+            // );
 
             $category->generatePath();
+
+            if (isset($category['thumb'])) {
+                $mediaPath = storage_path("app/public/uploads/images/" . $category['thumb']);
+                    $category->addMedia($mediaPath)
+                        ->preservingOriginal()
+                        ->toMediaCollection('images');
+            }
 
             $category->update([
                 'description' => fake()->realText(500),
@@ -101,10 +109,10 @@ class CategorySeeder extends Seeder
                 'content' => fake()->realText(1500),
             ]);
 
-            $mediaPath = storage_path("app/public/uploads/images/$date/" . basename($fakerFileName));
+            // $mediaPath = storage_path("app/public/uploads/images/$date/" . basename($fakerFileName));
 
-            $category->addMedia($mediaPath)
-                ->toMediaCollection('images');
+            // $category->addMedia($mediaPath)
+            //     ->toMediaCollection('images');
         }
     }
 }
