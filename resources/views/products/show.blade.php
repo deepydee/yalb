@@ -11,17 +11,19 @@
         <thead class="thead-dark">
             <tr>
             @foreach($product->attributes as $attribute)
-            <th scope="col">{{ $attribute->title }}</th>
+                @if ($attribute->pivot->value)
+                <th scope="col">{{ $attribute->title }}</th>
+                @endif
             @endforeach
             </tr>
         </thead>
         <tbody>
             <tr scope="row">
             @foreach($product->attributes as $attribute)
-            @if ($attribute->type === App\Enums\AttributeType::Text)
+            @if ($attribute->pivot->value && $attribute->type === App\Enums\AttributeType::Text)
                 <td>{!! $attribute->pivot->value !!}</td>
             @endif
-            @if ($attribute->type === App\Enums\AttributeType::Image)
+            @if ($attribute->pivot->value && $attribute->type === App\Enums\AttributeType::Image)
             <td><img src="{{ $attribute->pivot->value }}"></td>
             @endif
             @endforeach
