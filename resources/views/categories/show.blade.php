@@ -21,9 +21,9 @@
         </header>
     </div>
 
-@if ($category->descendants)
+{{-- @if ($category->children)
 <div class="row g-2 g-sm-4 mb-4">
-   @foreach ($category->descendants as $subcategory)
+   @foreach ($category->children as $subcategory)
    <div class="col-sm-6 col-lg-3">
         <div class="good-card rounded">
             <img src="{{ $subcategory->getFirstMediaUrl('images', 'thumb') }}" alt="{{ $subcategory->title }}">
@@ -34,13 +34,30 @@
     </div>
    @endforeach
 </div>
+@endif --}}
+
+@if ($category->children)
+<div class="row row-cols-lg-4 g-2 g-sm-4 mb-4">
+    @foreach ($category->children as $subcategory)
+    <div class="col col-md-3">
+      <a href="{{ route('category.show', ['path' => $subcategory->path]) }}" class="card-production">
+        <div class="card">
+          <img class="card-img-top" src="{{ $subcategory->getFirstMediaUrl('images', 'thumb') }}" alt="{{ $subcategory->title }}">
+          <div class="card-body">
+            <h4 class="card-title text-center">{{ $subcategory->title }}</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    @endforeach
+</div>
 @endif
 
 <div class="row g-2 g-sm-4 mb-4">
     @foreach($products as $product)
     <div class="col-sm-6 col-lg-3">
         <div class="good-card rounded">
-        <img src="{{ $product->getFirstMediaUrl('images', 'thumb') }}" alt="Изготовление РВД и шлангов">
+        <img src="{{ $product->getFirstMediaUrl('images', 'thumb') }}" alt="{{ $product->title }}">
         <div class="overlay overlay-1">
             <a href="{{ route('products.show', ['category_path' => $category->path, 'product' => $product]) }}"><h3>{{ $product->title }}</h3></a>
         </div>
