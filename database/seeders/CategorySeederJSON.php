@@ -35,11 +35,11 @@ class CategorySeederJSON extends Seeder
                         ->toMediaCollection('images');
             }
 
-            $category->update([
-                'description' => fake()->realText(500),
-                'keywords' => fake()->words(fake()->numberBetween(3, 9)),
-                'content' => fake()->realText(1500),
-            ]);
+            // $category->update([
+            //     'description' => fake()->realText(500),
+            //     'keywords' => fake()->words(fake()->numberBetween(3, 9)),
+            //     'content' => fake()->realText(1500),
+            // ]);
         }
     }
 }

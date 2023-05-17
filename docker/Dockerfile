@@ -9,13 +9,14 @@ ENV PATH="./vendor/bin:$PATH" \
     PHP_OPCACHE_MEMORY_CONSUMPTION=128
 
 RUN apt-get update && apt-get install -y \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libwebp-dev \
+    libpng-dev \
     zip \
     libxml2-dev \
     libzip-dev \
-    libpng-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure gd --with-webp --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
 
 RUN docker-php-ext-install pdo_mysql zip exif\
@@ -36,7 +37,7 @@ RUN mkdir -p /home/$user \
     && chmod -R 755 storage/ \
     && chmod +x /usr/local/bin/start
 
-RUN php artisan config:clear
+# RUN php artisan config:clear
 
 USER $user
 
