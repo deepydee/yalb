@@ -1,0 +1,87 @@
+[{
+    "title": "Производство",
+    "children": [{
+        "title": "Манжеты и уплотнения"
+    }, {
+        "title": "РВД и шланги"
+    }, {
+        "title": "Маслостанции"
+    }]
+}, {
+    "title": "Товары",
+    "children": [{
+        "title": "Уплотнения Kastas",
+        "thumb": "categories\/kastas\/kastas.png",
+        "children": [{
+            "title": "Направляющие элементы",
+            "thumb": "categories\/kastas\/rotary-seals.jpg"
+        }, {
+            "title": "Гидравлические уплотнительные элементы поршня-штока",
+            "thumb": "categories\/kastas\/hydraulic-guiding-elements.jpg"
+        }, {
+            "title": "Гидравлические уплотнительные элементы поршня",
+            "thumb": "categories\/kastas\/hydraulic-piston-seals.jpg"
+        }, {
+            "title": "Гидравлические уплотнительные элементы штока",
+            "thumb": "categories\/kastas\/hydraulic-rod-seals.jpg"
+        }, {
+            "title": "Другие уплотнительные элементы",
+            "thumb": "categories\/kastas\/other-sealing-elements.jpg"
+        }, {
+            "title": "Пневматические уплотнительные элементы поршня",
+            "thumb": "categories\/kastas\/pneumatic-piston-seals.jpg"
+        }, {
+            "title": "Пневматические уплотнительные элементы штока",
+            "thumb": "categories\/kastas\/pneumatic-rod-seals.jpg"
+        }, {
+            "title": "Радиальные уплотнительные элементы",
+            "thumb": "categories\/kastas\/rotary-seals.jpg"
+        }, {
+            "title": "Статические уплотнительные элементы",
+            "thumb": "categories\/kastas\/static-sealing-elements.jpg"
+        }, {
+            "title": "Грязесъемники",
+            "thumb": "categories\/kastas\/wipers.jpg"
+        }]
+    }, {
+        "title": "Гидрокомпоненты"
+    }, {
+        "title": "Пневмокомпоненты"
+    }, {
+        "title": "Ремкомплекты гидроцилиндров"
+    }, {
+        "title": "Металлорукова"
+    }, {
+        "title": "Стальные трубки"
+    }, {
+        "title": "Запчасти"
+    }]
+}, {
+    "title": "Ремонт",
+    "children": [{
+        "title": "Ремонт гидроцилиндров"
+    }, {
+        "title": "Ремонт пневмоцилиндров"
+    }, {
+        "title": "Ремонт маслостанций"
+    }, {
+        "title": "Ремонт гидронасосов"
+    }, {
+        "title": "Ремонт пневмонасосов"
+    }, {
+        "title": "Ремонт моторов"
+    }, {
+        "title": "Ремонт гидрораспределителей"
+    }, {
+        "title": "Ремонт гидромолотов"
+    }]
+}, {
+    "title": "Блог"
+}, {
+    "title": "Компания",
+    "children": [{
+        "title": "О компании"
+    }, {
+        "title": "Новости"
+    }]
+}]
