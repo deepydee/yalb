@@ -29,7 +29,6 @@ class ProductSeederJSON extends Seeder
             ['title' => 'Давление (макс), БАР', 'type' => AttributeType::Text],
             ['title' => 'Температура (макс), °C', 'type' => AttributeType::Text],
             ['title' => 'Скорость скольжения (макс), м/с', 'type' => AttributeType::Text],
-            ['title' => 'Скорость скольжения (макс), м/с', 'type' => AttributeType::Text],
             ['title' => 'Чертеж', 'type' => AttributeType::Image],
         ];
 

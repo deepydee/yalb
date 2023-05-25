@@ -12,8 +12,8 @@ class ProductController extends Controller
     public function show(string $categoryPath, Product $product): View
     {
         $category = Category::wherePath($categoryPath)
-            ->firstOrFail()
-            ->with('attributes');
+            ->with('ancestors')
+            ->firstOrFail();
 
         return view('products.show', compact('category', 'product'));
     }
