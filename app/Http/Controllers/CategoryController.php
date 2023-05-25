@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
         $products = $category->products()
             ->with('attributes', 'media')
-            ->paginate(8);
+            ->paginate(16);
 
         return view('categories.show', compact('category', 'products'));
     }

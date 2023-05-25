@@ -24,7 +24,7 @@
                 <td>{!! $attribute->pivot->value !!}</td>
             @endif
             @if ($attribute->pivot->value && $attribute->type === App\Enums\AttributeType::Image)
-            <td><img src="{{ $attribute->pivot->value }}"></td>
+            <td><img src="{{ asset('storage/uploads/images/'. $attribute->pivot->value) }}"></td>
             @endif
             @endforeach
             </tr>

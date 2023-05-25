@@ -64,6 +64,7 @@
         </div>
     </div>
     @endforeach
+    {{ $products->links('vendor.pagination.bootstrap-5') }}
 </div>
 @endif
 
